@@ -6,8 +6,12 @@ Collaborate with : [Osmel](https://github.com/Osmel00) , [Jan](https://github.co
 
 ## Scrum Rule
 
-- Sprint Planning : 20.07.2023 (first meeting)
-- Sprint : Mon - Die (first Task) / Mit (Review) / Don - Fre (second Task) / Sam (get new tasks)
+Our [Task](https://lucid.app/lucidspark/1d843cc9-2803-4ef6-9f5e-e509afca3ced/edit?viewport_loc=8318%2C-171%2C5544%2C2733%2C0_0&invitationId=inv_b439d5dd-dbf3-4d92-bd08-7e4ad4181644)
+
+- up to 28 collect ideas
+- at 27. and 28. Typescript Workshop
+- Sprint Planning : 01.08.2023 (first meeting)
+- Sprint : Mon - Die (first Task) / Mit (Review) 10 uhr / Don - Fre (second Task) / Sam (meeting) 11 uhr
 
 ---
 
