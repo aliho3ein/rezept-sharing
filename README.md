@@ -57,3 +57,16 @@ Tools and Technologies :
 - React
 - Node
 - SASS
+
+---
+
+primary-color : #f4f2ee
+secondary-color : #febd2f
+accent-color : #fd7458
+text-color : #222
+
+---
+
+## Alerts
+
+`alertMassage("message" , "icon" ,"time");`
