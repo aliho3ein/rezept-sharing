@@ -1,6 +1,15 @@
+import { Route, Routes } from "react-router-dom";
 import { FC } from "react";
+import StartPage from "../components/startPage/Index";
 
 const App: FC = () => {
-  return <h1>Rezept Sharing</h1>;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<StartPage />} />
+      </Routes>
+    </>
+  );
 };
+
 export default App;
