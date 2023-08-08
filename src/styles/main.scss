@@ -1,6 +1,4 @@
-@use "./variable";
-
-@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;600;700&display=swap");
+@import "./variable";
 
 * {
   margin: 0;
@@ -9,6 +7,38 @@
   list-style-type: none;
 }
 
-body {
-  font-family: "Titillium Web", sans-serif;
+body,
+html {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+/************* Scroll Style */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $secondary-color;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-moz-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+::-moz-scrollbar-thumb {
+  background-color: $secondary-color;
+  border-radius: 6px;
+}
+
+::-moz-scrollbar-track {
+  background: transparent;
 }

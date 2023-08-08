@@ -18,9 +18,11 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",
     "sass": "^1.64.2",
-    "sweetalert2": "^11.7.20"
+    "sweetalert2": "^11.7.20",
+    "aos": "^2.3.4"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.4",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
