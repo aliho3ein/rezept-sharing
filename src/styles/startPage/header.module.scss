@@ -1,7 +1,7 @@
 @import "./../variable";
 
 .startHeader {
-  height: 90vh;
+  height: 100vh;
   width: 100vw;
   background: linear-gradient(to top, $primary-color, #fff);
   display: flex;
@@ -9,9 +9,9 @@
 
   > i {
     font-size: 2rem;
-    color: #555;
+    color: #999;
     position: absolute;
-    bottom: -50px;
+    bottom: 20px;
     left: 0;
     right: 0;
     text-align: center;
@@ -46,8 +46,8 @@
     position: absolute;
     left: 30%;
     top: 25%;
-    font-size: 7em;
     user-select: none;
+    font: 700 7em $title-font;
   }
 }
 
