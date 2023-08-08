@@ -3,5 +3,36 @@
 .aboutContainer {
   height: 100vh;
   width: 100vw;
-  background-color: $primary-color;
+  display: grid;
+  place-content: center;
+
+  div {
+    width: 60%;
+    min-width: 300px;
+    max-height: 100vh;
+    position: relative;
+    margin-inline: auto;
+    border: 2px solid $secondary-color;
+    padding: 50px;
+    font-size: 1em;
+    background-color: #fff;
+    box-shadow: 0 0 2px $secondary-color;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-top: 10px;
+      line-height: 25px;
+    }
+  }
+
+  .onionImg {
+    height: 130px;
+    position: absolute;
+    right: -100px;
+    top: -50px;
+    transform: rotate(-45deg);
+  }
 }
