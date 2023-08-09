@@ -5,6 +5,7 @@ const Rewiews : FC = () => {
   const styles = { color: "#FEB51D",}
   return (
     <>
+    
      <AiFillStar style={styles}/>
     </>
   )

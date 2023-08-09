@@ -15,7 +15,7 @@ const Card: FC = () => {
           {[...Array(5)].map(() => {
             return <Rewiews />  
            })}
-           <p>(7 Rewiews)</p>  
+           <p>(8 Rewiews)</p>  
           </div> 
           <hr />
           <div className={styles.timeWiew}>
