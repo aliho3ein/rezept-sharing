@@ -8,7 +8,7 @@ const StartPage: FC = () => {
     <>
       <Header />
       <About />
-      {/* <Card/> */}
+      
 
     </>
   );

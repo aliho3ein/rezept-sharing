@@ -17,3 +17,11 @@ export interface completeRecipe extends recipeType {
   like: number;
   view: number;
 }
+
+//für Jan Folz
+export interface cardRecipe {
+  img: string[];//you take only the image into 0 position 
+  title: string; //recipe's name
+  rewiews: number;
+  time: number;
+}
