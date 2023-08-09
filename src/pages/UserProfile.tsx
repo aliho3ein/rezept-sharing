@@ -1,21 +1,20 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faReply } from "@fortawesome/free-solid-svg-icons";
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import AddRecipeForm from "../components/userProfile/AddRecipeForm";
+import style from "../styles/userProfile.module.scss";
 
 const UserProfile: FC = () => {
   return (
     <>
       <button>
         <Link to="/">
-          <FontAwesomeIcon icon={faReply} className="returnArrow" />
+          <i className={`fa-solid fa-reply ${style.returnArrow}`}></i>
           Back to home
         </Link>
       </button>
       <span>Add new recipe</span>
       <button>
-        <FontAwesomeIcon icon={faPlus} className="addRecipe" />
+        <i className={`fa-solid fa-plus ${style.addRecipe}`}></i>
       </button>
       <AddRecipeForm />
     </>
