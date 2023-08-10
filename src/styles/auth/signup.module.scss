@@ -1,18 +1,16 @@
-
 @import "../variable";
 
 .signin_container {
-  background: center/cover no-repeat url("../../assets/bild.jpg") ;
-  display:grid;
+  background: center/cover no-repeat url("../../assets/bild.jpg");
+  display: grid;
   place-content: center;
   height: 100vh;
   width: 100vw;
-
 }
 
 .card_form {
- // background-color:$primary-color;
-  backdrop-filter:blur(10px);
+  // background-color:$primary-color;
+  backdrop-filter: blur(10px);
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -30,7 +28,6 @@
     font-size: 1em;
     margin-bottom: 30px;
   }
-  
 }
 
 .input {
@@ -63,7 +60,7 @@
 
   i {
     cursor: pointer;
-    margin-inline:10px;
+    margin-inline: 10px;
   }
 }
 
@@ -90,7 +87,7 @@
 
   a {
     text-decoration: none;
-    color: #007BFF;
+    color: #007bff;
   }
 
   a:hover {
@@ -102,7 +99,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  margin-block: 10px ;
+  margin-block: 10px;
 
   span {
     flex-grow: 1;
@@ -132,9 +129,30 @@
   }
 }
 
+.google_container {
+  text-align: center;
+}
+
+.google_btn {
+  width: 100%;
+  border: none;
+  padding: 10px 20px;
+
+  cursor: pointer;
+}
+
+.google {
+  width: 100%;
+  border: none;
+  margin: 10px 0;
+
+  &:hover {
+    background-color: $text-color;
+  }
+}
+
 @media screen and (max-width: 991px) {
   .btn {
-
     height: 50px;
   }
 
