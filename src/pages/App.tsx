@@ -1,6 +1,22 @@
-import { FC } from "react";
+import { Route, Routes } from "react-router-dom";
+import { FC, useEffect } from "react";
+import StartPage from "../components/startPage/Index";
+import UserProfile from "./UserProfile";
+import Aos from "aos";
 
 const App: FC = () => {
-  return <h1>Rezept Sharing</h1>;
+  useEffect(() => {
+    Aos.init();
+  }, []);
+
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<StartPage />} />
+        <Route path="/user-profile" element={<UserProfile />} />
+      </Routes>
+    </>
+  );
 };
+
 export default App;
