@@ -15,7 +15,7 @@ const StartPage: FC = () => {
       <Header />
 
       <About />
-      {/* <Card/> */}
+      
 
 
       <main className={style.mainContainer}>
