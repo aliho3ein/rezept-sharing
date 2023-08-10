@@ -5,6 +5,7 @@ import UserProfile from "./UserProfile";
 import Aos from "aos";
 import Signin from "../components/auth/Signin";
 import Signup from "../components/auth/Signup";
+import VerificationCode from "../components/auth/VerificationCode";
 
 const App: FC = () => {
   useEffect(() => {
@@ -16,9 +17,14 @@ const App: FC = () => {
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/user-profile" element={<UserProfile />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-
+        <Route path="/anmelden" element={<Signin />} />
+        <Route path="/registrieren" element={<Signup />} />
+        <Route path="/passwort-vergessen" element={<s />} />
+        <Route
+          path="/verifiziere-verifikationscode/:email"
+          element={<VerificationCode />}
+        />
+        <Route path="/passwort-zuruecksetzen/:email" element={<a />} />
       </Routes>
     </>
   );
