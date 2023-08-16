@@ -1,16 +1,48 @@
 import { useState, FC } from "react";
 import { Link } from "react-router-dom";
 import style from "../../styles/auth/signin.module.scss";
+//import instance from "../../api/instance";
+import { alertMassage } from "../../actions/alerts";
+import GoogleBtn from "./googleBtn/GoogleBtn";
+import { useNavigate } from "react-router-dom";
+
 const Signin: FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  /*   const [message, setMessage] = useState<string>("");
-  const [isError, setIsError] = useState<boolean>(false); */
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:3000/user/anmelden", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+      console.log("ds", data.user.username);
+
+      if (response.ok) {
+        alertMassage(data.message, "success");
+        navigate("/", { state: { username: data.user.username } });
+      } else {
+        alertMassage(data.error || data.errors, "error");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className={style.signin_container}>
       <div className={style.card_form}>
         <h2 className={style.card_title}>Anmelden</h2>
+
         <p className={style.card_paragraph}>
           Bitte gib deine E-Mail-Adresse und dein Passwort ein, um dich
           anzumelden.
@@ -63,8 +95,8 @@ const Signin: FC = () => {
         <div className={style.separator}>
           <span>oder</span>
         </div>
-        <button className={style.btn}>
-          <span className={style.text}>Mit Google anmelden</span>
+        <button className={style.google}>
+          <GoogleBtn />
         </button>
       </div>
     </div>

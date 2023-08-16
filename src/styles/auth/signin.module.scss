@@ -1,16 +1,14 @@
 @import "../variable";
 .signin_container {
-    background: center / cover  no-repeat url("../../assets/signin.jpg");
+  background: center / cover  no-repeat url("../../assets/signin.jpg");
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
- 
-  
 }
 .card_form {
-   backdrop-filter: blur(10px); 
+  backdrop-filter: blur(10px);
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -21,14 +19,12 @@
     font-size: 1.5em;
     margin-bottom: 16px;
     text-transform: uppercase;
-    
   }
   .card_paragraph {
     font-size: 0.8em;
     color: #888;
     margin-bottom: 25px;
   }
-
 }
 .input {
   display: flex;
@@ -67,7 +63,7 @@
   }
   a {
     text-decoration: none;
-    color: #007BFF;
+    color: #007bff;
   }
   a:hover {
     color: $text-color;
@@ -79,30 +75,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px ;
-margin-left: 20px;
+  margin: 10px;
+  margin-left: 20px;
   a {
     text-decoration: none;
-    color: #007BFF;
+    color: #007bff;
   }
   a:hover {
     color: $text-color;
   }
- 
 }
 .separator {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin-block: 10px;
-  
-    span {
-      flex-grow: 1;
-      border-bottom: 1px solid #000;
-      margin-inline: 10px;
-    }
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-block: 10px;
+
+  span {
+    flex-grow: 1;
+    border-bottom: 1px solid #000;
+    margin-inline: 10px;
   }
-  
+}
+
 .btn {
   width: 100%;
   border: none;
@@ -113,12 +108,33 @@ margin-left: 20px;
   font-size: 16px;
   background-color: $primary-color;
   color: $text-color;
-  &:hover{
-      background-color:$text-color;
-      color: $primary-color;
+  &:hover {
+    background-color: $text-color;
+    color: $primary-color;
   }
-  .text{
+  .text {
     font-weight: 600;
+  }
+}
+.google_container {
+  text-align: center;
+}
+
+.google_btn {
+  width: 100%;
+  border: none;
+  padding: 10px 20px;
+
+  cursor: pointer;
+}
+
+.google {
+  width: 100%;
+  border: none;
+  margin: 10px 0;
+
+  &:hover {
+    background-color: $text-color;
   }
 }
 

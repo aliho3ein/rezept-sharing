@@ -1,5 +1,6 @@
 import { FC } from "react";
 import style from "./../../styles/startPage/nav.module.scss";
+import { Link } from "react-router-dom";
 
 const NavBar: FC = () => {
   return (
@@ -8,7 +9,9 @@ const NavBar: FC = () => {
         <li>How to use?</li>
         <li>Über uns</li>
         <li>Kontakt uns</li>
-        <li>Anmelden</li>
+        <li>
+          <Link to="/anmelden"> Anmelden</Link>
+        </li>
       </ul>
     </nav>
   );
