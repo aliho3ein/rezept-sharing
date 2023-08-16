@@ -16,6 +16,7 @@ const NavBar: FC = () => {
         <li>Kontakt uns</li>
         <li>
           <Link to="/signin">Anmelden</Link>
+          <Link to="/anmelden"> Anmelden</Link>
         </li>
       </ul>
     </nav>

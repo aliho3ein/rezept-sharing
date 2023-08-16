@@ -1,5 +1,9 @@
 import { useState, FC } from "react";
 import style from "../../styles/auth/signup.module.scss";
+//import instance from "../../api/instance";
+import { alertMassage } from "../../actions/alerts";
+import GoogleBtn from "./googleBtn/GoogleBtn";
+import { Link } from "react-router-dom";
 
 const Signup: FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -8,10 +12,41 @@ const Signup: FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
-  const [birthdate, setBirthdate] = useState<string>("");
+  const [dateOfBirth, setDateOfBirth] = useState<string>("");
   const [username, setUsername] = useState<string>("");
 
-  const handleSignup = () => {};
+  const handleSignup = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    try {
+      const userData = {
+        username,
+        email,
+        dateOfBirth,
+        password,
+        confirmPassword,
+      };
+
+      const response = await fetch("http://localhost:3000/user/registrieren", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+      const data = await response.json();
+
+      console.log("test", data);
+
+      if (response.ok) {
+        alertMassage(data.message, "success");
+      } else {
+        alertMassage(data.error || data.errors, "error");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const handleShowPasswordToggle = () => {
     setShowPassword(!showPassword);
@@ -22,7 +57,7 @@ const Signup: FC = () => {
   };
 
   return (
-    <div className={style.signin_container}>
+    <div className={style.signup_container}>
       <div className={style.card_form}>
         <h2 className={style.card_title}>Registrieren</h2>
         <p className={style.card_paragraph}>
@@ -94,12 +129,25 @@ const Signup: FC = () => {
             id="birthdate"
             type="date"
             placeholder="Geburtsdatum"
-            value={birthdate}
-            onChange={(e) => setBirthdate(e.target.value)}
+            value={dateOfBirth}
+            onChange={(e) => setDateOfBirth(e.target.value)}
           />
         </div>
         <button className={style.btn} type="button" onClick={handleSignup}>
           <span className={style.text}>Registrieren</span>
+        </button>
+
+        <p className={style.signup_link}>
+          Hast du keine Konto?
+          <Link to="/anmelden" className={style.signup_link}>
+            Anmelden
+          </Link>
+        </p>
+        <div className={style.separator}>
+          <span>oder</span>
+        </div>
+        <button className={style.google}>
+          <GoogleBtn />
         </button>
       </div>
     </div>
