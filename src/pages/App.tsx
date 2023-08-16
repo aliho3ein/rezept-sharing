@@ -5,6 +5,8 @@ import UserProfile from "./UserProfile";
 import Aos from "aos";
 import Signin from "../components/auth/Signin";
 import Signup from "../components/auth/Signup";
+import Pass from "../components/auth/Pass";
+import Email from "../components/auth/Email";
 
 const App: FC = () => {
   useEffect(() => {
@@ -18,7 +20,11 @@ const App: FC = () => {
         <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
-
+        <Route path="/pass" element={<Pass />} />
+        <Route
+          path="/email"
+          element={<Email placeholder="Bitte deine Email eingeben" />}
+        />
       </Routes>
     </>
   );

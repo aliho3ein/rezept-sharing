@@ -50,7 +50,7 @@ const Signin: FC = () => {
         <button className={style.btn} type="button">
           <span className={style.text}>Anmelden</span>
         </button>
-        <p className={style.signup_link}>
+        <p className={style.signin_link}>
           Hast du schon ein Konto?
           <Link
             to="/signup"

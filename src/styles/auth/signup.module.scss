@@ -1,8 +1,8 @@
 
 @import "../variable";
 
-.signin_container {
-  background: center/cover no-repeat url("../../assets/bild.jpg") ;
+.signup_container {
+  background: center/cover no-repeat url("../../assets/signup.jpg") ;
   display:grid;
   place-content: center;
   height: 100vh;
@@ -27,7 +27,8 @@
   }
 
   .card_paragraph {
-    font-size: 1em;
+    font-size: 0.8em;
+    color: #888;
     margin-bottom: 30px;
   }
   

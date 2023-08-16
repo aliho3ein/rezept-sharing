@@ -1,6 +1,6 @@
 @import "../variable";
 .signin_container {
-    background: center / cover  no-repeat url("../../assets/bild.jpg");
+    background: center / cover  no-repeat url("../../assets/signin.jpg");
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,8 @@
     
   }
   .card_paragraph {
-    font-size: 1em;
+    font-size: 0.8em;
+    color: #888;
     margin-bottom: 25px;
   }
 
@@ -73,7 +74,7 @@
   }
 }
 
-.signup_link {
+.signin_link {
   text-align: end;
   display: flex;
   justify-content: center;
