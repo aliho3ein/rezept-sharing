@@ -42,50 +42,54 @@ const Signin: FC = () => {
     <div className={style.signin_container}>
       <div className={style.card_form}>
         <h2 className={style.card_title}>Anmelden</h2>
-        <form onSubmit={handleSubmit}>
-          <p className={style.card_paragraph}>
-            Bitte gib deine E-Mail-Adresse und dein Passwort ein, um dich
-            anzumelden.
-          </p>
-          <div className={style.input}>
-            <label htmlFor="email">
-              <i className="fas fa-envelope"></i>
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className={style.input}>
-            <label htmlFor="password">
-              <i className="fas fa-lock"></i>
-            </label>
-            <input
-              id="password"
-              placeholder="password"
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <i
-              className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}
-              onClick={() => setShowPassword(!showPassword)}
-            ></i>
-          </div>
-          <div className={style.forgotPassword}>
-            <Link to="/forgot-password">Password vergessen?</Link>
-          </div>
-          <button className={style.btn} type="submit">
-            <span className={style.text}>Anmelden</span>
-          </button>
-        </form>
-        <p className={style.signup_link}>
-          Hast du keine Konto?
-          <Link to="/registrieren" className={style.signup_link}>
-            Registrieren
+
+        <p className={style.card_paragraph}>
+          Bitte gib deine E-Mail-Adresse und dein Passwort ein, um dich
+          anzumelden.
+        </p>
+        {/* <p style={{ color: isError ? "red" : "green" }}>{message}</p> */}
+        <div className={style.input}>
+          <label htmlFor="email">
+            <i className="fas fa-envelope"></i>
+          </label>
+          <input
+            id="email"
+            type="email"
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className={style.input}>
+          <label htmlFor="password">
+            <i className="fas fa-lock"></i>
+          </label>
+          <input
+            id="password"
+            placeholder="password"
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <i
+            className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}
+            onClick={() => setShowPassword(!showPassword)}
+          ></i>
+        </div>
+        <div className={style.forgotPassword}>
+          <Link to="/forgot-password">Password vergessen?</Link>
+        </div>
+        <button className={style.btn} type="button">
+          <span className={style.text}>Anmelden</span>
+        </button>
+        <p className={style.signin_link}>
+          Hast du schon ein Konto?
+          <Link
+            to="/signup"
+            className={style.signup_link}
+            // style={{ marginLeft: "20px" }}
+          >
+            Sign Up
           </Link>
         </p>
         <div className={style.separator}>

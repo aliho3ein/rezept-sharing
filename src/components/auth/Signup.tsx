@@ -57,7 +57,7 @@ const Signup: FC = () => {
   };
 
   return (
-    <div className={style.signin_container}>
+    <div className={style.signup_container}>
       <div className={style.card_form}>
         <h2 className={style.card_title}>Registrieren</h2>
         <p className={style.card_paragraph}>
