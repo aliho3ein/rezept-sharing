@@ -20,6 +20,14 @@
     margin-bottom: 100px;
     font-size: 2.5rem;
     font: 700 3em $title-font;
+    position: relative;
+    z-index: 2;
+  }
+
+  .carrot {
+    height: 90px;
+    position: absolute;
+    transform: translate(-90px, -30px) rotate(-20deg);
   }
 }
 
