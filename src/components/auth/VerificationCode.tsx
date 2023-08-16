@@ -1,23 +1,25 @@
 import React, { useState, useRef } from "react";
 import style from "../../styles/auth/verificationCode.module.scss";
 import { alertMassage } from "../../actions/alerts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const VerificationCode: React.FC = () => {
-  const [verificationCode, setVerificationCode] = useState<string[]>(
-    Array(6).fill("")
-  );
+  const [verificationCodeForgotPassword, setVerificationCodeForgotPassword] =
+    useState<string[]>(Array(6).fill(""));
 
-  const navigate = useNavigate();
   const inputRefs = Array.from({ length: 6 }, () =>
     useRef<HTMLInputElement>(null)
   );
+  const navigate = useNavigate();
+  const location = useLocation();
+  const id = location.state.id;
+  const email = location.state.email;
 
   const handleChange = (index: number, value: string) => {
     if (/^[0-9]*$/.test(value) && value.length <= 1) {
-      const updatedCode = [...verificationCode];
+      const updatedCode = [...verificationCodeForgotPassword];
       updatedCode[index] = value;
-      setVerificationCode(updatedCode);
+      setVerificationCodeForgotPassword(updatedCode);
 
       if (value.length === 1 && index < inputRefs.length - 1) {
         inputRefs[index + 1].current?.focus();
@@ -33,7 +35,7 @@ const VerificationCode: React.FC = () => {
         { length: 6 },
         (_, index) => digits[index] || ""
       );
-      setVerificationCode(updatedCode);
+      setVerificationCodeForgotPassword(updatedCode);
 
       const firstEmptyIndex = updatedCode.findIndex((digit) => digit === "");
       if (firstEmptyIndex !== -1) {
@@ -46,17 +48,17 @@ const VerificationCode: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const code = verificationCode.join("");
+    const code = verificationCodeForgotPassword.join("");
     try {
       const response = await fetch(
-        `http://localhost:3000/api/auth/verify-verification-code//* ${email} */`,
+        `http://localhost:3000/user/verifiziere-verifikationscode/${id}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            verificationCode: code,
+            verificationCodeForgotPassword: code,
           }),
         }
       );
@@ -65,14 +67,14 @@ const VerificationCode: React.FC = () => {
 
       if (response.ok) {
         alertMassage(data.message, "success");
-        navigate(`/passwort-zuruecksetzen//* ${email} */`, {
+        navigate(`/passwort-zuruecksetzen/${id}`, {
           state: {
-            username: data.user.username,
+            id: data.user._id,
             email: data.user.email,
           },
         });
       } else {
-        alertMassage(data.error || data.errors);
+        alertMassage(data.error || data.errors, "error");
       }
     } catch (error) {
       console.error("Verification code validation error:", error);
@@ -82,15 +84,13 @@ const VerificationCode: React.FC = () => {
   return (
     <div className={style.verificationCode}>
       <div className={style.cardForm}>
-        <h2 className={style.cardTitle}>Verification Code</h2>
-        <p className={style.cardBodyParagraph}>
-          Please enter your Verification Code
-        </p>
+        <h2 className={style.cardTitle}>verifiziere Code</h2>
+        <p className={style.cardBodyParagraph}>Bitte gib den Code ein</p>
 
-        {/* <p style={{ margin: "2rem", fontSize: "1.3rem" }}>{email}</p> */}
+        <p className={style.emailParagraph}>{email}</p>
         <form onSubmit={handleSubmit}>
           <div className={style.verificationInputs}>
-            {verificationCode.map((digit, index) => (
+            {verificationCodeForgotPassword.map((digit, index) => (
               <input
                 ref={inputRefs[index]}
                 key={index}

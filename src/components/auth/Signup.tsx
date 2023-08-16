@@ -4,8 +4,10 @@ import style from "../../styles/auth/signup.module.scss";
 import { alertMassage } from "../../actions/alerts";
 import GoogleBtn from "./googleBtn/GoogleBtn";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Signup: FC = () => {
+  const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -13,7 +15,8 @@ const Signup: FC = () => {
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
   const [dateOfBirth, setDateOfBirth] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const handleSignup = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -36,10 +39,9 @@ const Signup: FC = () => {
       });
       const data = await response.json();
 
-      console.log("test", data);
-
       if (response.ok) {
         alertMassage(data.message, "success");
+        navigate("/anmelden");
       } else {
         alertMassage(data.error || data.errors, "error");
       }
@@ -143,9 +145,9 @@ const Signup: FC = () => {
             Anmelden
           </Link>
         </p>
-        <div className={style.separator}>
-          <span>oder</span>
-        </div>
+
+        <div className={style.oder}>Order</div>
+
         <button className={style.google}>
           <GoogleBtn />
         </button>

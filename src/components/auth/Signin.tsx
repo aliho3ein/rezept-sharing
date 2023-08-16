@@ -11,6 +11,7 @@ const Signin: FC = () => {
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [clicked, setClicked] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,7 +26,7 @@ const Signin: FC = () => {
       });
 
       const data = await response.json();
-      console.log("ds", data.user.username);
+      console.log(data.error, "JSON Error");
 
       if (response.ok) {
         alertMassage(data.message, "success");
@@ -76,7 +77,7 @@ const Signin: FC = () => {
             ></i>
           </div>
           <div className={style.forgotPassword}>
-            <Link to="/forgot-password">Password vergessen?</Link>
+            <Link to="/passwort-vergessen">Password vergessen?</Link>
           </div>
           <button className={style.btn} type="submit">
             <span className={style.text}>Anmelden</span>
@@ -88,9 +89,8 @@ const Signin: FC = () => {
             Registrieren
           </Link>
         </p>
-        <div className={style.separator}>
-          <span>oder</span>
-        </div>
+
+        <div className={style.oder}>Order</div>
         <button className={style.google}>
           <GoogleBtn />
         </button>

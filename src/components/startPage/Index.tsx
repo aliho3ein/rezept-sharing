@@ -7,7 +7,7 @@ import About from "./About";
 import Crew from "./Crew";
 
 import style from "../../styles/startPage/index.module.scss";
-
+import Contact from "../contactPage/Contact";
 
 const StartPage: FC = () => {
   return (
@@ -15,8 +15,6 @@ const StartPage: FC = () => {
       <Header />
 
       <About />
-      
-
 
       <main className={style.mainContainer}>
         <About />
@@ -27,10 +25,10 @@ const StartPage: FC = () => {
         </section>
         <Crew />
       </main>
+      <Contact />
       <footer className={style.footerContainer}>
         Copyright 2023 &copy; Powered By Tasty-Pixel
       </footer>
-
     </>
   );
 };
