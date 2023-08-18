@@ -1,36 +1,53 @@
-import React from "react";
-import style from "../../../styles/auth/signin.module.scss";
+import React, { useState } from "react";
 import {
+  GoogleOAuthProvider,
   GoogleLogin,
-  GoogleLoginResponse,
-  GoogleLoginResponseOffline,
-} from "react-google-login";
+  GoogleLoginProps,
+} from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
+import style from "../../../styles/auth/signin.module.scss";
+import { alertMassage } from "../../../actions/alerts";
 
 const ClientID =
-  "377046576265-pm281qdmthb4pbd332f16qoon9m33d41.apps.googleusercontent.com";
+  "18690519048-ean2nk7fi4pg51rtv7np1q6gek9c9voo.apps.googleusercontent.com";
 
 const GoogleBtn: React.FC = () => {
-  const handleLoginSuccess = (
-    response: GoogleLoginResponse | GoogleLoginResponseOffline
-  ) => {
-    console.log("Login Success:", response);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLoginSuccess: GoogleLoginProps["onSuccess"] = (response) => {
+    const jwtToken = response.credential;
+    const decodedToken = jwt_decode(jwtToken as string);
+    console.log(decodedToken);
+    setLoggedIn(true);
   };
 
-  const handleLoginFailure = (error: any) => {
-    console.log("Login Failure:", error);
+  const handleLoginError: GoogleLoginProps["onError"] = () => {
+    console.log("Login Failed");
+  };
+
+  const handleLogout = () => {
+    // Simulated logout action
+    alertMassage("Logout successful", "success");
+    setLoggedIn(false);
   };
 
   return (
-    <div className={style.google_container}>
-      <GoogleLogin
-        className={style.google_btn}
-        clientId={ClientID}
-        buttonText="Login with Google"
-        onSuccess={handleLoginSuccess}
-        onFailure={handleLoginFailure}
-        cookiePolicy={"single_host_origin"}
-      />
-    </div>
+    <GoogleOAuthProvider clientId={ClientID}>
+      <div className={style.googleButton}>
+        {loggedIn ? (
+          <>
+            <button className={style.logoutButton} onClick={handleLogout}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <GoogleLogin
+            onSuccess={handleLoginSuccess}
+            onError={handleLoginError}
+          />
+        )}
+      </div>
+    </GoogleOAuthProvider>
   );
 };
 
