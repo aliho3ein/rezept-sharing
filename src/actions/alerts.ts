@@ -22,7 +22,7 @@ export const alertMassage = (
   icon: iconType = "success",
   timer = 3000
 ): void => {
-  Toast.fire({
+  void Toast.fire({
     icon,
     title,
     timer,
