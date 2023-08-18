@@ -9,6 +9,9 @@ import Pass from "../components/auth/Pass";
 import Email from "../components/auth/Email";
 
 import VerificationCode from "../components/auth/VerificationCode";
+import Contact from "../components/contactPage/Contact";
+import EmailVerification from "../components/auth/EmailVerification";
+import NewPassword from "../components/auth/NewPassword";
 
 const App: FC = () => {
   useEffect(() => {
@@ -21,6 +24,7 @@ const App: FC = () => {
         <Route path="/" element={<StartPage />} />
         <Route path="/user-profile" element={<UserProfile />} />
 
+
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/pass" element={<Pass />} />
@@ -29,12 +33,19 @@ const App: FC = () => {
           element={<Email placeholder="Bitte deine Email eingeben" />}
         />
 
-        <Route path="/passwort-vergessen" element={<s />} />
+        {/*<Route path="/passwort-vergessen" element={<s />} />*/}
         <Route
-          path="/verifiziere-verifikationscode/:email"
+          path="/passwort-vergessen"
+          element={
+            <EmailVerification placeholder="Bitte deine Email eingeben" />
+          }
+        />
+        <Route
+          path="/verifiziere-verifikationscode/:id"
           element={<VerificationCode />}
         />
-        <Route path="/passwort-zuruecksetzen/:email" element={<a />} />
+        <Route path="/passwort-zuruecksetzen/:id" element={<NewPassword />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </>
   );
