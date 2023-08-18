@@ -18,6 +18,8 @@ const Signup: FC = () => {
   const handleSignup = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
+    console.log("ok");
+
     try {
       const userData = {
         username,
@@ -36,12 +38,16 @@ const Signup: FC = () => {
       });
       const data = await response.json();
 
-      console.log("test", data);
+      // console.log("test", data.errors);
 
       if (response.ok) {
-        alertMassage(data.message, "success");
+        alertMassage(data.message as string, "success");
       } else {
-        alertMassage(data.error || data.errors, "error");
+        for (const err of data.errors) {
+          alertMassage(err as string, "error");
+        }
+
+        // alertMassage(data.error || data.errors, "error");
       }
     } catch (err) {
       console.error(err);
@@ -139,7 +145,7 @@ const Signup: FC = () => {
 
         <p className={style.signup_link}>
           Hast du keine Konto?
-          <Link to="/anmelden" className={style.signup_link}>
+          <Link to="/signin" className={style.signup_link}>
             Anmelden
           </Link>
         </p>
