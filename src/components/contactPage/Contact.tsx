@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import React, { FC, useState } from "react";
 import style from "../../styles/contact.module.scss";
 import { alertMassage } from "../../actions/alerts";
@@ -44,9 +45,11 @@ const Contact: FC = () => {
         textMessage,
       })
       .then((res) => {
-        console.log("ok");
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        alertMassage(res.data.message);
+        // inputs must be empty
       })
-      .catch((err) => console.log("err"));
+      .catch(() => alertMassage("Fehler beim Senden der E-Mail", "error"));
   };
 
   return (
