@@ -5,6 +5,9 @@ import UserProfile from "./UserProfile";
 import Aos from "aos";
 import Signin from "../components/auth/Signin";
 import Signup from "../components/auth/Signup";
+import Pass from "../components/auth/Pass";
+import Email from "../components/auth/Email";
+
 import VerificationCode from "../components/auth/VerificationCode";
 import Contact from "../components/contactPage/Contact";
 import EmailVerification from "../components/auth/EmailVerification";
@@ -20,8 +23,17 @@ const App: FC = () => {
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/user-profile" element={<UserProfile />} />
-        <Route path="/anmelden" element={<Signin />} />
-        <Route path="/registrieren" element={<Signup />} />
+
+
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/pass" element={<Pass />} />
+        <Route
+          path="/email"
+          element={<Email placeholder="Bitte deine Email eingeben" />}
+        />
+
+        {/*<Route path="/passwort-vergessen" element={<s />} />*/}
         <Route
           path="/passwort-vergessen"
           element={

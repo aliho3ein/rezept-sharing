@@ -6,10 +6,16 @@ const NavBar: FC = () => {
   return (
     <nav className={style.navbar}>
       <ul>
-        <li>How to use?</li>
-        <li>Über uns</li>
+        <li>
+          <Link to="/">How to use?</Link>
+        </li>
+
+        <li>
+          <a href="#about">Über uns</a>
+        </li>
         <li>Kontakt uns</li>
         <li>
+          <Link to="/signin">Anmelden</Link>
           <Link to="/anmelden"> Anmelden</Link>
         </li>
       </ul>

@@ -3,7 +3,7 @@ import style from "./../../styles/startPage/about.module.scss";
 
 const About: FC = () => {
   return (
-    <section className={style.aboutContainer}>
+    <section id="about" className={style.aboutContainer}>
       <div>
         <figure>
           <img src="src/assets/01.png" className={style.onionImg} alt="onion" />
