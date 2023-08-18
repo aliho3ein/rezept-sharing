@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import style from "../../styles/contact.module.scss";
 import { alertMassage } from "../../actions/alerts";
+import instance from "../../api/instance";
 
 const Contact: FC = () => {
   const [username, setUsername] = useState("");
@@ -8,10 +9,10 @@ const Contact: FC = () => {
   const [subject, setSubject] = useState("");
   const [textMessage, setTextMessage] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:3000/user/contact", {
+    /* try {
+    /*  const response = await fetch("http://localhost:3000/user/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,11 +34,23 @@ const Contact: FC = () => {
       }
     } catch (error) {
       console.log(error);
-    }
+    }*/
+
+    instance
+      .post("/user/contact", {
+        username,
+        email,
+        subject,
+        textMessage,
+      })
+      .then((res) => {
+        console.log("ok");
+      })
+      .catch((err) => console.log("err"));
   };
 
   return (
-    <div className={style.contactPage}>
+    <div id="contact" className={style.contactPage}>
       <h1>Kontaktieren Sie Uns für weitere Informationen.</h1>
 
       <div className={style.contactContainer}>
@@ -87,6 +100,7 @@ const Contact: FC = () => {
               onChange={(e) => setSubject(e.target.value)}
             />
             <textarea
+              rows={10}
               name="message"
               placeholder="Ihre Nachricht"
               className={style.contactInput}

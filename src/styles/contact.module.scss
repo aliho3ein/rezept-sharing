@@ -2,7 +2,7 @@
 
 .contactPage {
   width: 100%;
-  margin: 10% auto;
+  padding-block: 10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +20,6 @@
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 10px;
-  background-color: #e0d3d322;
   .contactTitle {
     text-align: center;
   }
@@ -56,7 +55,7 @@
         height: 40px;
         width: 40px;
         margin-right: 8px;
-        background-color: #e1e1e165;
+        background-color: $secondary-color;
         color: $text-color;
         border-radius: 50%;
 
@@ -72,6 +71,7 @@
 .contactForm {
   flex: 2;
   .contactInput {
+    resize: none;
     width: 100%;
     padding: 0.75rem;
     margin-bottom: 1rem;
@@ -97,9 +97,9 @@
   text-decoration: none;
   cursor: pointer;
   user-select: none;
-  -webkit-user-select: none;
   touch-action: manipulation;
   width: 100%;
+  background-color: $secondary-color;
 
   span:first-child {
     position: relative;
@@ -131,7 +131,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: $secondary-color;
+    background-color: $accent-color;
     color: $text-color;
     transform-origin: bottom center;
     transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);

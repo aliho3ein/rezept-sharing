@@ -86,13 +86,12 @@ const Signin: FC = () => {
         </form>
         <p className={style.signup_link}>
           Hast du keine Konto?
-          <Link to="/registrieren" className={style.signup_link}>
+          <Link to="/signup" className={style.signup_link}>
             Registrieren
-
           </Link>
         </p>
 
-        <div className={style.oder}>Order</div>
+        <div className={style.oder}>Oder</div>
         <button className={style.google}>
           <GoogleBtn />
         </button>
