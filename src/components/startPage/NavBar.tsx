@@ -13,10 +13,11 @@ const NavBar: FC = () => {
         <li>
           <a href="#about">Über uns</a>
         </li>
-        <li>Kontakt uns</li>
+        <li>
+          <a href="#contact">Kontakt uns</a>
+        </li>
         <li>
           <Link to="/signin">Anmelden</Link>
-          <Link to="/anmelden"> Anmelden</Link>
         </li>
       </ul>
     </nav>
