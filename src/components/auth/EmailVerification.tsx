@@ -2,46 +2,47 @@ import React, { useState } from "react";
 import style from "../../styles/auth/emailVerification.module.scss";
 import { useNavigate } from "react-router-dom";
 import { alertMassage } from "../../actions/alerts";
+import instance from "../../api/instance";
 
 interface EmailProps {
   placeholder: string;
 }
 
 const EmailVerification: React.FC<EmailProps> = ({ placeholder }) => {
-  const [email, setEmail] = useState<string>("");
+  const [emailVerificationData, setEmailVerificationData] = useState({
+    email: "",
+  });
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    try {
-      const response = await fetch(
-        "http://localhost:3000/user/passwort-vergessen",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email }),
-        }
-      );
-      const data = await response.json();
+    instance
+      .post("/user/passwort-vergessen", emailVerificationData)
+      .then((res) => {
+        console.log("code", res.data.user.verificationCodeForgotPassword);
 
-      if (response.ok) {
-        alertMassage(data.message, "success");
-        navigate(`/verifiziere-verifikationscode/${data.user._id}`, {
-          state: {
-            id: data.user._id,
-            username: data.user.username,
-            email: data.user.email,
-          },
-        });
-      } else {
-        alertMassage(data.error || data.errors, "error");
-      }
-      setEmail("");
-    } catch (error) {
-      console.log(error);
-    }
+        if (res) {
+          alertMassage(res.data.message);
+          navigate(`/verifiziere-verifikationscode/${res.data.user._id}`, {
+            state: { email: res.data.user.email, id: res.data.user._id },
+          });
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          const textError = err.response.data.error || err.response.data.errors;
+          alertMassage(textError, "error");
+        } else {
+          alertMassage("Ein Fehler ist aufgetreten.", "error");
+        }
+      });
+  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEmailVerificationData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
   return (
     <div className={style.email_container}>
@@ -58,9 +59,10 @@ const EmailVerification: React.FC<EmailProps> = ({ placeholder }) => {
             id="email"
             className={style.input__input}
             type="email"
+            name="email"
             placeholder={placeholder}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={emailVerificationData.email}
+            onChange={handleChange}
           />
         </div>
         <button className={style.btn} onClick={handleSubmit}>

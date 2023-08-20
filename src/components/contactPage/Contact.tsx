@@ -5,53 +5,39 @@ import { alertMassage } from "../../actions/alerts";
 import instance from "../../api/instance";
 
 const Contact: FC = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [textMessage, setTextMessage] = useState("");
+  const [contactData, setContactData] = useState({
+    username: "",
+    email: "",
+    subject: "",
+    textMessage: "",
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    /* try {
-    /*  const response = await fetch("http://localhost:3000/user/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          subject,
-          textMessage,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alertMassage(data.message, "success");
-      } else {
-        alertMassage(data.error, "error");
-      }
-    } catch (error) {
-      console.log(error);
-    }*/
-
     instance
-      .post("/user/contact", {
-        username,
-        email,
-        subject,
-        textMessage,
-      })
+      .post("/user/contact", contactData)
       .then((res) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         alertMassage(res.data.message);
         // inputs must be empty
+        setContactData({
+          username: "",
+          email: "",
+          subject: "",
+          textMessage: "",
+        });
       })
       .catch(() => alertMassage("Fehler beim Senden der E-Mail", "error"));
   };
-
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setContactData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
   return (
     <div id="contact" className={style.contactPage}>
       <h1>Kontaktieren Sie Uns für weitere Informationen.</h1>
@@ -80,35 +66,35 @@ const Contact: FC = () => {
           <form className={style.contactForm} onSubmit={handleSubmit}>
             <input
               type="text"
-              name="name"
+              name="username"
               placeholder="Name"
               className={style.contactInput}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={contactData.username}
+              onChange={handleChange}
             />
             <input
               type="email"
               name="email"
               placeholder="Email"
               className={style.contactInput}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={contactData.email}
+              onChange={handleChange}
             />
             <input
               type="text"
               name="subject"
               placeholder="Betreff"
               className={style.contactInput}
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
+              value={contactData.subject}
+              onChange={handleChange}
             />
             <textarea
               rows={10}
-              name="message"
+              name="textMessage"
               placeholder="Ihre Nachricht"
               className={style.contactInput}
-              value={textMessage}
-              onChange={(e) => setTextMessage(e.target.value)}
+              value={contactData.textMessage}
+              onChange={handleChange}
             ></textarea>
             <button type="submit" className={style.contactButton}>
               <span>SEND</span>

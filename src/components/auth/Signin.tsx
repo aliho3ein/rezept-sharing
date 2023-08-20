@@ -1,42 +1,46 @@
 import { useState, FC } from "react";
 import { Link } from "react-router-dom";
 import style from "../../styles/auth/signin.module.scss";
-//import instance from "../../api/instance";
 import { alertMassage } from "../../actions/alerts";
 import GoogleBtn from "./googleBtn/GoogleBtn";
 import { useNavigate } from "react-router-dom";
+import instance from "../../api/instance";
 
 const Signin: FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
-  const [clicked, setClicked] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:3000/user/anmelden", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+    instance
+      .post("/user/anmelden", formData)
+      .then((res) => {
+        if (res.status === 200) {
+          alertMassage(res.data.message);
+          navigate("/", { state: { username: res.data.user.username } });
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          const textError = err.response.data.error || err.response.data.errors;
+          alertMassage(textError, "error");
+        } else {
+          alertMassage("Ein Fehler ist aufgetreten.", "error");
+        }
       });
+  };
 
-      const data = await response.json();
-      console.log(data.error, "JSON Error");
-
-      if (response.ok) {
-        alertMassage(data.message, "success");
-        navigate("/", { state: { username: data.user.username } });
-      } else {
-        alertMassage(data.error || data.errors, "error");
-      }
-    } catch (err) {
-      console.error(err);
-    }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   return (
@@ -57,8 +61,9 @@ const Signin: FC = () => {
               id="email"
               type="email"
               placeholder="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
           <div className={style.input}>
@@ -69,8 +74,9 @@ const Signin: FC = () => {
               id="password"
               placeholder="password"
               type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
             />
             <i
               className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}

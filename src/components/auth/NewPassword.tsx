@@ -2,13 +2,16 @@ import { FC, useState } from "react";
 import style from "../../styles/auth/newPassword.module.scss";
 import { useNavigate, useLocation } from "react-router-dom";
 import { alertMassage } from "../../actions/alerts";
+import instance from "../../api/instance";
 
 const NewPassword: FC = () => {
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState({
+    password: "",
+    confirmPassword: "",
+  });
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,32 +26,32 @@ const NewPassword: FC = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const updatePassword = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/user/passwort-zuruecksetzen/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            password,
-            confirmPassword,
-          }),
+  const updatePassword = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    instance
+      .put(`/user/passwort-zuruecksetzen/${id}`, newPassword)
+      .then((res) => {
+        if (res.status === 200) {
+          alertMassage(res.data.message);
+          navigate("/signin");
         }
-      );
-      const data = await response.json();
+      })
+      .catch((err) => {
+        if (err.response) {
+          const textError = err.response.data.error || err.response.data.errors;
+          alertMassage(textError, "error");
+        } else {
+          alertMassage("Ein Fehler ist aufgetreten.", "error");
+        }
+      });
+  };
 
-      if (response.ok) {
-        alertMassage(data.message, "success");
-        navigate("/anmelden");
-      } else {
-        alertMassage(data.error || data.errors, "error");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewPassword((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   return (
@@ -57,7 +60,7 @@ const NewPassword: FC = () => {
         <h2 className={style.card_title}>Neues Passwort</h2>
         <p className={style.card_paragraph}>
           Bitte{" "}
-          {password
+          {newPassword.password
             ? "dein neues Passwort erneut eingeben"
             : "dein neues Passwort eingeben"}
         </p>
@@ -68,11 +71,12 @@ const NewPassword: FC = () => {
           </label>
           <input
             id="newPassword"
+            name="password"
             className={style.input__input}
             type={showNewPassword ? "text" : "password"}
             placeholder="Neues Passwort anfordern"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={newPassword.password}
+            onChange={handleChange}
           />
           <i
             className={`fas ${showNewPassword ? "fa-eye-slash" : "fa-eye"}`}
@@ -85,11 +89,12 @@ const NewPassword: FC = () => {
           </label>
           <input
             id="confirmPassword"
+            name="confirmPassword"
             className={style.input__input}
             type={showConfirmPassword ? "text" : "password"}
             placeholder="Neues Passwort erneut eingeben."
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={newPassword.confirmPassword}
+            onChange={handleChange}
           />
           <i
             className={`fas ${showConfirmPassword ? "fa-eye-slash" : "fa-eye"}`}
@@ -98,7 +103,7 @@ const NewPassword: FC = () => {
         </div>
         <button className={style.btn} onClick={updatePassword}>
           <span className={style.text}>
-            {password ? "Passwort ändern" : "Passwort zurücksetzen"}
+            {newPassword.password ? "Passwort ändern" : "Passwort zurücksetzen"}
           </span>
         </button>
       </div>
