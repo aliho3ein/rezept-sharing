@@ -4,6 +4,7 @@ import { alertMassage } from "../../actions/alerts";
 import GoogleBtn from "./googleBtn/GoogleBtn";
 import { Link, useNavigate } from "react-router-dom";
 import instance from "../../api/instance";
+import Cookies from "js-cookie";
 
 const Signup: FC = () => {
   const [formData, setFormData] = useState({
@@ -56,6 +57,11 @@ const Signup: FC = () => {
       ...prevData,
       [name]: value,
     }));
+  };
+  const handleLogout = () => {
+    Cookies.remove("authToken");
+    Cookies.remove("userName");
+    alertMassage("Logout successful", "success");
   };
   return (
     <div className={style.signup_container}>
@@ -153,7 +159,7 @@ const Signup: FC = () => {
         <div className={style.oder}>Order</div>
 
         <button className={style.google}>
-          <GoogleBtn />
+          <GoogleBtn onLogout={handleLogout} />
         </button>
       </div>
     </div>
