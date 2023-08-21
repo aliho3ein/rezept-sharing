@@ -1,10 +1,12 @@
-import { useState, FC } from "react";
+import { useState, FC, useEffect } from "react";
 import { Link } from "react-router-dom";
 import style from "../../styles/auth/signin.module.scss";
 import { alertMassage } from "../../actions/alerts";
 import GoogleBtn from "./googleBtn/GoogleBtn";
 import { useNavigate } from "react-router-dom";
 import instance from "../../api/instance";
+import Cookies from "js-cookie";
+import LogoutButton from "./Logout";
 
 const Signin: FC = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +14,7 @@ const Signin: FC = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,6 +25,7 @@ const Signin: FC = () => {
       .then((res) => {
         if (res.status === 200) {
           alertMassage(res.data.message);
+          Cookies.set("authToken", res.data.token, { expires: 7 });
           navigate("/", { state: { username: res.data.user.username } });
         }
       })
@@ -42,67 +46,88 @@ const Signin: FC = () => {
       [name]: value,
     }));
   };
+  useEffect(() => {
+    const authToken = Cookies.get("authToken");
 
+    if (authToken) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+  const handleLogout = () => {
+    Cookies.remove("authToken");
+    Cookies.remove("userName");
+    alertMassage("Logout successful", "success");
+  };
   return (
-    <div className={style.signin_container}>
-      <div className={style.card_form}>
-        <h2 className={style.card_title}>Anmelden</h2>
+    <>
+      <div className={style.signin_container}>
+        <div className={style.card_form}>
+          <h2 className={style.card_title}>Anmelden</h2>
 
-        <form onSubmit={handleSubmit}>
-          <p className={style.card_paragraph}>
-            Bitte gib deine E-Mail-Adresse und dein Passwort ein, um dich
-            anzumelden.
+          <form onSubmit={handleSubmit}>
+            <p className={style.card_paragraph}>
+              Bitte gib deine E-Mail-Adresse und dein Passwort ein, um dich
+              anzumelden.
+            </p>
+            <div className={style.input}>
+              <label htmlFor="email">
+                <i className="fas fa-envelope"></i>
+              </label>
+              <input
+                id="email"
+                type="email"
+                placeholder="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={style.input}>
+              <label htmlFor="password">
+                <i className="fas fa-lock"></i>
+              </label>
+              <input
+                id="password"
+                placeholder="password"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <i
+                className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}
+                onClick={() => setShowPassword(!showPassword)}
+              ></i>
+            </div>
+            <div className={style.forgotPassword}>
+              <Link to="/passwort-vergessen">Password vergessen?</Link>
+            </div>
+            <button className={style.btn} type="submit">
+              <span className={style.text}>Anmelden</span>
+            </button>
+          </form>
+          <p className={style.signup_link}>
+            Hast du keine Konto?
+            <Link to="/signup" className={style.signup_link}>
+              Registrieren
+            </Link>
           </p>
-          <div className={style.input}>
-            <label htmlFor="email">
-              <i className="fas fa-envelope"></i>
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={style.input}>
-            <label htmlFor="password">
-              <i className="fas fa-lock"></i>
-            </label>
-            <input
-              id="password"
-              placeholder="password"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-            <i
-              className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}
-              onClick={() => setShowPassword(!showPassword)}
-            ></i>
-          </div>
-          <div className={style.forgotPassword}>
-            <Link to="/passwort-vergessen">Password vergessen?</Link>
-          </div>
-          <button className={style.btn} type="submit">
-            <span className={style.text}>Anmelden</span>
-          </button>
-        </form>
-        <p className={style.signup_link}>
-          Hast du keine Konto?
-          <Link to="/signup" className={style.signup_link}>
-            Registrieren
-          </Link>
-        </p>
 
-        <div className={style.oder}>Oder</div>
-        <button className={style.google}>
-          <GoogleBtn />
-        </button>
+          <div className={style.oder}>Oder</div>
+          {/*         <button className={style.google}>
+          <GoogleBtn onLogout={handleLogout} />
+          {isLoggedIn && <LogoutButton onLogout={handleLogout} />}
+        </button> */}
+          {isLoggedIn ? (
+            <LogoutButton onLogout={handleLogout} />
+          ) : (
+            <GoogleBtn onLogout={handleLogout} />
+          )}
+
+          {/* <LogoutButton onLogout={handleLogout} /> */}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Signin;
