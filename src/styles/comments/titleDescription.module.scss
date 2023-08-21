@@ -1,0 +1,58 @@
+@import "../variable";
+.wrapper{
+  width: 100%;
+  height: max-content;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+}
+.sectImg{
+ //border: 1px solid;
+ width: 100%;
+}
+.imgRecipe {
+  min-width: 300px;
+  height: 250px;
+  border-radius: 20px;
+  background-color: $secondary-color;
+  width: 100%;
+  filter: drop-shadow(0 0 10px #555);
+  margin: 20px 0;
+}
+
+.sectZutaten {
+  margin: 20px 0;
+  border-top: 1px solid rgba(81, 72, 72, 0.303);
+  border-bottom: 1px solid rgba(81, 72, 72, 0.303);
+  padding: 30px 0;
+  width:100%;
+  h3 {
+    padding-bottom: 20px ;
+  }
+
+  .listItem {
+    display: flex;
+    width: 100%;
+    border-radius: 8px;
+    justify-content: space-between;
+    p {
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+    }
+  }
+ 
+}
+
+.zubereitung {
+    border: 1px solid rgba(81, 72, 72, 0.152);;
+    padding: 15px 0 0 10px ;
+    p {
+        max-width: 500px;
+        padding: 20px 10px;
+    }
+   
+    
+}
