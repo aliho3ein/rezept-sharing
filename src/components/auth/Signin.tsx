@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useState, FC, useEffect } from "react";
 import { Link } from "react-router-dom";
 import style from "../../styles/auth/signin.module.scss";
@@ -17,14 +20,14 @@ const Signin: FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     instance
       .post("/user/anmelden", formData)
       .then((res) => {
         if (res.status === 200) {
-          alertMassage(res.data.message);
+          alertMassage(res.data.message as string);
           Cookies.set("authToken", res.data.token, { expires: 7 });
           navigate("/", { state: { username: res.data.user.username } });
         }
@@ -32,7 +35,7 @@ const Signin: FC = () => {
       .catch((err) => {
         if (err.response) {
           const textError = err.response.data.error || err.response.data.errors;
-          alertMassage(textError, "error");
+          alertMassage(textError as string, "error");
         } else {
           alertMassage("Ein Fehler ist aufgetreten.", "error");
         }

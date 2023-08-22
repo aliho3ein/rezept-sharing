@@ -6,11 +6,13 @@ import About from "./About";
 import Crew from "./Crew";
 import style from "../../styles/startPage/index.module.scss";
 import Contact from "../contactPage/Contact";
+import TestImg from "./testImg";
 
 const StartPage: FC = () => {
   return (
     <>
       <Header />
+      <TestImg />
       <main className={style.mainContainer}>
         <About />
         <section className={style.imageBlock}>
