@@ -1,101 +1,136 @@
-import { useState, FC } from "react";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { useState, FC, useEffect } from "react";
 import { Link } from "react-router-dom";
 import style from "../../styles/auth/signin.module.scss";
-//import instance from "../../api/instance";
 import { alertMassage } from "../../actions/alerts";
 import GoogleBtn from "./googleBtn/GoogleBtn";
 import { useNavigate } from "react-router-dom";
+import instance from "../../api/instance";
+import Cookies from "js-cookie";
+import LogoutButton from "./Logout";
 
 const Signin: FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:3000/user/anmelden", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+    instance
+      .post("/user/anmelden", formData)
+      .then((res) => {
+        if (res.status === 200) {
+          alertMassage(res.data.message as string);
+          Cookies.set("authToken", res.data.token, { expires: 7 });
+          navigate("/", { state: { username: res.data.user.username } });
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          const textError = err.response.data.error || err.response.data.errors;
+          alertMassage(textError as string, "error");
+        } else {
+          alertMassage("Ein Fehler ist aufgetreten.", "error");
+        }
       });
-
-      const data = await response.json();
-      console.log("ds", data.user.username);
-
-      if (response.ok) {
-        alertMassage(data.message, "success");
-        navigate("/", { state: { username: data.user.username } });
-      } else {
-        alertMassage(data.error || data.errors, "error");
-      }
-    } catch (err) {
-      console.error(err);
-    }
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  useEffect(() => {
+    const authToken = Cookies.get("authToken");
+
+    if (authToken) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+  const handleLogout = () => {
+    Cookies.remove("authToken");
+    Cookies.remove("userName");
+    alertMassage("Logout successful", "success");
+  };
   return (
-    <div className={style.signin_container}>
-      <div className={style.card_form}>
-        <h2 className={style.card_title}>Anmelden</h2>
-        <form onSubmit={handleSubmit}>
-          <p className={style.card_paragraph}>
-            Bitte gib deine E-Mail-Adresse und dein Passwort ein, um dich
-            anzumelden.
+    <>
+      <div className={style.signin_container}>
+        <div className={style.card_form}>
+          <h2 className={style.card_title}>Anmelden</h2>
+
+          <form onSubmit={handleSubmit}>
+            <p className={style.card_paragraph}>
+              Bitte gib deine E-Mail-Adresse und dein Passwort ein, um dich
+              anzumelden.
+            </p>
+            <div className={style.input}>
+              <label htmlFor="email">
+                <i className="fas fa-envelope"></i>
+              </label>
+              <input
+                id="email"
+                type="email"
+                placeholder="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={style.input}>
+              <label htmlFor="password">
+                <i className="fas fa-lock"></i>
+              </label>
+              <input
+                id="password"
+                placeholder="password"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <i
+                className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}
+                onClick={() => setShowPassword(!showPassword)}
+              ></i>
+            </div>
+            <div className={style.forgotPassword}>
+              <Link to="/passwort-vergessen">Password vergessen?</Link>
+            </div>
+            <button className={style.btn} type="submit">
+              <span className={style.text}>Anmelden</span>
+            </button>
+          </form>
+          <p className={style.signup_link}>
+            Hast du keine Konto?
+            <Link to="/signup" className={style.signup_link}>
+              Registrieren
+            </Link>
           </p>
-          <div className={style.input}>
-            <label htmlFor="email">
-              <i className="fas fa-envelope"></i>
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className={style.input}>
-            <label htmlFor="password">
-              <i className="fas fa-lock"></i>
-            </label>
-            <input
-              id="password"
-              placeholder="password"
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <i
-              className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}
-              onClick={() => setShowPassword(!showPassword)}
-            ></i>
-          </div>
-          <div className={style.forgotPassword}>
-            <Link to="/forgot-password">Password vergessen?</Link>
-          </div>
-          <button className={style.btn} type="submit">
-            <span className={style.text}>Anmelden</span>
-          </button>
-        </form>
-        <p className={style.signup_link}>
-          Hast du keine Konto?
-          <Link to="/registrieren" className={style.signup_link}>
-            Registrieren
-          </Link>
-        </p>
-        <div className={style.separator}>
-          <span>oder</span>
+
+          <div className={style.oder}>Oder</div>
+          {/*         <button className={style.google}>
+          <GoogleBtn onLogout={handleLogout} />
+          {isLoggedIn && <LogoutButton onLogout={handleLogout} />}
+        </button> */}
+          {isLoggedIn ? (
+            <LogoutButton onLogout={handleLogout} />
+          ) : (
+            <GoogleBtn onLogout={handleLogout} />
+          )}
+
+          {/* <LogoutButton onLogout={handleLogout} /> */}
         </div>
-        <button className={style.google}>
-          <GoogleBtn />
-        </button>
       </div>
-    </div>
+    </>
   );
 };
 export default Signin;

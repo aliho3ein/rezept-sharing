@@ -1,0 +1,335 @@
+@import "../variable";
+
+//! Start
+.start {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px;
+  background-color: $primary-color;
+  width: 50%;
+  margin: 10px auto;
+}
+
+//! search component
+.recipeListContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: transparent;
+  width: 100%;
+}
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid $secondary-color;
+  border-radius: 5px;
+  width: 100%;
+
+  .searchInput {
+    flex: 1;
+    padding: 10px 35px 10px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: $primary-color;
+    transition: 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+    color: $text-color;
+    cursor: text;
+    outline: none;
+
+    &::placeholder {
+      color: #888;
+    }
+
+    &:focus {
+      background-color: #fff;
+    }
+  }
+
+  .searchIcon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $accent-color;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+      color: $text-color;
+    }
+  }
+
+  .clearIcon {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $accent-color;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $text-color;
+    }
+  }
+}
+.recipes {
+  list-style: none;
+  background-color: $primary-color;
+  border: 1px solid $secondary-color;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 100%;
+
+  .recipeItem {
+    padding: 10px 20px;
+    font-family: "Titillium Web", sans-serif;
+    font-size: 18px;
+    color: #222;
+    border-bottom: 1px solid #febd2f;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    .titleInput {
+      font-size: 1em;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: #fef3e0;
+    }
+  }
+}
+.modal {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+
+  .modalContent {
+    background-color: $primary-color;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 50%;
+
+    .iconContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+
+      .recipeIcon {
+        font-size: 24px;
+        color: $accent-color;
+        margin-right: 10px;
+      }
+
+      h2 {
+        margin: 0;
+        font-family: $title-font;
+      }
+    }
+  }
+  .imagesContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    .recipeImage {
+      max-width: 50%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+  .recipeType {
+    color: $text-color;
+    margin: 10px 0;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .recipeIngredientsTitle {
+    margin: 20px 0;
+  }
+
+  .recipeIngredients {
+    list-style: none;
+    padding: 0;
+
+    .recipeIngredientItem {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      .recipeIngredientName {
+        font-weight: bold;
+        margin-right: 5px;
+      }
+
+      .recipeIngredientDetails {
+        flex: 1;
+        border-top: 1px solid $text-color;
+      }
+
+      .recipeIngredientAmount {
+        margin: 0 5px;
+        font-weight: 500;
+      }
+
+      .recipeIngredientUnit {
+        color: $accent-color;
+      }
+    }
+  }
+
+  .iconContainerTime {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    .recipeIcon {
+      font-size: 18px;
+      margin-right: 5px;
+    }
+
+    .cookingTime {
+      color: $accent-color;
+      margin: 10px 0;
+    }
+  }
+
+  .closeButton {
+    width: 100%;
+    border: none;
+    padding: 10px 20px;
+    margin-block: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: $text-color;
+    color: $secondary-color;
+    transition: all 200ms;
+
+    &:hover {
+      filter: brightness(1.5);
+    }
+  }
+}
+
+//! RandomBtn
+.centerBtn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.randomBtn {
+  background-color: $text-color;
+  color: $secondary-color;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 55px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease-in-out;
+  &:hover {
+    filter: brightness(1.5);
+  }
+  i {
+    font-size: 20px;
+    margin: 0 10px;
+  }
+}
+
+//!Filter Options
+.filterOptions {
+  margin-bottom: 20px;
+
+  label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: $text-color;
+    font-family: $title-font;
+  }
+
+  .filterList {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+      cursor: pointer;
+      color: $text-color;
+      font-family: $title-font;
+      transition: color 0.3s ease-in-out;
+      font-size: 17px;
+
+      &:hover {
+        color: $accent-color;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+//! sortOptions
+.sortOptions {
+  margin-bottom: 20px;
+
+  label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: $text-color;
+    font-family: $title-font;
+  }
+
+  .sortList {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+      cursor: pointer;
+      color: $text-color;
+      font-family: $title-font;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: $accent-color;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

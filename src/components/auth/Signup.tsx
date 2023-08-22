@@ -1,51 +1,46 @@
 import { useState, FC } from "react";
 import style from "../../styles/auth/signup.module.scss";
-//import instance from "../../api/instance";
 import { alertMassage } from "../../actions/alerts";
 import GoogleBtn from "./googleBtn/GoogleBtn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import instance from "../../api/instance";
+import Cookies from "js-cookie";
 
 const Signup: FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    dateOfBirth: "",
+  });
+
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
-  const [dateOfBirth, setDateOfBirth] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const handleSignup = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    instance
+      .post("user/registrieren", formData)
+      .then((res) => {
+        console.log(res);
 
-    try {
-      const userData = {
-        username,
-        email,
-        dateOfBirth,
-        password,
-        confirmPassword,
-      };
-
-      const response = await fetch("http://localhost:3000/user/registrieren", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(userData),
+        if (res.status === 201) {
+          alertMassage(res.data.message);
+          navigate("/signin");
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          const textError = err.response.data.error || err.response.data.errors;
+          alertMassage(textError, "error");
+        } else {
+          alertMassage("Ein Fehler ist aufgetreten.", "error");
+        }
       });
-      const data = await response.json();
-
-      console.log("test", data);
-
-      if (response.ok) {
-        alertMassage(data.message, "success");
-      } else {
-        alertMassage(data.error || data.errors, "error");
-      }
-    } catch (err) {
-      console.error(err);
-    }
   };
 
   const handleShowPasswordToggle = () => {
@@ -56,8 +51,20 @@ const Signup: FC = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const handleLogout = () => {
+    Cookies.remove("authToken");
+    Cookies.remove("userName");
+    alertMassage("Logout successful", "success");
+  };
   return (
-    <div className={style.signin_container}>
+    <div className={style.signup_container}>
       <div className={style.card_form}>
         <h2 className={style.card_title}>Registrieren</h2>
         <p className={style.card_paragraph}>
@@ -72,8 +79,9 @@ const Signup: FC = () => {
             id="username"
             type="text"
             placeholder="Benutzername"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
           />
         </div>
         <div className={style.input}>
@@ -83,9 +91,10 @@ const Signup: FC = () => {
           <input
             id="email"
             type="email"
+            name="email"
             placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={handleChange}
           />
         </div>
 
@@ -97,8 +106,9 @@ const Signup: FC = () => {
             id="password"
             placeholder="Passwort"
             type={showPassword ? "text" : "password"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
           />
           <i
             className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}
@@ -113,8 +123,9 @@ const Signup: FC = () => {
             id="confirmPassword"
             placeholder="Passwort bestätigen"
             type={showConfirmPassword ? "text" : "password"}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
           />
           <i
             className={showConfirmPassword ? "fas fa-eye" : "fas fa-eye-slash"}
@@ -129,8 +140,9 @@ const Signup: FC = () => {
             id="birthdate"
             type="date"
             placeholder="Geburtsdatum"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
+            name="dateOfBirth"
+            value={formData.dateOfBirth}
+            onChange={handleChange}
           />
         </div>
         <button className={style.btn} type="button" onClick={handleSignup}>
@@ -139,15 +151,15 @@ const Signup: FC = () => {
 
         <p className={style.signup_link}>
           Hast du keine Konto?
-          <Link to="/anmelden" className={style.signup_link}>
+          <Link to="/signin" className={style.signup_link}>
             Anmelden
           </Link>
         </p>
-        <div className={style.separator}>
-          <span>oder</span>
-        </div>
+
+        <div className={style.oder}>Order</div>
+
         <button className={style.google}>
-          <GoogleBtn />
+          <GoogleBtn onLogout={handleLogout} />
         </button>
       </div>
     </div>

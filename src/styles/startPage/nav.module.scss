@@ -18,10 +18,14 @@
       cursor: pointer;
       transition: color 150ms;
 
+      a {
+        all: unset;
+      }
+
       &:last-child {
         margin-left: auto;
         padding: 3px 8px;
-        border-radius: 8px;
+        border-radius: 5px;
         background-color: $secondary-color;
 
         &:hover {
@@ -31,6 +35,13 @@
 
       &:hover {
         color: $secondary-color;
+      }
+      a {
+        text-decoration: none;
+        color: $text-color;
+        &:hover {
+          color: $primary-color;
+        }
       }
     }
   }

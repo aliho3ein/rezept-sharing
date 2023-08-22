@@ -1,36 +1,45 @@
 @import "../variable";
+
+$link-color: #007bff;
+
 .signin_container {
-  background: center / cover no-repeat url("../../assets/bild.jpg");
+  background: center / cover no-repeat url("../../assets/signin.jpg");
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
 }
+
 .card_form {
+  background-color: rgba($primary-color, 0.7);
   backdrop-filter: blur(10px);
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
   padding: 20px;
-  width: 100%;
-  max-width: 500px;
+  width: 500px;
   text-align: center;
+
   .card_title {
     font-size: 1.5em;
     margin-bottom: 16px;
     text-transform: uppercase;
   }
   .card_paragraph {
-    font-size: 1em;
+    font-size: 0.8em;
+    color: #777;
     margin-bottom: 25px;
+    font-size: 0.8em;
+    color: #888;
   }
 }
+
 .input {
   display: flex;
   align-items: center;
   border-bottom: 1px solid $text-color;
   padding: 7px 0;
   margin-bottom: 1.5rem;
+
   label {
     font-size: 1.2em;
     margin-right: 15px;
@@ -55,6 +64,7 @@
     margin: 0 10px;
   }
 }
+
 .forgotPassword {
   text-align: end;
   a {
@@ -62,14 +72,14 @@
   }
   a {
     text-decoration: none;
-    color: #007bff;
+    color: $link-color;
   }
   a:hover {
     color: $text-color;
   }
 }
 
-.signup_link {
+.signin_link {
   text-align: end;
   display: flex;
   justify-content: center;
@@ -78,23 +88,56 @@
   margin-left: 20px;
   a {
     text-decoration: none;
-    color: #007bff;
+    margin-left: 10px;
+    color: $link-color;
   }
   a:hover {
     color: $text-color;
+    transition: color 0.3s;
   }
 }
-.separator {
+
+.oder {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
   display: flex;
   align-items: center;
+  /** */
   text-align: center;
-  margin-block: 10px;
+  margin-block: 20px;
+
+  &::after,
+  &::before {
+    content: "";
+    width: 200px;
+    height: 1px;
+    background-color: $text-color;
+  }
 
   span {
-    flex-grow: 1;
-    border-bottom: 1px solid #000;
     margin-inline: 10px;
+    vertical-align: 2px;
   }
+  /** */
+  font-size: 0.75rem;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.oder::before,
+.oder::after {
+  content: "";
+  flex: 1 1 0%;
+  border-top: 1px solid #000;
+}
+
+.oder::before {
+  margin-right: 0.375rem;
+}
+
+.oder::after {
+  margin-left: 0.375rem;
+  /** */
 }
 
 .btn {
@@ -105,38 +148,44 @@
   cursor: pointer;
   border-radius: 4px;
   font-size: 16px;
-  background-color: $primary-color;
-  color: $text-color;
+  background-color: $text-color;
+  color: $secondary-color;
+  transition: all 200ms;
+
   &:hover {
-    background-color: $text-color;
-    color: $primary-color;
+    filter: brightness(1.5);
   }
   .text {
     font-weight: 600;
   }
 }
-.google_container {
-  text-align: center;
-}
 
-.google_btn {
-  width: 100%;
-  border: none;
-  padding: 10px 20px;
-
+.googleButton {
+  background-color: $primary-color;
+  padding: 0;
   cursor: pointer;
-}
+  display: inline-block;
+  font-size: 0;
 
-.google {
-  width: 100%;
-  border: none;
-  margin: 10px 0;
-
-  &:hover {
+  .logoutButton {
     background-color: $text-color;
+    width: 100%;
+    color: $secondary-color;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 200ms;
+    &:hover {
+      filter: brightness(1.5);
+    }
   }
 }
-
+.google {
+  border: none;
+}
 @media screen and (max-width: 991px) {
   .button-75 {
     height: 50px;
