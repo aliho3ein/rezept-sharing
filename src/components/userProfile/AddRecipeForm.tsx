@@ -3,6 +3,7 @@ import Ingredient, { Material } from "./Ingredient";
 import style from "../../styles/userProfile/recipeForm.module.scss";
 import instance from "../../api/instance";
 import { uploadRecipeImg } from "../../actions/imageStorage";
+
 // import { useNavigate } from "react-router-dom";
 
 interface FormData {
@@ -68,6 +69,7 @@ const AddRecipeForm: FC = () => {
       .catch((err) => console.error(err));
     // console.log(formData);
   }
+
 
   const getUrl = (e: ChangeEvent) => {
     uploadRecipeImg(e, Date.now())
@@ -211,6 +213,7 @@ const AddRecipeForm: FC = () => {
         onChange={handleInputChange}
       />
       <span>Zubereitungszeit in min.</span>
+
       <input
         type="file"
         id="image"
@@ -218,6 +221,9 @@ const AddRecipeForm: FC = () => {
         value={formData.image}
         onChange={getUrl}
       />
+
+      <input type="file" id="image" multiple value={formData.image} />
+
       <button type="submit">Rezept erstellen</button>
     </form>
   );
