@@ -9,8 +9,8 @@ import {
 import { alertMassage } from "./alerts.js";
 
 /** upload Recipe Image max. 4 allowed */
-export const uploadRecipeImg = (e: ChangeEvent, id: string, number: number) => {
-  const imageRef = ref(storage, `recipe/${id}-${number}`);
+export const uploadRecipeImg = (e: ChangeEvent, id: any) => {
+  const imageRef = ref(storage, `recipe/${id}`);
   return uploadImage(e, imageRef);
 };
 
@@ -36,5 +36,6 @@ const uploadImage = async (e: ChangeEvent, imageRef: StorageReference) => {
       "Beim Hochladen Ihres Fotos ist ein Fehler aufgetreten",
       "error"
     );
+    // throw new Error();
   }
 };
