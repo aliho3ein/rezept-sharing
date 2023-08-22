@@ -1,0 +1,52 @@
+@import "../variable";
+
+.recipeForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.titleInput {
+  width: 540px;
+  height: 40px;
+  border-radius: 5px;
+
+  &::placeholder {
+    padding-left: 5px;
+  }
+
+  &:focus {
+    border-color: $secondary-color;
+  }
+}
+
+.ingredientInput {
+  width: 295px;
+  height: 40px;
+  padding-left: 5px;
+}
+
+.countInput {
+  width: 60px;
+  height: 40px;
+}
+
+.unitSelect {
+  width: 175px;
+  height: 40px;
+}
+
+.descArea {
+  width: 540px;
+  height: 125px;
+  resize: none;
+  overflow: hidden;
+
+  &::placeholder {
+    padding: 5px;
+  }
+}
