@@ -9,6 +9,7 @@ import VerificationCode from "../components/auth/VerificationCode";
 import Contact from "../components/contactPage/Contact";
 import EmailVerification from "../components/auth/EmailVerification";
 import NewPassword from "../components/auth/NewPassword";
+import Start from "./Start";
 
 const App: FC = () => {
   useEffect(() => {
@@ -19,6 +20,8 @@ const App: FC = () => {
     <>
       <Routes>
         <Route path="/" element={<StartPage />} />
+        <Route path="/recipes" element={<Start />} />
+
         <Route path="/user-profile" element={<UserProfile />} />
 
         <Route path="/signin" element={<Signin />} />
