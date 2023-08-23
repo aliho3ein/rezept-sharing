@@ -3,6 +3,7 @@ import Ingredient, { Material } from "./Ingredient";
 import style from "../../styles/userProfile/recipeForm.module.scss";
 import instance from "../../api/instance";
 import { uploadRecipeImg } from "../../actions/imageStorage";
+import { alertMassage } from "../../actions/alerts";
 
 // import { useNavigate } from "react-router-dom";
 
@@ -12,7 +13,6 @@ interface FormData {
   desc: string;
   category: string[];
   time: string | number;
-  image: string[];
 }
 
 const AddRecipeForm: FC = () => {
@@ -25,8 +25,9 @@ const AddRecipeForm: FC = () => {
     desc: "",
     category: [],
     time: 0,
-    image: [],
   });
+
+  const [image, setImg] = useState<string[]>([]);
 
   function addIngredientToMaterial(ingredient: Material) {
     setFormData((prevData) => ({
@@ -64,18 +65,14 @@ const AddRecipeForm: FC = () => {
   function handleSubmit(event: any) {
     event.preventDefault();
     instance
-      .post(`/recipe/create/${userId}`, formData)
-      .then((response) => console.log(response.data))
-      .catch((err) => console.error(err));
-    // console.log(formData);
+      .post(`/recipe/create/${userId}`, { ...formData, image })
+      .then((response) => alertMassage("Rezept gespeichert"))
+      .catch((err) => alertMassage("Fehler beim Speichern"));
   }
-
 
   const getUrl = (e: ChangeEvent) => {
     uploadRecipeImg(e, Date.now())
-      .then((res) =>
-        setFormData({ ...formData, image: [...formData.image, res] })
-      )
+      .then((res) => res && setImg([...image, res]))
       .catch((err) => console.log(err));
   };
 
