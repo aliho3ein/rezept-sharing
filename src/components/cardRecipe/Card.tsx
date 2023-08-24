@@ -11,8 +11,10 @@ const Card: FC<cardType> = ({ data }) => {
   return (
     <section className={styles.cardContainer}>
       <div className={styles.card}>
-        <div>
-          <img className={styles.img} src={image[0]} /> {/*"src/assets/frite-salad.png" alt="image" */}
+
+        <div className={styles.imageCard}>
+          <img src={image[0]} /> {/*"src/assets/frite-salad.png" alt="image" */}
+
         </div>
         <div className={styles.cardInfo}>
           <p className={styles.titleRecipe}>{title}</p>{" "}
@@ -23,10 +25,10 @@ const Card: FC<cardType> = ({ data }) => {
             })}
             <p>{like[0]}Rewiews </p> {/*(8 Rewiews)*/}
           </div>
-          <hr />
+          <div className={styles.line}></div>
           <div className={styles.timeWiew}>
-            <p> {time}mins</p> {/*  20 mins*/}
-            <div>View Recipe</div>
+            <p className={styles.time}> {time}mins</p> {/*  20 mins*/}
+            <div className={styles.viewRecipe}>View Recipe</div>
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import SortOptions from "../components/mainPage/SortOptions";
 import instance from "../api/instance";
 import Card from "../components/cardRecipe/Card";
 import { recipeType } from "../models/recipe";
-import { alertMassage } from "../actions/alerts";
+//import { alertMassage } from "../actions/alerts";
 
 const Start: FC = () => {
   const [recipeList, setRecipeList] = useState<recipeType[]>([]);
@@ -17,10 +17,13 @@ const Start: FC = () => {
 
   useEffect(() => {
     instance
-      .get<recipeType[]>(`recipe/page/${pageNr}`, {
-        params: { sort, category },
+      .get<recipeType[]>(`/recipe/page/${pageNr}`, {
+        params: { sort, category: category.join(",") },
       })
-      .then((res) => setRecipeList(res.data))
+      .then((res) => {
+        setRecipeList(res.data);
+        // console.log("dataaaa", res.data[1]);
+      })
       .catch((err) => console.log(err));
   }, [sort, pageNr, category]);
 
@@ -47,9 +50,17 @@ const Start: FC = () => {
         <SortOptions changeSort={setSort} />
       </div>
 
-      {recipeList.map((item, index) => {
+      {/* {recipeList.map((item, index) => {
         return <Card data={item} key={index} />;
-      })}
+      })} */}
+      <div className={style.cardsContainer}>
+        {recipeList.map((item, index) => {
+          if (category.length === 0 || category.includes(item.category[1])) {
+            return <Card data={item} key={index} />;
+          }
+          return null;
+        })}
+      </div>
     </>
   );
 };

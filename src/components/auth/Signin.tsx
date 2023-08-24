@@ -32,6 +32,7 @@ const Signin: FC = () => {
           navigate("/", { state: { username: res.data.user.username } });
         }
       })
+
       .catch((err) => {
         if (err.response) {
           const textError = err.response.data.error || err.response.data.errors;
