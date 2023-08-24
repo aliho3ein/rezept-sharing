@@ -1,0 +1,180 @@
+@import "../variable";
+
+.signup_container {
+  background: center/cover no-repeat url("../../assets/signup.jpg");
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.card_form {
+  background-color: rgba($primary-color, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 30%;
+  min-width: 500px;
+  text-align: center;
+
+  .card_title {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+  }
+
+  .card_paragraph {
+    margin-bottom: 25px;
+    font-size: 0.8em;
+    color: #777;
+    margin-bottom: 30px;
+    color: #888;
+  }
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $text-color;
+  padding: 7px 0;
+  margin-bottom: 22px;
+
+  label {
+    font-size: 1.2em;
+    margin-right: 10px;
+  }
+
+  input {
+    border-radius: 4px;
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    background-color: transparent;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-left: 15px;
+  }
+
+  input:focus {
+    background-color: transparent;
+  }
+
+  i {
+    cursor: pointer;
+    margin-inline: 10px;
+  }
+}
+
+.forgotPassword {
+  text-align: end;
+
+  a {
+    text-decoration: none;
+    color: $primary-color;
+  }
+
+  a:hover {
+    color: $text-color;
+  }
+}
+
+.signup_link {
+  text-align: end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  margin-left: 10px;
+
+  a {
+    text-decoration: none;
+    color: #007bff;
+  }
+
+  a:hover {
+    color: $text-color;
+  }
+}
+
+.oder {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.oder::before,
+.oder::after {
+  content: "";
+  flex: 1 1 0%;
+  border-top: 1px solid #000;
+}
+
+.oder::before {
+  margin-right: 0.375rem;
+}
+
+.oder::after {
+  margin-left: 0.375rem;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  padding: 10px 20px;
+  margin-block: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: $text-color;
+  color: $secondary-color;
+  transition: all 200ms;
+
+  &:hover {
+    filter: brightness(1.5);
+  }
+
+  .text {
+    font-weight: 600;
+  }
+}
+
+.googleButton {
+  background-color: $primary-color;
+  padding: 0;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0;
+  .logoutButton {
+    background-color: $primary-color;
+    width: 100%;
+    color: $text-color;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    &:hover {
+      background-color: $text-color;
+      color: $primary-color;
+    }
+  }
+}
+.google {
+  border: none;
+}
+@media screen and (max-width: 991px) {
+  .btn {
+    height: 50px;
+  }
+
+  .btn text {
+    line-height: 50px;
+  }
+}

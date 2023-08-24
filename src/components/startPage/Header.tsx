@@ -2,6 +2,7 @@ import { FC } from "react";
 
 import style from "./../../styles/startPage/header.module.scss";
 import NavBar from "./NavBar";
+import { Link } from "react-router-dom";
 
 const Header: FC = () => {
   return (
@@ -16,6 +17,9 @@ const Header: FC = () => {
           Rezept <br /> Sharing <br />
           Plattform
         </h1>
+        <Link to="/recipes" className={style.enterBtn}>
+          als Gast eintreten
+        </Link>
       </div>
       <i className="fas fa-arrow-down"></i>
     </header>

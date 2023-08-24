@@ -20,9 +20,9 @@ type iconType = "success" | "error" | "warning" | "info" | "question";
 export const alertMassage = (
   title: string,
   icon: iconType = "success",
-  timer: number = 3000
-) => {
-  Toast.fire({
+  timer = 3000
+): void => {
+  void Toast.fire({
     icon,
     title,
     timer,

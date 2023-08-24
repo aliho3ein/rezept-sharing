@@ -1,0 +1,144 @@
+@import "../variable";
+.email_container {
+  background: center/cover no-repeat url("../../assets/bild.jpg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.card_form {
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    font-size: 1.5em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  &__paragraph {
+    font-size: 1em;
+  }
+}
+.card_paragraph {
+  margin: 20px;
+  font-size: 0.8em;
+  color: #888;
+}
+.input {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $text-color;
+  padding: 7px 0;
+  margin-bottom: 20px;
+
+  &__label {
+    font-size: 1.2em;
+    margin-right: 15px;
+  }
+
+  &__input {
+    border-radius: 4px;
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    background-color: transparent;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-left: 15px;
+    margin: 10px;
+  }
+
+  &__input:focus {
+    background-color: transparent;
+  }
+
+  &__icon {
+    cursor: pointer;
+    margin: 0 10px;
+  }
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  padding: 10px 20px;
+  margin-block: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: $text-color;
+  color: $secondary-color;
+  transition: all 200ms;
+
+  &:hover {
+    filter: brightness(1.5);
+  }
+
+  .text {
+    font-weight: 600;
+  }
+}
+
+.forgotPassword {
+  text-align: end;
+
+  &__link {
+    text-decoration: none;
+    color: $primary-color;
+
+    &:hover {
+      color: $text-color;
+    }
+  }
+}
+
+.signup_link {
+  text-align: end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  margin-left: 20px;
+
+  &__link {
+    text-decoration: none;
+    color: $primary-color;
+
+    &:hover {
+      color: $text-color;
+    }
+  }
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-block: 10px;
+
+  &__span {
+    flex-grow: 1;
+    border-bottom: 1px solid #000;
+    margin-inline: 10px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .button-75 {
+    height: 50px;
+  }
+  .button-75 span {
+    line-height: 50px;
+  }
+}

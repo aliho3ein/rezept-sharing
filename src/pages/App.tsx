@@ -14,6 +14,8 @@ const App: FC = () => {
     <>
       <Routes>
         <Route path="/" element={<StartPage />} />
+        <Route path="/recipes" element={<StartPage />} />
+
         <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/comments" element={<CommentPage />} />
       </Routes>
