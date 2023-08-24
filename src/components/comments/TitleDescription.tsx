@@ -1,14 +1,44 @@
-import { FC } from "react";
+import { FC , useEffect,useState} from "react";
 import styles from "../../styles/comments/titleDescription.module.scss";
 import { CountRewiews } from "./CountRewiews";
+import Comment from "./Comment";
+import Card from "../cardRecipe/Card";
+import { recipeType } from "../../models/recipe";
+//import instance from "../../api/instance";
+import axios from "axios";
+
 const TitleDescription: FC = () => {
+  // const getData = () => {
+  //   instance.get("/recipe/64d394cb3b9a0f12a8cee52a").then((res) => {
+  //     console.log(res);
+      
+  //   });
+  // }
+  //getData();
+  const [dataRecipe,setDataRecipe] = useState<recipeType>();
+  async function getTutorial() {
+    try {
+      const response = await axios.get('http://localhost:3000/recipe/64e5e9f9aad54a0f87ae7650');
+        setDataRecipe(response.data) 
+        console.log(dataRecipe?.material);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  useEffect(() => {
+    getTutorial();
+  },[])
+  
+   
   const arrZutaten = [
     { title: "Avocado", number: 2, unit: "kg" },
     { title: "Salz und Pfeffe", number: "", unit: "" },
     { title: "Tomaten", number: 4, unit: "kg" },
-    { title: "Salz und Pfeffe fdfgfgf", number: "", unit: "" },
+    { title: "Salz und Pfeffe", number: "", unit: "" },
     { title: "Tomaten", number: 4, unit: "kg" },
   ];
+
+  const imgArr = ["/src/assets/frite-salad.png"];
 
   return (
     <>
@@ -17,7 +47,7 @@ const TitleDescription: FC = () => {
           <h2>Title</h2>
           <img
             className={styles.imgRecipe}
-            src={"/src/assets/removebg-incognito.png"} //removebg-incognito.png incognita.jpg
+            src={"/src/assets/1a-guacamole-dip.jpg"} //removebg-incognito.png incognita.jpg
             alt="image incognita"
           />
           <CountRewiews />
@@ -25,7 +55,7 @@ const TitleDescription: FC = () => {
         <section className={styles.sectZutaten}>
           <div>
             <h3>Zutaten</h3>
-            {arrZutaten.map((zutaten, index) => {
+            {dataRecipe?.material?.map((zutaten, index) => {
               return (
                 <div
                   className={styles.listItem}
@@ -35,13 +65,7 @@ const TitleDescription: FC = () => {
                       : { backgroundColor: "" }
                   }
                 >
-                  <p
-                    // style={
-                    //   zutaten.number === ""
-                    //     ? { visibility: "hidden" }
-                    //     : { visibility: "visible" }
-                    // }
-                  >
+                  <p>
                     {/* {zutaten.number === "" ? 0 : zutaten.number} */}
                     {zutaten.number}
                   </p>
@@ -68,7 +92,24 @@ const TitleDescription: FC = () => {
           übrigen Zutaten.
         </p>
       </section>
-      </>
+
+      <section className={styles.sectComment}>
+        <h3>Kommentare</h3>
+        <Comment />
+        <Comment />
+        <div className={styles.btn}>Alle Kommentare anzeigen</div>
+      </section>
+
+      <div className={styles.similarRecipes}>
+        <h3>Änliche Rezepte</h3>
+        <div className={styles.cardContainer}>
+          <Card img={imgArr} rewiews={8} title="Chilli con Carne" time={23} />
+          <Card img={imgArr} rewiews={8} title="Chilli con Carne" time={23} />
+          <Card img={imgArr} rewiews={8} title="Chilli con Carne" time={23} />
+          <Card img={imgArr} rewiews={8} title="Chilli con Carne" time={23} />
+        </div>
+      </div>
+    </>
   );
 };
 

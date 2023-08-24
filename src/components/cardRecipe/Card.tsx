@@ -9,7 +9,7 @@ const Card:FC<cardRecipe> = ({img,title,rewiews,time}) => {
     <section className={styles.cardContainer}>
       <div className={styles.card}>
         <div>
-          <img src={img[0]} /> {/*"src/assets/frite-salad.png" alt="image" */}
+          <img className={styles.img} src={img[0]} /> {/*"src/assets/frite-salad.png" alt="image" */}
         </div>
         <div className={styles.cardInfo}>
           <p className={styles.titleRecipe}>{title}</p>  {/*Special Salad Chicken*/}

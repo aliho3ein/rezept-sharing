@@ -25,3 +25,12 @@ export interface cardRecipe {
   rewiews: number;
   time: number;
 }
+export interface comment {
+  _id: string;
+  userID: string;
+  recipeID: string;
+  titles: string;
+  desc?: string;
+  date?:Date;
+  like?:number[];
+}
