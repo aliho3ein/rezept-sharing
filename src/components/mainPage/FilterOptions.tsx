@@ -1,7 +1,11 @@
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import style from "../../styles/mainPage/main.module.scss";
 
-const FilterOptions: FC = () => {
+interface filterType {
+  changeCategory: Dispatch<SetStateAction<string[]>>;
+}
+
+const FilterOptions: FC<filterType> = ({ changeCategory }) => {
   const filterOptions = [
     "Vegan",
     "Asiatisch",
@@ -11,6 +15,15 @@ const FilterOptions: FC = () => {
     "Meeresfrüchte",
     "Sonstiges",
   ];
+
+  const getChange = () => {
+    const value = ["asia"];
+
+    // changeCategory((lastState) => {
+    //   return [...lastState, value];
+    // });
+    changeCategory([...value]);
+  };
 
   return (
     <div className={style.filterOptions}>

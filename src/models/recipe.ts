@@ -8,20 +8,20 @@ export interface recipeType {
   image: string[];
   category: categoriesType[];
   time: number;
+  like: number[];
 }
 
 export interface completeRecipe extends recipeType {
   id: string;
   userId: string;
   date: Date;
-  like: number;
   view: number;
 }
 
 //für Jan Folz
 export interface cardRecipe {
-  img: string[];//you take only the image into 0 position 
+  image: string[]; //you take only the image into 0 position
   title: string; //recipe's name
-  rewiews: number;
+  like: number[];
   time: number;
 }
