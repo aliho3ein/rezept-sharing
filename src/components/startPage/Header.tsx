@@ -17,7 +17,7 @@ const Header: FC = () => {
           Rezept <br /> Sharing <br />
           Plattform
         </h1>
-        <Link to="/" className={style.enterBtn}>
+        <Link to="/recipes" className={style.enterBtn}>
           als Gast eintreten
         </Link>
       </div>
