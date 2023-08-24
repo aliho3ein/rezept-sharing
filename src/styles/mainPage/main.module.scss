@@ -11,7 +11,11 @@
   width: 50%;
   margin: 10px auto;
 }
-
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
 //! search component
 .recipeListContainer {
   display: flex;
@@ -267,7 +271,7 @@
 }
 
 //!Filter Options
-.filterOptions {
+/* .filterOptions {
   margin-bottom: 20px;
 
   label {
@@ -332,4 +336,103 @@
       }
     }
   }
+}
+ */
+.filterOptionsContainer {
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.filterOptionsContainer .labelFilterTitle {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: $title-font;
+  margin-bottom: 10px;
+  color: $text-color;
+}
+
+.filterList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.filterList li {
+  margin: 10px 0;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.filterInput {
+  display: none;
+}
+
+.filterLabel {
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: $text-color;
+  color: $secondary-color;
+  font-family: $title-font;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 10px;
+}
+
+.filterLabel:hover {
+  filter: brightness(1.5);
+}
+
+.filterInput:checked + .filterLabel {
+  background-color: $accent-color;
+  color: $primary-color;
+}
+
+/* Stile für sortOptionsContainer */
+.sortOptionsContainer {
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.sortOptionsContainer .labelSortTile {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: $title-font;
+  margin-bottom: 10px;
+  color: $text-color;
+}
+
+.sortList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sortList li {
+  margin: 10px 0;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.sortInput {
+  display: none;
+}
+
+.sortLabel {
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: $text-color;
+  color: $secondary-color;
+  font-family: $title-font;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 10px;
+}
+
+.sortLabel:hover {
+  filter: brightness(1.5);
+}
+
+.sortInput:checked + .sortLabel {
+  background-color: $accent-color;
+  color: $primary-color;
 }
