@@ -79,8 +79,16 @@
 // }
 
 .cardContainer {
+
+    display: flex;
+    align-items: center;
+    background-color:  $primary-color;
+    width: max-content;
+    //height: 300px;
+    
   width: 200px;
   margin: 10px;
+
 }
 .card {
   display: flex;
@@ -93,20 +101,21 @@
 
   .imageCard {
     position: relative;
-    width: 100%;
-    height: 100px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    width: 180px;
+    height: 200px;
+    border-radius: 20px;
+    background-color:white;
+    //border : 1px solid;
+}
+ 
+.img {
+    position: absolute;
+    top:-40px;
+    left: 26px;
+    width: 70%;
+    filter: drop-shadow(0 0 10px #555);
+  }}
 
-    img {
-      position: absolute;
-      top: -50px;
-      width: 100%;
-      max-height: 200px;
-    }
-  }
 
   .cardInfo {
     flex: 1;

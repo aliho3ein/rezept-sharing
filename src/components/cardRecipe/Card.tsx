@@ -11,8 +11,10 @@ const Card: FC<cardType> = ({ data }) => {
   return (
     <section className={styles.cardContainer}>
       <div className={styles.card}>
+
         <div className={styles.imageCard}>
           <img src={image[0]} /> {/*"src/assets/frite-salad.png" alt="image" */}
+
         </div>
         <div className={styles.cardInfo}>
           <p className={styles.titleRecipe}>{title}</p>{" "}
