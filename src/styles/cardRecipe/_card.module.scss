@@ -1,83 +1,83 @@
 @import "../variable";
 
-// .cardContainer {
-//   display: flex;
-//   align-items: center;
-//   background-color: $primary-color;
-//   width: max-content;
-//   //height: 300px;
-// }
-// .card {
-//   position: relative;
-//   width: 180px;
-//   height: 200px;
-//   border-radius: 20px;
-//   background-color: white;
-//   //border : 1px solid;
-// }
+.cardContainer {
+  display: flex;
+  align-items: center;
+  background-color: $primary-color;
+  width: max-content;
+  //height: 300px;
+}
+.card {
+  position: relative;
+  width: 180px;
+  height: 200px;
+  border-radius: 20px;
+  background-color: white;
+  //border : 1px solid;
+}
 
-// img {
-//   position: absolute;
-//   top: -40px;
-//   left: 26px;
-//   width: 70%;
-//   filter: drop-shadow(0 0 10px #555);
-// }
+img {
+  position: absolute;
+  top: -40px;
+  left: 26px;
+  width: 70%;
+  filter: drop-shadow(0 0 10px #555);
+}
 
-// .cardInfo {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   //border: 1px solid;
-//   margin-top: 110px;
-// }
-// .titleRecipe {
-//   font-weight: bold;
-//   font-size: 12px;
-// }
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //border: 1px solid;
+  margin-top: 110px;
+}
+.titleRecipe {
+  font-weight: bold;
+  font-size: 12px;
+}
 
-// hr {
-//   border: 1px solid #0000001f;
-//   width: 100%;
-//   margin-bottom: 5px;
-// }
+hr {
+  border: 1px solid #0000001f;
+  width: 100%;
+  margin-bottom: 5px;
+}
 
-// .timeWiew {
-//   display: flex;
-//   font-size: 10px;
-//   width: 100%;
-//   justify-content: space-around;
-//   padding: 5px 0;
-//   align-items: center;
+.timeWiew {
+  display: flex;
+  font-size: 10px;
+  width: 100%;
+  justify-content: space-around;
+  padding: 5px 0;
+  align-items: center;
 
-//   div {
-//     background-color: #e9f8f1;
-//     //color: #B1E6CB;
-//     color: #65ca93;
-//     font-weight: bold;
-//     border-radius: 5px;
-//     padding: 5px 10px;
-//     cursor: pointer;
-//   }
+  div {
+    background-color: #e9f8f1;
+    //     //color: #B1E6CB;
+    color: #65ca93;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
 
-//   div:hover {
-//     color: white;
-//     background-color: #22ba70;
-//   }
-// }
-// .rewiews {
-//   display: flex;
-//   align-items: center;
-//   font-size: 10px;
-//   padding: 5px 0;
-//   p {
-//     padding-left: 5px;
-//   }
-// }
-// .stars {
-//   color: #feb51d;
-// }
-
+  div:hover {
+    color: white;
+    background-color: #22ba70;
+  }
+}
+.rewiews {
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  padding: 5px 0;
+  p {
+    padding-left: 5px;
+  }
+}
+.stars {
+  color: #feb51d;
+}
+/* 
 .cardContainer {
   display: flex;
   align-items: center;
@@ -171,3 +171,4 @@
     background-color: darken($accent-color, 10%);
   }
 }
+ */
