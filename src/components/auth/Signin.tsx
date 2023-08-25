@@ -28,7 +28,7 @@ const Signin: FC = () => {
       .then((res) => {
         if (res.status === 200) {
           alertMassage(res.data.message as string);
-          Cookies.set("authToken", res.data.token, { expires: 7 });
+          // Cookies.set("authToken", res.data.token, { expires: 7 });
           navigate("/", { state: { username: res.data.user.username } });
         }
       })
@@ -134,4 +134,5 @@ const Signin: FC = () => {
     </>
   );
 };
+
 export default Signin;
