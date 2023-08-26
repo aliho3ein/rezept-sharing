@@ -9,7 +9,6 @@ import GoogleBtn from "./googleBtn/GoogleBtn";
 import { useNavigate } from "react-router-dom";
 import instance from "../../api/instance";
 import Cookies from "js-cookie";
-import LogoutButton from "./Logout";
 
 const Signin: FC = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +16,7 @@ const Signin: FC = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  /*   const [userId, setUserId] = useState<string | null>(null); */
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,8 +27,22 @@ const Signin: FC = () => {
       .then((res) => {
         if (res.status === 200) {
           alertMassage(res.data.message as string);
-          // Cookies.set("authToken", res.data.token, { expires: 7 });
-          navigate("/", { state: { username: res.data.user.username } });
+          const authToken = res.data.token;
+          console.log(authToken);
+
+          Cookies.set("token", authToken, { expires: 7 });
+
+          const loggedInUserId = res.data.user._id;
+          /*           setUserId(loggedInUserId); */
+          console.log(loggedInUserId);
+
+          if (loggedInUserId) {
+            navigate("/recipes", {
+              state: { username: res.data.user.username },
+            });
+          } else {
+            navigate("/signin");
+          }
         }
       })
 
@@ -42,6 +55,19 @@ const Signin: FC = () => {
         }
       });
   };
+  useEffect(() => {
+    const authToken = Cookies.get("token");
+    /*    if (authToken) {
+      setUserId(authToken);
+    }
+    const loggedInUserId = authToken;
+    if (loggedInUserId) {
+      navigate("/recipes");
+    } */
+    if (authToken) {
+      navigate("/recipes");
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -50,24 +76,21 @@ const Signin: FC = () => {
       [name]: value,
     }));
   };
-  useEffect(() => {
-    const authToken = Cookies.get("authToken");
 
-    if (authToken) {
-      setIsLoggedIn(true);
-    }
-  }, []);
   const handleLogout = () => {
-    Cookies.remove("authToken");
+    /*     setUserId(null); */
+    Cookies.remove("token");
     Cookies.remove("userName");
     alertMassage("Logout successful", "success");
   };
+
+  /*   const isLoggedIn = userId !== null; */
+
   return (
     <>
       <div className={style.signin_container}>
         <div className={style.card_form}>
           <h2 className={style.card_title}>Anmelden</h2>
-
           <form onSubmit={handleSubmit}>
             <p className={style.card_paragraph}>
               Bitte gib deine E-Mail-Adresse und dein Passwort ein, um dich
@@ -116,19 +139,13 @@ const Signin: FC = () => {
               Registrieren
             </Link>
           </p>
-
           <div className={style.oder}>Oder</div>
-          {/*         <button className={style.google}>
           <GoogleBtn onLogout={handleLogout} />
-          {isLoggedIn && <LogoutButton onLogout={handleLogout} />}
-        </button> */}
-          {isLoggedIn ? (
-            <LogoutButton onLogout={handleLogout} />
+          {/*        {isLoggedIn ? (
+            <>{navigate("/recipes")}</>
           ) : (
             <GoogleBtn onLogout={handleLogout} />
-          )}
-
-          {/* <LogoutButton onLogout={handleLogout} /> */}
+          )} */}
         </div>
       </div>
     </>
