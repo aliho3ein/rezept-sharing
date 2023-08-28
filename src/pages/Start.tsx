@@ -22,7 +22,7 @@ const Start: FC = () => {
       })
       .then((res) => {
         setRecipeList(res.data);
-        // console.log("dataaaa", res.data[1]);
+        /*    console.log("dataaaa", res.data[0]); */
       })
       .catch((err) => console.log(err));
   }, [sort, pageNr, category]);
