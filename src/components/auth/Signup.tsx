@@ -174,7 +174,7 @@ const Signup: FC = () => {
         <div className={style.oder}>Order</div>
 
         <button className={style.google}>
-          <GoogleBtn onLogout={handleLogout} />
+          <GoogleBtn /* onLogout={handleLogout} */ />
         </button>
       </div>
     </div>

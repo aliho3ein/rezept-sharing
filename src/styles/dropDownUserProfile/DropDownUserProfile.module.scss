@@ -1,0 +1,78 @@
+@import "../variable";
+.userProfileContainer {
+  position: fixed;
+  top: 50px;
+  right: 40px;
+  display: flex;
+  width: fit-content;
+  z-index: 9999;
+}
+
+.userProfilePictureDropDown {
+  position: relative;
+  z-index: 1;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+}
+
+.userProfilePictureDropDown.active {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba($accent-color, 0.1);
+}
+
+.dropdownContent {
+  position: absolute;
+  top: 10px;
+  right: -30px;
+  background-color: $primary-color;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+  z-index: 1;
+}
+
+.userInfo {
+  padding: 16px;
+  border-bottom: 1px solid $text-color;
+  .username {
+    font-family: $title-font;
+    font-size: 18px;
+    color: $text-color;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .email {
+    font-size: 14px;
+    color: #888;
+  }
+}
+
+.dropdownMenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:nth-child(1):hover,
+    &:nth-child(2):hover,
+    &:nth-child(3):hover {
+      background-color: $secondary-color;
+      color: $text-color;
+      font-weight: 500;
+    }
+
+    a.newRecipes {
+      text-decoration: none;
+      color: $text-color;
+    }
+  }
+}

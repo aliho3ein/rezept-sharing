@@ -9,14 +9,14 @@ interface LogoutButtonProps {
 
 const LogoutButton: React.FC<LogoutButtonProps> = ({ onLogout }) => {
   const handleLogout = () => {
-    Cookies.remove("authToken");
+    Cookies.remove("token");
     onLogout();
     alertMassage(`Logout successful `);
   };
 
   return (
     <button className={style.logoutButton} onClick={handleLogout}>
-      Logout
+      Abmelden
     </button>
   );
 };
