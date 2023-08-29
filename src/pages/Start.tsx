@@ -7,6 +7,7 @@ import SortOptions from "../components/mainPage/SortOptions";
 import instance from "../api/instance";
 import Card from "../components/cardRecipe/Card";
 import { recipeType } from "../models/recipe";
+import DropDownUserProfile from "../components/dropDownUserProfile/DropDownUserProfile";
 //import { alertMassage } from "../actions/alerts";
 
 const Start: FC = () => {
@@ -44,6 +45,7 @@ const Start: FC = () => {
 
   return (
     <>
+      <DropDownUserProfile />
       <div className={style.start}>
         <Search recipes={recipes} />
         <FilterOptions changeCategory={setCategory} />

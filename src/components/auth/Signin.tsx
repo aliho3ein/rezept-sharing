@@ -9,6 +9,12 @@ import GoogleBtn from "./googleBtn/GoogleBtn";
 import { useNavigate } from "react-router-dom";
 import instance from "../../api/instance";
 import Cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
+
+export interface DecodedToken {
+  username: string;
+  email: string;
+}
 
 const Signin: FC = () => {
   const [formData, setFormData] = useState({
@@ -16,7 +22,6 @@ const Signin: FC = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  /*   const [userId, setUserId] = useState<string | null>(null); */
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,12 +38,14 @@ const Signin: FC = () => {
           Cookies.set("token", authToken, { expires: 7 });
 
           const loggedInUserId = res.data.user._id;
-          /*           setUserId(loggedInUserId); */
           console.log(loggedInUserId);
 
           if (loggedInUserId) {
             navigate("/recipes", {
-              state: { username: res.data.user.username },
+              state: {
+                username: res.data.user.username,
+                email: res.data.user.email,
+              },
             });
           } else {
             navigate("/signin");
@@ -57,15 +64,18 @@ const Signin: FC = () => {
   };
   useEffect(() => {
     const authToken = Cookies.get("token");
-    /*    if (authToken) {
-      setUserId(authToken);
-    }
-    const loggedInUserId = authToken;
-    if (loggedInUserId) {
-      navigate("/recipes");
-    } */
     if (authToken) {
-      navigate("/recipes");
+      try {
+        const decodedToken = jwt_decode(authToken as string) as DecodedToken;
+        navigate("/recipes", {
+          state: {
+            username: decodedToken.username,
+            email: decodedToken.email,
+          },
+        });
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
     }
   }, []);
 
@@ -77,13 +87,11 @@ const Signin: FC = () => {
     }));
   };
 
-  const handleLogout = () => {
-    /*     setUserId(null); */
+  /*   const handleLogout = () => {
     Cookies.remove("token");
-    Cookies.remove("userName");
     alertMassage("Logout successful", "success");
   };
-
+ */
   /*   const isLoggedIn = userId !== null; */
 
   return (
@@ -140,7 +148,7 @@ const Signin: FC = () => {
             </Link>
           </p>
           <div className={style.oder}>Oder</div>
-          <GoogleBtn onLogout={handleLogout} />
+          <GoogleBtn /* onLogout={handleLogout} */ />
           {/*        {isLoggedIn ? (
             <>{navigate("/recipes")}</>
           ) : (
