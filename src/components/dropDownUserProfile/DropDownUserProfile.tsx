@@ -10,6 +10,7 @@ const DropDownUserProfile: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const username = location.state?.username;
+  const id = location.state?.id;
   const email = location.state?.email;
   const picture = location.state?.picture;
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
@@ -38,6 +39,7 @@ const DropDownUserProfile: FC = () => {
       {isDropdownOpen && (
         <div className={style.dropdownContent}>
           <div className={style.userInfo}>
+            <p>{id}</p>
             <p className={style.username}>{username}</p>
             <p className={style.email}>{email}</p>
           </div>
