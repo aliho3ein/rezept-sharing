@@ -7,7 +7,7 @@ const UserProfile: FC = () => {
   const [popup, setPopup] = useState<boolean>(false);
 
   return (
-    <>
+    <section className={style.userProfileContainer}>
       {popup && <AddRecipeForm closePopup={setPopup} />}
       <button>
         <Link to="/">
@@ -15,12 +15,12 @@ const UserProfile: FC = () => {
           Zurück zum Feed
         </Link>
       </button>
-      <header></header>
+
       <span>Rezept hinzufügen</span>
       <button onClick={() => setPopup(true)}>
         <i className={`fa-solid fa-plus ${style.addRecipe}`}></i>
       </button>
-    </>
+    </section>
   );
 };
 
