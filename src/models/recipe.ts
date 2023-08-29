@@ -1,4 +1,17 @@
-export type categoriesType = "seeFood" | "asian" | "oriental" | number;
+export type SortType = "Neueste" | "Zeit" | "Meist Gesehene";
+export type CategoryType =
+  | "Asiatisch"
+  | "Italienisch"
+  | "Orientalisch"
+  | "Burger"
+  | "Meeresfrüchte"
+  | "Griechisch"
+  | "Spanisch"
+  | "Vegan"
+  | "Sushi"
+  | "BBQ/Grill"
+  | "Snacks"
+  | "Sonstiges";
 
 export interface recipeType {
   userID: string;
@@ -6,7 +19,7 @@ export interface recipeType {
   material: string[];
   desc: string;
   image: string[];
-  category: categoriesType[];
+  category: CategoryType[];
   time: number;
  
 }

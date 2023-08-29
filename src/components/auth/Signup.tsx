@@ -1,4 +1,4 @@
-import { useState, FC } from "react";
+import { useState, FC, useEffect } from "react";
 import style from "../../styles/auth/signup.module.scss";
 import { alertMassage } from "../../actions/alerts";
 import GoogleBtn from "./googleBtn/GoogleBtn";
@@ -18,19 +18,29 @@ const Signup: FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
+  const [registredUserId, setRegisteredUserId] = useState<string | null>(null);
+
+  /* const [loggedIn, setLoggedIn] = useState<boolean>(false); */
 
   const navigate = useNavigate();
 
+  /*   useEffect(() => { */
+  /*  const authToken = Cookies.get("authToken"); */
+  // wird eig. immer undefined weil beim registrierung ist noch nicht authenticated nur beim anmeldung
+  // um die Sicherheit und Benutzererfahrung in einer Webanwendung zu gewährleisten
+
   const handleSignup = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
     instance
       .post("user/registrieren", formData)
       .then((res) => {
-        console.log(res);
-
         if (res.status === 201) {
           alertMassage(res.data.message);
-          navigate("/signin");
+          const userId = res.data.newUser._id;
+          setRegisteredUserId(userId);
+        } else {
+          navigate("/signup");
         }
       })
       .catch((err) => {
@@ -42,6 +52,11 @@ const Signup: FC = () => {
         }
       });
   };
+  useEffect(() => {
+    if (registredUserId) {
+      navigate("/signin");
+    }
+  }, [registredUserId, navigate]);
 
   const handleShowPasswordToggle = () => {
     setShowPassword(!showPassword);
@@ -159,7 +174,7 @@ const Signup: FC = () => {
         <div className={style.oder}>Order</div>
 
         <button className={style.google}>
-          <GoogleBtn onLogout={handleLogout} />
+          <GoogleBtn /* onLogout={handleLogout} */ />
         </button>
       </div>
     </div>

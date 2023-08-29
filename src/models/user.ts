@@ -1,5 +1,12 @@
 export interface userWithId {
-  name: string;
+  username?: string;
+  email: string;
+  password?: string;
+  dateOfBirth?: Date;
+  isVerified: boolean;
+  info?: string[];
+  image?: string[];
+  wishlist?: string[];
 }
 
 export interface crewType {

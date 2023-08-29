@@ -62,7 +62,6 @@ const Contact: FC = () => {
               Deutschland
             </p>
           </div>
-          <hr />
           <form className={style.contactForm} onSubmit={handleSubmit}>
             <input
               type="text"
