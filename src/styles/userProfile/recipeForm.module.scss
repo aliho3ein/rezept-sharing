@@ -1,5 +1,44 @@
 @import "../variable";
 
+@mixin input {
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  padding-left: 7px;
+  font-size: 16px;
+
+  &::placeholder {
+    padding-left: 8px;
+  }
+
+  &:focus {
+    border: 2px solid $secondary-color;
+  }
+}
+
+@mixin ingredientBtns($color) {
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  padding: 6px;
+  background-color: $color;
+  cursor: pointer;
+
+  &:hover {
+    color: white;
+  }
+}
+
+* {
+  outline: none;
+  color: $text-color;
+  letter-spacing: 1px;
+}
+
+body {
+  background-color: $primary-color;
+}
+
 .recipeForm {
   display: flex;
   justify-content: center;
@@ -7,46 +46,178 @@
   flex-direction: column;
   gap: 20px;
   height: 100%;
-  overflow: hidden;
 }
 
 .titleInput {
+  @include input();
   width: 540px;
-  height: 40px;
-  border-radius: 5px;
-
-  &::placeholder {
-    padding-left: 5px;
-  }
-
-  &:focus {
-    border-color: $secondary-color;
-  }
 }
 
 .ingredientInput {
-  width: 295px;
-  height: 40px;
-  padding-left: 5px;
+  @include input();
+  width: 290px;
 }
 
 .countInput {
-  width: 60px;
-  height: 40px;
+  @include input();
+  width: 45px;
 }
 
 .unitSelect {
+  @include input();
   width: 175px;
-  height: 40px;
+  background-color: white;
 }
 
 .descArea {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
   width: 540px;
   height: 125px;
+  border-radius: 5px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  padding: 8px;
   resize: none;
   overflow: hidden;
 
   &::placeholder {
-    padding: 5px;
+    padding: 8px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
   }
+
+  &:focus {
+    border: 2px solid $secondary-color;
+  }
+}
+
+.timeInput {
+  @include input();
+  width: 220px;
+}
+
+.categorySection {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 700px;
+}
+
+.categoryLabel {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  background-color: white;
+  padding: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $secondary-color;
+  }
+}
+
+.categoryCheckbox {
+  display: none;
+}
+
+.categoryCheckbox:checked + .categoryLabel {
+  background-color: $secondary-color;
+}
+
+.addInstanceBtn {
+  @include ingredientBtns($secondary-color);
+}
+
+.confirmIngredientBtn {
+  @include ingredientBtns($secondary-color);
+}
+
+.saveBtn {
+  border: none;
+  background-color: $secondary-color;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.goBackBtn {
+  position: relative;
+  top: 50px;
+  left: 500px;
+  font-size: 30px;
+  padding: 4px;
+  cursor: pointer;
+
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+.ingredientInstance {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.closeInstanceBtn {
+  @include ingredientBtns($accent-color);
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileInputBtn {
+  font-size: 22px;
+  cursor: pointer;
+
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+.fileInputSection {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+}
+
+.fileInputImg {
+  height: 150px;
+  width: 150px;
+  border: 2px solid $secondary-color;
+  border-radius: 5px;
+}
+
+.fileInputImgDelete {
+  display: inline;
+  font-size: 22px;
+  cursor: pointer;
+
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+.fileInputMaximum {
+  font-weight: 700;
+  color: $accent-color;
+}
+
+h2,
+h3 {
+  margin-top: 20px;
+}
+
+.undoIngredientBtn {
+  @include ingredientBtns($accent-color);
 }
