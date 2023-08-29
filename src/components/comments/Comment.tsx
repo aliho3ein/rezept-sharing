@@ -1,12 +1,21 @@
 import {FC} from 'react'
 import  styles from "../../styles/comments/commet.module.scss"
-const Comment:FC = () => {
+import { comment } from '../../models/comment'
+
+//const data: Comment | undefined;
+type commetType = { data: comment };
+const Comment:FC<commetType>  = ({data}) => {
+   console.log(data);
+  
+   
+ 
   return (
+    
     <div className={styles.main}>
         <img src={"/src/assets/buddy-60fix.jpg"} alt="user img" />
         <div>
-            <p>user</p>
-            <p>Das Rezept ist sehr gut, bislang möchte ich keine Avocado. Aber ich habe reichlich Salz dazugeben müssen, bis der Geschmack perfekt war. Aber dann absolut lecker.</p>
+             <p>{data?.userID?.username}</p>
+             <p>{data?.desc}</p>
         </div>
     </div>
   )

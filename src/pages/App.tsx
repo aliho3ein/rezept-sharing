@@ -5,6 +5,7 @@ import UserProfile from "./UserProfile";
 import Aos from "aos";
 import CommentPage from "./CommentPage";
 
+
 const App: FC = () => {
   useEffect(() => {
     Aos.init();
@@ -18,6 +19,7 @@ const App: FC = () => {
 
         <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/comments" element={<CommentPage />} />
+    
       </Routes>
     </>
   );
