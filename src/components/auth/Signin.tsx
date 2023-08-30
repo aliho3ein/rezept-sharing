@@ -35,7 +35,7 @@ const Signin: FC = () => {
       .post("/user/anmelden", formData)
       .then((res) => {
         if (res.status === 200) {
-          alertMassage(res.data.message as string);
+          alertMassage(res.data.message + " " + res.data.user.username);
           const authToken = res.data.token;
           /* console.log(authToken); */
 
@@ -47,12 +47,13 @@ const Signin: FC = () => {
           if (loggedInUserId) {
             setUser({
               _id: loggedInUserId,
+              ...res.data.user,
             } as userWithId);
             navigate("/recipes", {
               state: {
-                id: loggedInUserId,
+                /*                 id: loggedInUserId,
                 username: res.data.user.username,
-                email: res.data.user.email,
+                email: res.data.user.email, */
               },
             });
           } else {
@@ -139,7 +140,8 @@ const Signin: FC = () => {
               <Link to="/passwort-vergessen">Password vergessen?</Link>
             </div>
             <button className={style.btn} type="submit">
-              <span className={style.text}>Anmelden</span>
+              {/* <span className={style.text}>Anmelden</span> */}
+              Anmelden
             </button>
           </form>
           <p className={style.signup_link}>

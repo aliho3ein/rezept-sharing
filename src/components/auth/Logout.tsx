@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "../../styles/auth/logout.module.scss";
 import Cookies from "js-cookie";
 import { alertMassage } from "../../actions/alerts";
+import { AuthContext } from "../../context/authContext";
 
 interface LogoutButtonProps {
   onLogout: () => void;
 }
 
 const LogoutButton: React.FC<LogoutButtonProps> = ({ onLogout }) => {
+  const { user } = useContext(AuthContext);
   const handleLogout = () => {
     Cookies.remove("token");
     onLogout();
-    alertMassage(`Logout successful `);
+    alertMassage(`Logout successful ${user?.username} `);
   };
 
   return (

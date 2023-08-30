@@ -48,16 +48,14 @@ const GoogleBtn: React.FC = () => {
         Cookies.set("token", jwtToken as string, { expires: 7 });
         Cookies.set("userData", JSON.stringify(decodedToken), { expires: 7 });
 
-        const { name, email, picture } = decodedToken;
-
         if (logedGoogleUserId) {
-          setUser({ _id: logedGoogleUserId } as userWithId);
+          setUser({ _id: logedGoogleUserId, ...res.data.user } as userWithId);
           navigate("/recipes", {
             state: {
-              id: logedGoogleUserId,
-              username: name,
-              email: email,
-              picture: picture,
+              /*               id: logedGoogleUserId,
+              username: decodedToken.name,
+              email: decodedToken.email, */
+              picture: decodedToken.picture,
             },
           });
         }
