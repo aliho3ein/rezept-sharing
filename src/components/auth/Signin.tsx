@@ -35,7 +35,9 @@ const Signin: FC = () => {
       .post("/user/anmelden", formData)
       .then((res) => {
         if (res.status === 200) {
+
           alertMassage(res.data.message + " " + res.data.user.username);
+
           const authToken = res.data.token;
           /* console.log(authToken); */
 
@@ -59,6 +61,7 @@ const Signin: FC = () => {
           } else {
             navigate("/signin");
           }
+
         }
       })
 
@@ -94,6 +97,19 @@ const Signin: FC = () => {
       ...prevData,
       [name]: value,
     }));
+  };
+
+
+    if (authToken) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+  const handleLogout = () => {
+    Cookies.remove("authToken");
+    Cookies.remove("userName");
+    alertMassage("Logout successful", "success");
+
+    console.log();
   };
 
   return (

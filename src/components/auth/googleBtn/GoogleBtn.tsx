@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import React, { useContext } from "react";
 import Cookies from "js-cookie";
 import {
@@ -9,6 +10,7 @@ import jwt_decode from "jwt-decode";
 import style from "../../../styles/auth/signin.module.scss";
 import { useNavigate } from "react-router-dom";
 import instance from "../../../api/instance";
+
 import { alertMassage } from "../../../actions/alerts";
 import { AuthContext } from "../../../context/authContext";
 import { userWithId } from "../../../models/user";
@@ -29,7 +31,26 @@ const GoogleBtn: React.FC = () => {
 
   const handleLoginSuccess: GoogleLoginProps["onSuccess"] = (response) => {
     const jwtToken = response.credential;
+
+    const decodedToken = jwt_decode(jwtToken as string);
+    console.log(decodedToken);
+    // request to DB decodedToken.image
+    /**
+      
+     data = {
+      username : decodedToken.name
+      email :decodedToken.email
+      image: decodedToken.picture
+     }
+      
+    instance.post("/user/googleCheck" , data).then(res => log(res))
+     */
+
+    Cookies.set("authToken", jwtToken as string, { expires: 7 });
+    Cookies.set("userData", JSON.stringify(decodedToken), { expires: 7 });
+
     const decodedToken = jwt_decode(jwtToken as string) as DecodedToken;
+
 
     const data = {
       username: decodedToken.name,

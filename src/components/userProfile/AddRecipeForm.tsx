@@ -47,8 +47,6 @@ const AddRecipeForm: FC<RecipeFormProps> = ({ closePopup }) => {
   });
   const [image, setImg] = useState<string[]>([]);
 
-  console.log(formData.material);
-
   function addIngredientToMaterial(ingredient: Material) {
     setFormData((prevData) => ({
       ...prevData,
