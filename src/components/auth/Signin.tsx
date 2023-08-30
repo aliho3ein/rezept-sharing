@@ -36,6 +36,7 @@ const Signin: FC = () => {
       .then((res) => {
         if (res.status === 200) {
           alertMassage(res.data.message as string);
+
           const authToken = res.data.token;
           /* console.log(authToken); */
 
@@ -58,6 +59,7 @@ const Signin: FC = () => {
           } else {
             navigate("/signin");
           }
+
         }
       })
 
@@ -93,6 +95,19 @@ const Signin: FC = () => {
       ...prevData,
       [name]: value,
     }));
+  };
+
+
+    if (authToken) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+  const handleLogout = () => {
+    Cookies.remove("authToken");
+    Cookies.remove("userName");
+    alertMassage("Logout successful", "success");
+
+    console.log();
   };
 
   return (
