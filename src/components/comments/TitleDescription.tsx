@@ -24,7 +24,7 @@ const TitleDescription: FC = () => {
   async function getRecipe() {
     try {
       const response = await axios.get(
-        "http://localhost:3000/recipe/64e5e9f9aad54a0f87ae7650"
+        "http://localhost:3000/recipe/64eef4d8f36d0997fe144773"
       );
       setDataRecipe(response.data);
     } catch (error) {
@@ -34,7 +34,7 @@ const TitleDescription: FC = () => {
   async function getComments() {
     try {
       const response = await axios.get(
-        "http://localhost:3000/comment/64e5e9f9aad54a0f87ae7650"
+        "http://localhost:3000/comment/64eef4d8f36d0997fe144773"
       );
          setDataComment(response.data);
       

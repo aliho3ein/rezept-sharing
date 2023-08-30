@@ -23,7 +23,7 @@ const Card: FC<cardType> = ({ data }) => {
             })}
             <p>{data?.like[0]}Rewiews </p> {/*(8 Rewiews)*/}
           </div>
-          <div className={styles.line}></div>
+          <hr />
           <div className={styles.timeWiew}>
             <p> {data?.time}mins</p> {/*  20 mins*/}
             <div>View Recipe</div>
