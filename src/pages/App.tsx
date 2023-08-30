@@ -38,6 +38,7 @@ const App: FC = () => {
         />
         <Route path="/passwort-zuruecksetzen/:id" element={<NewPassword />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/user-profile/:id" element={<UserProfile />} />
       </Routes>
     </>
   );
