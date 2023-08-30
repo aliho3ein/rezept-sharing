@@ -161,7 +161,7 @@ const Signup: FC = () => {
           />
         </div>
         <button className={style.btn} type="button" onClick={handleSignup}>
-          <span className={style.text}>Registrieren</span>
+          Registrieren
         </button>
 
         <p className={style.signup_link}>
