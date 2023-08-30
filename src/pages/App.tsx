@@ -12,9 +12,9 @@ import NewPassword from "../components/auth/NewPassword";
 import CommentPage from "./CommentPage";
 
 const App: FC = () => {
-  const { user, setUser } = useContext(AuthContext);
+  //const { user, setUser } = useContext(AuthContext);
 
-  console.log(user);
+  //console.log(user);
 
   useEffect(() => {
     Aos.init();
@@ -23,7 +23,7 @@ const App: FC = () => {
     <>
       <Routes>
         <Route path="/" element={<StartPage />} />
-         <Route path="/recipes" element={<Start />} /> 
+         {/* <Route path="/recipes" element={<Start />} />  */}
         <Route path="/user-profile" element={<UserProfile />} />
 
 
