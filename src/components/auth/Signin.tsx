@@ -28,8 +28,10 @@ const Signin: FC = () => {
       .then((res) => {
         if (res.status === 200) {
           alertMassage(res.data.message as string);
-          // Cookies.set("authToken", res.data.token, { expires: 7 });
-          navigate("/", { state: { username: res.data.user.username } });
+          console.log(res.data);
+
+          //  Cookies.set("authToken", res.data.token, { expires: 7 });
+          //navigate("/", { state: { username: res.data.user.username } });
         }
       })
 
@@ -61,6 +63,8 @@ const Signin: FC = () => {
     Cookies.remove("authToken");
     Cookies.remove("userName");
     alertMassage("Logout successful", "success");
+
+    console.log();
   };
   return (
     <>

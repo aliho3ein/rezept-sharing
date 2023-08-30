@@ -9,7 +9,6 @@ import VerificationCode from "../components/auth/VerificationCode";
 import Contact from "../components/contactPage/Contact";
 import EmailVerification from "../components/auth/EmailVerification";
 import NewPassword from "../components/auth/NewPassword";
-import CommentPage from "./CommentPage";
 import Start from "./Start";
 
 import { AuthContext } from "../context/authContext";
