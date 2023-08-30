@@ -23,9 +23,9 @@ const App: FC = () => {
     <>
       <Routes>
         <Route path="/" element={<StartPage />} />
-        <Route path="/recipes" element={<Start />} />
+         <Route path="/recipes" element={<Start />} /> 
         <Route path="/user-profile" element={<UserProfile />} />
-        <Route path="/comments" element={<CommentPage />} />
+        <Route path="/recipe/:id" element={<CommentPage />} />
       </Routes>
     </>
   );
