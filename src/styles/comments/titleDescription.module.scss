@@ -34,14 +34,21 @@
   }
 
   .listItem {
+    //border: 1px solid;
     display: flex;
     width: 100%;
     border-radius: 8px;
     justify-content: space-between;
     p {
-      width: 100%;
-      text-align: center;
-      padding: 10px 0;
+      //width: 100%;
+      text-align: right;
+      padding: 10px;
+      //border: 1px solid;
+      
+    }
+    .paraphName{
+      text-align: left;
+      max-width: max-content;
     }
     
   }
@@ -110,6 +117,11 @@
 
   .cardContainer{
     justify-content: unset !important;
+  }
+  .listItem {
+    p{
+      padding:10px 20px !important;
+    }
   }
 }
 

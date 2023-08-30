@@ -21,14 +21,14 @@ export interface recipeType {
   image: string[];
   category: CategoryType[];
   time: number;
-  like: number[];
+ 
 }
 
 export interface completeRecipe extends recipeType {
   id: string;
-  userId: string;
-  date: Date;
+  createAt:Date
   view: number;
+  like: number[];
 }
 
 //für Jan Folz
@@ -38,12 +38,4 @@ export interface cardRecipe {
   like: number[];
   time: number;
 }
-export interface comment {
-  _id: string;
-  userID: string;
-  recipeID: string;
-  titles: string;
-  desc?: string;
-  date?:Date;
-  like?:number[];
-}
+
