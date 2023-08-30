@@ -25,7 +25,26 @@ const App: FC = () => {
         <Route path="/" element={<StartPage />} />
         <Route path="/recipes" element={<Start />} />
         <Route path="/user-profile" element={<UserProfile />} />
+
+
+        <Route path="/signin" element={<Signin />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/passwort-vergessen"
+          element={
+            <EmailVerification placeholder="Bitte deine Email eingeben" />
+          }
+        />
+        <Route
+          path="/verifiziere-verifikationscode/:id"
+          element={<VerificationCode />}
+        />
+        <Route path="/passwort-zuruecksetzen/:id" element={<NewPassword />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/user-profile/:id" element={<UserProfile />} />
+
         <Route path="/comments" element={<CommentPage />} />
+
       </Routes>
     </>
   );
