@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import Cookies from "js-cookie";
 import {
   GoogleOAuthProvider,
@@ -7,34 +8,30 @@ import {
 } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import style from "../../../styles/auth/signin.module.scss";
-import LogoutButton from "../Logout";
 import { useNavigate } from "react-router-dom";
 import instance from "../../../api/instance";
-interface DecodedToken {
+
+import { alertMassage } from "../../../actions/alerts";
+import { AuthContext } from "../../../context/authContext";
+import { userWithId } from "../../../models/user";
+
+export interface DecodedToken {
   name: string;
+  email: string;
+  picture: string;
+  sub: string;
 }
 
 const ClientID =
   "18690519048-ean2nk7fi4pg51rtv7np1q6gek9c9voo.apps.googleusercontent.com";
 
-interface GoogleBtnProps {
-  onLogout: () => void;
-}
-
-const GoogleBtn: React.FC<GoogleBtnProps> = ({ onLogout }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-
+const GoogleBtn: React.FC = () => {
+  const { setUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  useEffect(() => {
-    const authToken = Cookies.get("authToken");
-
-    if (authToken) {
-      setLoggedIn(true);
-    }
-  }, []);
 
   const handleLoginSuccess: GoogleLoginProps["onSuccess"] = (response) => {
     const jwtToken = response.credential;
+
     const decodedToken = jwt_decode(jwtToken as string);
     console.log(decodedToken);
     // request to DB decodedToken.image
@@ -52,8 +49,48 @@ const GoogleBtn: React.FC<GoogleBtnProps> = ({ onLogout }) => {
     Cookies.set("authToken", jwtToken as string, { expires: 7 });
     Cookies.set("userData", JSON.stringify(decodedToken), { expires: 7 });
 
-    setLoggedIn(true);
-    navigate("/");
+    const decodedToken = jwt_decode(jwtToken as string) as DecodedToken;
+
+
+    const data = {
+      username: decodedToken.name,
+      email: decodedToken.email,
+      picture: decodedToken.picture,
+    };
+
+    instance
+      .post("/user/checkgoogle", data)
+      .then((res) => {
+        const logedGoogleUserId = res.data.user._id;
+        /*         console.log("data", res.data.user); */
+
+        alertMassage(res.data.message + " " + res.data.user.username);
+
+        Cookies.set("token", jwtToken as string, { expires: 7 });
+        Cookies.set("userData", JSON.stringify(decodedToken), { expires: 7 });
+
+        const { name, email, picture } = decodedToken;
+
+        if (logedGoogleUserId) {
+          setUser({ _id: logedGoogleUserId } as userWithId);
+          navigate("/recipes", {
+            state: {
+              id: logedGoogleUserId,
+              username: name,
+              email: email,
+              picture: picture,
+            },
+          });
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          const textError = err.response.data.error || err.response.data.errors;
+          alertMassage(textError as string, "error");
+        } else {
+          alertMassage("Ein Fehler ist aufgetreten.", "error");
+        }
+      });
   };
 
   const handleLoginError: GoogleLoginProps["onError"] = () => {
@@ -63,16 +100,10 @@ const GoogleBtn: React.FC<GoogleBtnProps> = ({ onLogout }) => {
   return (
     <GoogleOAuthProvider clientId={ClientID}>
       <div className={style.googleButton}>
-        {loggedIn ? (
-          <>
-            <LogoutButton onLogout={onLogout} />
-          </>
-        ) : (
-          <GoogleLogin
-            onSuccess={handleLoginSuccess}
-            onError={handleLoginError}
-          />
-        )}
+        <GoogleLogin
+          onSuccess={handleLoginSuccess}
+          onError={handleLoginError}
+        />
       </div>
     </GoogleOAuthProvider>
   );

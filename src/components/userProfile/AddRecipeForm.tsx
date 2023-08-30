@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from "react";
 import Ingredient, { Material } from "./Ingredient";
 import style from "../../styles/userProfile/recipeForm.module.scss";
 import instance from "../../api/instance";
@@ -12,10 +12,29 @@ interface FormData {
   material: Material[];
   desc: string;
   category: string[];
-  time: string | number;
+  time: string;
 }
 
-const AddRecipeForm: FC = () => {
+type RecipeFormProps = {
+  closePopup: Dispatch<SetStateAction<boolean>>;
+};
+
+const categories: string[] = [
+  "Sonstige",
+  "Asiatisch",
+  "Italienisch",
+  "Oriental",
+  "Burger",
+  "Griechisch",
+  "Spanisch",
+  "Meeresfrüchte",
+  "Vegan",
+  "Sushi",
+  "BBQ/Grill",
+  "Snacks",
+];
+
+const AddRecipeForm: FC<RecipeFormProps> = ({ closePopup }) => {
   // const navigate = useNavigate();
   const [anotherIngredientInstance, setAnotherIngredientInstance] =
     useState<number>(1);
@@ -24,15 +43,21 @@ const AddRecipeForm: FC = () => {
     material: [],
     desc: "",
     category: [],
-    time: 0,
+    time: "",
   });
-
   const [image, setImg] = useState<string[]>([]);
 
   function addIngredientToMaterial(ingredient: Material) {
     setFormData((prevData) => ({
       ...prevData,
       material: [...prevData.material, ingredient],
+    }));
+  }
+
+  function removeIngredientFromMaterial(indexToRemove: number) {
+    setFormData((prevData) => ({
+      ...prevData,
+      material: prevData.material.filter((_, index) => index !== indexToRemove),
     }));
   }
 
@@ -76,9 +101,18 @@ const AddRecipeForm: FC = () => {
       .catch((err) => console.log(err));
   };
 
+  function handleRemoveImages() {
+    setImg([]);
+  }
+
   return (
     <form onSubmit={handleSubmit} className={style.recipeForm}>
+      <i
+        className={`fa-solid fa-close ${style.goBackBtn}`}
+        onClick={() => closePopup(false)}
+      ></i>
       <h1>Rezept erstellen</h1>
+      <h2>Titel</h2>
       <input
         type="text"
         id="title"
@@ -87,141 +121,94 @@ const AddRecipeForm: FC = () => {
         onChange={handleInputChange}
         className={style.titleInput}
       />
+      <h2>Zutaten</h2>
       {[...Array(anotherIngredientInstance)].map((_, index) => {
         return (
           <Ingredient
             key={index}
             addAnotherIngredientInstance={setAnotherIngredientInstance}
+            removeIngredientInstance={setAnotherIngredientInstance}
             addToMaterial={addIngredientToMaterial}
+            removeFromMaterial={removeIngredientFromMaterial}
+            instanceCount={anotherIngredientInstance}
+            identifier={index}
           />
         );
       })}
+      <h2>Beschreibung</h2>
       <textarea
         id="desc"
-        placeholder="Zubereitung..."
+        placeholder="Beschreibe hier, wie man dein Gericht zubereitet."
         value={formData.desc}
         onChange={handleInputChange}
         className={style.descArea}
       ></textarea>
-      <p>Wähle Kategorien für dein Rezept aus</p>
-      <section>
-        <label>
-          <input
-            type="checkbox"
-            value="Sonstige"
-            onChange={handleCategoryChange}
-          />
-          Sonstige
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Asiatisch"
-            onChange={handleCategoryChange}
-          />
-          Asiatisch
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Italienisch"
-            onChange={handleCategoryChange}
-          />
-          Italienisch
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Oriental"
-            onChange={handleCategoryChange}
-          />
-          Oriental
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Burger"
-            onChange={handleCategoryChange}
-          />
-          Burger
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Griechisch"
-            onChange={handleCategoryChange}
-          />
-          Griechisch
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Spanisch"
-            onChange={handleCategoryChange}
-          />
-          Spanisch
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Meeresfrüchte"
-            onChange={handleCategoryChange}
-          />
-          Meeresfrüchte
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Vegan"
-            onChange={handleCategoryChange}
-          />
-          Vegan
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Sushi"
-            onChange={handleCategoryChange}
-          />
-          Sushi
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="BBQ/Grill"
-            onChange={handleCategoryChange}
-          />
-          BBQ/Grill
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            value="Snacks"
-            onChange={handleCategoryChange}
-          />
-          Snacks
-        </label>
-      </section>
+      <h2>Zubereitungsdauer</h2>
       <input
-        type="number"
+        type="text"
         id="time"
-        min="1"
+        placeholder="Minuten"
         value={formData.time}
         onChange={handleInputChange}
+        className={style.timeInput}
       />
-      <span>Zubereitungszeit in min.</span>
+      <h3>Wähle Kategorien für dein Rezept aus</h3>
+      <section className={style.categorySection}>
+        {categories.map((category) => (
+          <>
+            <input
+              type="checkbox"
+              value={category}
+              onChange={handleCategoryChange}
+              className={style.categoryCheckbox}
+              id={category}
+            />
+            <label
+              htmlFor={category}
+              key={category}
+              className={style.categoryLabel}
+            >
+              {category}
+            </label>
+          </>
+        ))}
+      </section>
+      <h3>Lade bis zu 4 Bilder von deinem Gericht hoch</h3>
+      <section className={style.fileInputSection}>
+        {image.length < 4 && (
+          <label htmlFor="image">
+            <i
+              className={`fa-solid fa-arrow-up-from-bracket ${style.fileInputBtn}`}
+            ></i>
+          </label>
+        )}
 
-      <input
-        type="file"
-        id="image"
-        multiple
-        value={formData.image}
-        onChange={getUrl}
-      />
-
-      <input type="file" id="image" multiple value={formData.image} />
-
-      <button type="submit">Rezept erstellen</button>
+        <input
+          type="file"
+          id="image"
+          multiple
+          accept="image/*"
+          onChange={getUrl}
+          className={style.fileInput}
+        />
+        {image.map((img, index) => {
+          return <img src={img} key={index} className={style.fileInputImg} />;
+        })}
+        {image.length > 0 && (
+          <i
+            className={`fa-solid fa-trash-can ${style.fileInputImgDelete}`}
+            onClick={handleRemoveImages}
+          ></i>
+        )}
+      </section>
+      {image.length === 4 && (
+        <p className={style.fileInputMaximum}>
+          Maximale Anzahl an Bildern erreicht
+        </p>
+      )}
+      <button type="submit" className={style.saveBtn}>
+        Speichern
+      </button>
     </form>
   );
 };
