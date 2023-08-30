@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useState, FC, useEffect } from "react";
+import { useState, FC, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import style from "../../styles/auth/signin.module.scss";
 import { alertMassage } from "../../actions/alerts";
@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import instance from "../../api/instance";
 import Cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
+import { AuthContext } from "../../context/authContext";
+import { userWithId } from "../../models/user";
 
 export interface DecodedToken {
   username: string;
@@ -17,6 +19,8 @@ export interface DecodedToken {
 }
 
 const Signin: FC = () => {
+  const { setUser } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -33,7 +37,7 @@ const Signin: FC = () => {
         if (res.status === 200) {
           alertMassage(res.data.message as string);
           const authToken = res.data.token;
-          console.log(authToken);
+          /* console.log(authToken); */
 
           Cookies.set("token", authToken, { expires: 7 });
 
@@ -41,8 +45,12 @@ const Signin: FC = () => {
           console.log(loggedInUserId);
 
           if (loggedInUserId) {
+            setUser({
+              _id: loggedInUserId,
+            } as userWithId);
             navigate("/recipes", {
               state: {
+                id: loggedInUserId,
                 username: res.data.user.username,
                 email: res.data.user.email,
               },
@@ -86,13 +94,6 @@ const Signin: FC = () => {
       [name]: value,
     }));
   };
-
-  /*   const handleLogout = () => {
-    Cookies.remove("token");
-    alertMassage("Logout successful", "success");
-  };
- */
-  /*   const isLoggedIn = userId !== null; */
 
   return (
     <>
@@ -149,11 +150,6 @@ const Signin: FC = () => {
           </p>
           <div className={style.oder}>Oder</div>
           <GoogleBtn /* onLogout={handleLogout} */ />
-          {/*        {isLoggedIn ? (
-            <>{navigate("/recipes")}</>
-          ) : (
-            <GoogleBtn onLogout={handleLogout} />
-          )} */}
         </div>
       </div>
     </>
