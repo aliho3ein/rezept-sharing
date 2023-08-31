@@ -9,9 +9,12 @@ interface LogoutButtonProps {
 }
 
 const LogoutButton: React.FC<LogoutButtonProps> = ({ onLogout }) => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const handleLogout = () => {
     Cookies.remove("token");
+    Cookies.remove("userData");
+    Cookies.remove("userId");
+    setUser(undefined);
     onLogout();
     alertMassage(`Logout successful ${user?.username} `);
   };

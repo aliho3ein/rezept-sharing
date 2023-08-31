@@ -35,33 +35,22 @@ const Signin: FC = () => {
       .post("/user/anmelden", formData)
       .then((res) => {
         if (res.status === 200) {
-
           alertMassage(res.data.message + " " + res.data.user.username);
 
           const authToken = res.data.token;
-          /* console.log(authToken); */
-
-          Cookies.set("token", authToken, { expires: 7 });
-
           const loggedInUserId = res.data.user._id;
-          console.log(loggedInUserId);
 
           if (loggedInUserId) {
+            Cookies.set("token", authToken, { expires: 7 });
+            Cookies.set("userId", loggedInUserId, { expires: 7 });
             setUser({
               _id: loggedInUserId,
               ...res.data.user,
             } as userWithId);
-            navigate("/recipes", {
-              state: {
-                /*                 id: loggedInUserId,
-                username: res.data.user.username,
-                email: res.data.user.email, */
-              },
-            });
+            navigate("/recipes");
           } else {
             navigate("/signin");
           }
-
         }
       })
 
@@ -97,19 +86,6 @@ const Signin: FC = () => {
       ...prevData,
       [name]: value,
     }));
-  };
-
-
-    if (authToken) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-  const handleLogout = () => {
-    Cookies.remove("authToken");
-    Cookies.remove("userName");
-    alertMassage("Logout successful", "success");
-
-    console.log();
   };
 
   return (
@@ -156,7 +132,6 @@ const Signin: FC = () => {
               <Link to="/passwort-vergessen">Password vergessen?</Link>
             </div>
             <button className={style.btn} type="submit">
-              {/* <span className={style.text}>Anmelden</span> */}
               Anmelden
             </button>
           </form>
@@ -167,7 +142,7 @@ const Signin: FC = () => {
             </Link>
           </p>
           <div className={style.oder}>Oder</div>
-          <GoogleBtn /* onLogout={handleLogout} */ />
+          <GoogleBtn />
         </div>
       </div>
     </>

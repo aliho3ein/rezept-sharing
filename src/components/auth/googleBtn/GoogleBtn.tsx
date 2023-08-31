@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import React, { useContext } from "react";
 import Cookies from "js-cookie";
 import {
@@ -31,26 +30,9 @@ const GoogleBtn: React.FC = () => {
 
   const handleLoginSuccess: GoogleLoginProps["onSuccess"] = (response) => {
     const jwtToken = response.credential;
-
-    const decodedToken = jwt_decode(jwtToken as string);
-    console.log(decodedToken);
-    // request to DB decodedToken.image
-    /**
-      
-     data = {
-      username : decodedToken.name
-      email :decodedToken.email
-      image: decodedToken.picture
-     }
-      
-    instance.post("/user/googleCheck" , data).then(res => log(res))
-     */
-
+    const decodedToken = jwt_decode(jwtToken as string) as DecodedToken;
     Cookies.set("authToken", jwtToken as string, { expires: 7 });
     Cookies.set("userData", JSON.stringify(decodedToken), { expires: 7 });
-
-    const decodedToken = jwt_decode(jwtToken as string) as DecodedToken;
-
 
     const data = {
       username: decodedToken.name,
@@ -62,23 +44,14 @@ const GoogleBtn: React.FC = () => {
       .post("/user/checkgoogle", data)
       .then((res) => {
         const logedGoogleUserId = res.data.user._id;
-        /*         console.log("data", res.data.user); */
-
         alertMassage(res.data.message + " " + res.data.user.username);
 
-        Cookies.set("token", jwtToken as string, { expires: 7 });
-        Cookies.set("userData", JSON.stringify(decodedToken), { expires: 7 });
-
         if (logedGoogleUserId) {
+          Cookies.set("token", jwtToken as string, { expires: 7 });
+          Cookies.set("userData", JSON.stringify(decodedToken), { expires: 7 });
+          Cookies.set("userId", logedGoogleUserId, { expires: 7 });
           setUser({ _id: logedGoogleUserId, ...res.data.user } as userWithId);
-          navigate("/recipes", {
-            state: {
-              /*               id: logedGoogleUserId,
-              username: decodedToken.name,
-              email: decodedToken.email, */
-              picture: decodedToken.picture,
-            },
-          });
+          navigate("/recipes");
         }
       })
       .catch((err) => {
