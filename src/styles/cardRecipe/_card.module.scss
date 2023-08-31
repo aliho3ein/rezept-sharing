@@ -1,84 +1,87 @@
 @import "../variable";
 
+// .cardContainer {
+//   display: flex;
+//   align-items: center;
+//   background-color: $primary-color;
+//   width: max-content;
+//   //height: 300px;
+// }
+// .card {
+//   position: relative;
+//   width: 180px;
+//   height: 200px;
+//   border-radius: 20px;
+//   background-color: white;
+//   //border : 1px solid;
+// }
+
+// img {
+//   position: absolute;
+//   top: -40px;
+//   left: 26px;
+//   width: 70%;
+//   filter: drop-shadow(0 0 10px #555);
+// }
+
+// .cardInfo {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   //border: 1px solid;
+//   margin-top: 110px;
+// }
+// .titleRecipe {
+//   font-weight: bold;
+//   font-size: 12px;
+// }
+
+// hr {
+//   border: 1px solid #0000001f;
+//   width: 100%;
+//   margin-bottom: 5px;
+// }
+
+// .timeWiew {
+//   display: flex;
+//   font-size: 10px;
+//   width: 100%;
+//   justify-content: space-around;
+//   padding: 5px 0;
+//   align-items: center;
+
+//   div {
+//     background-color: #e9f8f1;
+//     //     //color: #B1E6CB;
+//     color: #65ca93;
+//     font-weight: bold;
+//     border-radius: 5px;
+//     padding: 5px 10px;
+//     cursor: pointer;
+//   }
+
+//   div:hover {
+//     color: white;
+//     background-color: #22ba70;
+//   }
+// }
+// .rewiews {
+//   display: flex;
+//   align-items: center;
+//   font-size: 10px;
+//   padding: 5px 0;
+//   p {
+//     padding-left: 5px;
+//   }
+// }
+// .stars {
+//   color: #feb51d;
+// }
+
+/////// here
+ 
 .cardContainer {
-  display: flex;
-  align-items: center;
-  background-color: $primary-color;
-  width: max-content;
-  //height: 300px;
-}
-.card {
-  position: relative;
-  width: 180px;
-  height: 200px;
-  border-radius: 20px;
-  background-color: white;
-  //border : 1px solid;
-}
-
-img {
-  position: absolute;
-  top: -40px;
-  left: 26px;
-  width: 70%;
-  filter: drop-shadow(0 0 10px #555);
-}
-
-.cardInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  //border: 1px solid;
-  margin-top: 110px;
-}
-.titleRecipe {
-  font-weight: bold;
-  font-size: 12px;
-}
-
-hr {
-  border: 1px solid #0000001f;
-  width: 100%;
-  margin-bottom: 5px;
-}
-
-.timeWiew {
-  display: flex;
-  font-size: 10px;
-  width: 100%;
-  justify-content: space-around;
-  padding: 5px 0;
-  align-items: center;
-
-  div {
-    background-color: #e9f8f1;
-    //     //color: #B1E6CB;
-    color: #65ca93;
-    font-weight: bold;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-
-  div:hover {
-    color: white;
-    background-color: #22ba70;
-  }
-}
-.rewiews {
-  display: flex;
-  align-items: center;
-  font-size: 10px;
-  padding: 5px 0;
-  p {
-    padding-left: 5px;
-  }
-}
-.stars {
-  color: #feb51d;
-}
-/* 
-.cardContainer {
+  //border: 1px solid ;
   display: flex;
   align-items: center;
   background-color: $primary-color;
@@ -89,6 +92,7 @@ hr {
   margin: 10px;
 }
 .card {
+ 
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -99,27 +103,30 @@ hr {
 
   .imageCard {
     position: relative;
-    width: 180px;
-    height: 200px;
+    width: 100%; // width: 180px;
+    height: 150px;
     border-radius: 20px;
     background-color: white;
-    //border : 1px solid;
+    
   }
 
   .img {
     position: absolute;
-    top:-40px;
-    left:-22px;
+    top:0px;
+    left:-15px;
     width:120%;
-    filter: drop-shadow(0 0 10px #555);
+    height: 100%;
+    //filter: drop-shadow(0 0 10px #555);
   }
 }
 
 .cardInfo {
+ 
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   padding: 10px;
 
   .titleRecipe {
@@ -147,10 +154,12 @@ hr {
   }
 
   .timeWiew {
+    //border : 1px solid;
     display: flex;
     font-size: 12px;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
   }
 }
 
@@ -164,11 +173,17 @@ hr {
   color: white;
   font-weight: bold;
   border-radius: 5px;
-  padding: 5px 10px;
+  padding: 8px 10px;
   cursor: pointer;
 
   &:hover {
     background-color: darken($accent-color, 10%);
   }
 }
- */
+
+hr {
+     border: 1px solid #0000001f;
+     width: 100%;
+     margin-bottom: 5px;
+   }
+ 

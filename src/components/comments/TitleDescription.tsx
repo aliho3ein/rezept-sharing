@@ -7,6 +7,7 @@ import { completeRecipe } from "../../models/recipe";
 import { comment } from "../../models/comment";
 //import instance from "../../api/instance";
 import axios from "axios";
+import TextareaComment from "./TextareaComment";
 
 const TitleDescription: FC = () => {
   // const getData = () => {
@@ -27,6 +28,7 @@ const TitleDescription: FC = () => {
         "http://localhost:3000/recipe/64eef4d8f36d0997fe144773"
       );
       setDataRecipe(response.data);
+      console.log(dataRecipe)
     } catch (error) {
       console.error(error);
     }
@@ -84,7 +86,7 @@ const TitleDescription: FC = () => {
           <h2>{dataRecipe?.title}</h2>
           <img
             className={styles.imgRecipe}
-            src={"/src/assets/1a-guacamole-dip.jpg"} // verification if  image exists
+            src={dataRecipe?.image? dataRecipe.image[0]:"/src/assets/icons-camera.png"} // verification if  image exists {"/src/assets/1a-guacamole-dip.jpg"}
             alt="image incognita"
           />
           <CountRewiews />
@@ -121,7 +123,7 @@ const TitleDescription: FC = () => {
 
       <section className={styles.sectComment}>
         <h3>Kommentare</h3>
-
+        <TextareaComment/>
         {auxComment ? (
           auxComment.map((comment, index) => (
             <Comment key={index} data={comment} />
