@@ -1,37 +1,49 @@
-import { FC, useContext, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import style from "../../styles/dropDownUserProfile/DropDownUserProfile.module.scss";
 import LogoutButton from "../auth/Logout";
 import Cookies from "js-cookie";
-import { alertMassage } from "../../actions/alerts";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import avatarPic from "../../assets/avatar.jpg";
 import { AuthContext } from "../../context/authContext";
+import instance from "../../api/instance";
 
 const DropDownUserProfile: FC = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { user } = useContext(AuthContext);
-
-  /*   const username = location.state?.username;
-  const id = location.state?.id;
-  const email = location.state?.email; */
-  const picture = location.state?.picture;
+  const { user, setUser } = useContext(AuthContext);
+  const [userImage, setUserImage] = useState<string | undefined>("");
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+
+  const userIdFromCookies = Cookies.get("userId");
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  useEffect(() => {
+    if (userIdFromCookies) {
+      instance
+        .get(`/user/${userIdFromCookies}`)
+        .then((res) => {
+          setUser(res.data);
+          setUserImage(res.data.image[0]);
+        })
+        .catch((err) => {
+          console.error("Error fetching user data:", err);
+        });
+    }
+  }, [userIdFromCookies, setUser]);
+
   const handleLogout = () => {
     Cookies.remove("token");
-    alertMassage("Logout successful", "success");
+    Cookies.remove("userData");
+    Cookies.remove("userId");
     navigate("/signin");
   };
 
   return (
     <div className={style.userProfileContainer}>
       <img
-        src={picture || avatarPic}
+        src={userImage || avatarPic}
         alt="User"
         className={`${style.userProfilePictureDropDown} ${
           isDropdownOpen ? style.active : ""
