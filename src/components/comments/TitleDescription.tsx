@@ -21,7 +21,8 @@ const TitleDescription: FC = () => {
   const [dataComment, setDataComment] = useState<[comment]>();
   const [auxComment, setAuxComment] = useState<[comment]>();
   const [texto, setTexto] = useState<string>("Alle Kommentare anzeigen");
-
+  const [flag, setFlag] = useState<boolean>(false);
+  
   async function getRecipe() {
     try {
       const response = await axios.get(
@@ -47,19 +48,19 @@ const TitleDescription: FC = () => {
   useEffect(() => {
     getRecipe();
     getComments();
-  }, []);
+  }, [flag]);
 
   useEffect(() => {
     Comments();
   }, [dataComment]);
 
-  // remove after update  const arrZutaten = [
-  //   { title: "Avocado", number: 2, unit: "kg" },
-  //   { title: "Salz und Pfeffe", number: "", unit: "" },
-  //   { title: "Tomaten", number: 4, unit: "kg" },
-  //   { title: "Salz und Pfeffe", number: "", unit: "" },
-  //   { title: "Tomaten", number: 4, unit: "kg" },
-  // ];
+
+///*************************
+  console.log(flag);
+  //console.log(dataComment);
+///******************************
+
+
   const Comments = (): void => {
     let aux: any = dataComment;
     if (dataComment && dataComment.length > 1) {
@@ -69,6 +70,8 @@ const TitleDescription: FC = () => {
   };
 
   const showAllComment = (): void => {
+      
+   
     if (texto === "Alle Kommentare anzeigen") {
       setTexto("Weniger Kommentare anzeigen");
       setAuxComment(dataComment);
@@ -123,7 +126,7 @@ const TitleDescription: FC = () => {
 
       <section className={styles.sectComment}>
         <h3>Kommentare</h3>
-        <TextareaComment recipeID = {dataRecipe?._id}/>
+        <TextareaComment recipeID = {dataRecipe?._id} flag= {flag} setFlag={setFlag} setText={setTexto} />
         
         {auxComment ? (
           auxComment.map((comment, index) => (
