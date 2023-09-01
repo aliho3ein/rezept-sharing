@@ -1,0 +1,196 @@
+@import "../variable";
+
+$link-color: #007bff;
+
+.signin_container {
+  background: center / cover no-repeat url("../../assets/signin.jpg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.card_form {
+  background-color: rgba($primary-color, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
+  padding: 20px;
+  width: 500px;
+  text-align: center;
+
+  .card_title {
+    font-size: 1.5em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .card_paragraph {
+    font-size: 0.8em;
+    color: #777;
+    margin-bottom: 25px;
+    font-size: 0.8em;
+    color: #888;
+  }
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $text-color;
+  padding: 7px 0;
+  margin-bottom: 1.5rem;
+
+  label {
+    font-size: 1.2em;
+    margin-right: 15px;
+  }
+
+  input {
+    border-radius: 4px;
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    background-color: transparent;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-left: 15px;
+  }
+  input:focus {
+    background-color: transparent;
+  }
+  i {
+    cursor: pointer;
+    margin: 0 10px;
+  }
+}
+
+.forgotPassword {
+  text-align: end;
+  a {
+    color: $primary-color;
+  }
+  a {
+    text-decoration: none;
+    color: $link-color;
+  }
+  a:hover {
+    color: $text-color;
+  }
+}
+
+.signup_link {
+  text-align: end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  margin-left: 20px;
+  a {
+    text-decoration: none;
+    margin-left: 10px;
+    color: $link-color;
+  }
+  a:hover {
+    color: $text-color;
+    transition: color 0.3s;
+  }
+}
+
+.oder {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  /** */
+  text-align: center;
+  margin-block: 20px;
+
+  &::after,
+  &::before {
+    content: "";
+    width: 200px;
+    height: 1px;
+    background-color: $text-color;
+  }
+
+  span {
+    margin-inline: 10px;
+    vertical-align: 2px;
+  }
+  /** */
+  font-size: 0.75rem;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.oder::before,
+.oder::after {
+  content: "";
+  flex: 1 1 0%;
+  border-top: 1px solid #000;
+}
+
+.oder::before {
+  margin-right: 0.375rem;
+}
+
+.oder::after {
+  margin-left: 0.375rem;
+  /** */
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  padding: 10px 20px;
+  margin-block: 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: $text-color;
+  color: $secondary-color;
+  transition: all 200ms;
+
+  &:hover {
+    filter: brightness(1.5);
+  }
+  .text {
+    font-weight: 600;
+  }
+}
+
+.googleButton {
+  background-color: $primary-color;
+  padding: 0;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0;
+
+  .logoutButton {
+    background-color: $text-color;
+    width: 100%;
+    color: $secondary-color;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 200ms;
+    &:hover {
+      filter: brightness(1.5);
+    }
+  }
+}
+.google {
+  border: none;
+}
+@media screen and (max-width: 991px) {
+  .button-75 {
+    height: 50px;
+  }
+  .button-75 span {
+    line-height: 50px;
+  }
+}
