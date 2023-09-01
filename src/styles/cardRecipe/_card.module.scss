@@ -1,6 +1,6 @@
 @import "../variable";
 
-// .cardContainer {
+/*// .cardContainer {
 //   display: flex;
 //   align-items: center;
 //   background-color: $primary-color;
@@ -76,7 +76,7 @@
 // }
 // .stars {
 //   color: #feb51d;
-// }
+// }*/
 
 /////// here
  
@@ -99,24 +99,27 @@
   border-radius: 20px;
   background-color: white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  //overflow: hidden;
 
   .imageCard {
     position: relative;
     width: 100%; // width: 180px;
-    height: 150px;
+    height: 130px;
     border-radius: 20px;
     background-color: white;
+    
     
   }
 
   .img {
     position: absolute;
-    top:0px;
-    left:-15px;
-    width:120%;
-    height: 100%;
-    //filter: drop-shadow(0 0 10px #555);
+    top:-45px;
+    left:20px;
+    width:80%;
+    height: 120%;
+    border-radius: 50%;
+    border: 1px solid;
+    filter: drop-shadow(0 0 10px #555);
   }
 }
 
@@ -127,7 +130,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 0px 10px 10px;
 
   .titleRecipe {
     font-weight: bold;
@@ -160,6 +163,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 5px 0;
   }
 }
 
