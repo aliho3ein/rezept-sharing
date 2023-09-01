@@ -1,8 +1,8 @@
 export interface comment {
-    _id: string;
-    userID: any;
+    _id?: string;
+    userID: string;
     recipeID: string;
-    title: string;
+    title?: string;
     desc?: string;
     date?:Date;
     like?:number[];

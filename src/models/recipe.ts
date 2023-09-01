@@ -25,7 +25,7 @@ export interface recipeType {
 }
 
 export interface completeRecipe extends recipeType {
-  id: string;
+  _id: string;
   createAt:Date
   view: number;
   like: number[];

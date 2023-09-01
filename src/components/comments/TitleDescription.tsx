@@ -28,7 +28,7 @@ const TitleDescription: FC = () => {
         "http://localhost:3000/recipe/64eef4d8f36d0997fe144773"
       );
       setDataRecipe(response.data);
-      console.log(dataRecipe)
+      console.log(dataRecipe?._id)
     } catch (error) {
       console.error(error);
     }
@@ -123,7 +123,8 @@ const TitleDescription: FC = () => {
 
       <section className={styles.sectComment}>
         <h3>Kommentare</h3>
-        <TextareaComment/>
+        <TextareaComment recipeID = {dataRecipe?._id}/>
+        
         {auxComment ? (
           auxComment.map((comment, index) => (
             <Comment key={index} data={comment} />

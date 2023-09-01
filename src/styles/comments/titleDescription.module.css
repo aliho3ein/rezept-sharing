@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+.wrapper {
+  width: 100%;
+  height: -moz-max-content;
+  height: max-content;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectImg {
+  width: 100%;
+}
+
+.imgRecipe {
+  min-width: 300px;
+  height: 250px;
+  border-radius: 20px;
+  background-color: #febd2f;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.sectZutaten {
+  margin: 20px 0;
+  border-top: 1px solid rgba(81, 72, 72, 0.303);
+  border-bottom: 1px solid rgba(81, 72, 72, 0.303);
+  padding: 30px 0;
+  width: 100%;
+}
+.sectZutaten h3 {
+  padding-bottom: 20px;
+}
+.sectZutaten .listItem {
+  display: flex;
+  width: 100%;
+  border-radius: 8px;
+  justify-content: space-between;
+}
+.sectZutaten .listItem p {
+  text-align: right;
+  padding: 10px;
+}
+.sectZutaten .listItem .paraphName {
+  text-align: left;
+  max-width: -moz-max-content;
+  max-width: max-content;
+}
+
+.zubereitung {
+  border: 1px solid rgba(81, 72, 72, 0.152);
+  padding: 15px 0 0 10px;
+}
+.zubereitung p {
+  max-width: 500px;
+  padding: 20px 10px;
+}
+
+.sectComment {
+  border-top: 1px solid rgba(81, 72, 72, 0.303);
+  border-bottom: 1px solid rgba(81, 72, 72, 0.303);
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  margin: 50px 0 20px;
+}
+.sectComment .btn {
+  width: -moz-max-content;
+  width: max-content;
+  background-color: #febd2f;
+  color: white;
+  padding: 14px 15px;
+  border-radius: 25px;
+  margin: 20px auto 0;
+  cursor: pointer;
+}
+.sectComment .btn:hover {
+  background-color: rgba(254, 188, 47, 0.5960784314);
+}
+
+.similarRecipes {
+  border-bottom: 1px solid rgba(81, 72, 72, 0.303);
+  width: 100%;
+  max-width: 500px;
+  padding-bottom: 50px;
+  margin-top: 30px;
+}
+.similarRecipes h3 {
+  padding-bottom: 60px;
+}
+.similarRecipes .cardContainer {
+  display: flex;
+  flex-flow: wrap;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  row-gap: 50px;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .imgRecipe {
+    height: 350px;
+  }
+  .cardContainer {
+    justify-content: unset !important;
+  }
+  .listItem p {
+    padding: 10px 20px !important;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  .wrapper {
+    flex-direction: row;
+    max-width: 1258px;
+    -moz-column-gap: 40px;
+         column-gap: 40px;
+    align-items: start;
+    margin-bottom: 50px;
+  }
+  .sectZutaten {
+    height: 400px;
+    overflow: auto;
+  }
+  .zubereitung p {
+    max-width: 800px;
+    padding: 20px;
+  }
+  .sectComment {
+    max-width: 800px;
+  }
+  .similarRecipes {
+    max-width: 800px;
+  }
+}/*# sourceMappingURL=titleDescription.module.css.map */
