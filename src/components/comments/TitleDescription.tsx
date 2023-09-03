@@ -20,6 +20,7 @@ const TitleDescription: FC = () => {
   const [dataRecipe, setDataRecipe] = useState<completeRecipe>();
   const [dataComment, setDataComment] = useState<[comment]>();
   const [auxComment, setAuxComment] = useState<[comment]>();
+  const [dataCategory, setDataCategory] = useState<[completeRecipe]>();
   const [texto, setTexto] = useState<string>("Alle Kommentare anzeigen");
   const [flag, setFlag] = useState<boolean>(false);
   
@@ -45,6 +46,18 @@ const TitleDescription: FC = () => {
       console.error(error);
     }
   }
+
+  async function getByCategory() {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/recipe/category/Vegan"
+      );
+      setDataCategory(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
   useEffect(() => {
     getRecipe();
     getComments();
@@ -54,10 +67,14 @@ const TitleDescription: FC = () => {
     Comments();
   }, [dataComment]);
 
+  useEffect(() => {
+  getByCategory()
+  }, [dataRecipe]);
 
 ///*************************
   console.log(flag);
   //console.log(dataComment);
+  //getByCategory();
 ///******************************
 
 
@@ -144,10 +161,12 @@ const TitleDescription: FC = () => {
       <div className={styles.similarRecipes}>
         <h3>Änliche Rezepte</h3>
         <div className={styles.cardContainer}>
-          <Card data={dataRecipe} />
-          <Card data={dataRecipe} />
-          <Card data={dataRecipe} />
-          <Card data={dataRecipe} />
+         {
+          dataCategory?.map((category) =>  {
+           return <Card data={category} />
+          })
+         }
+          
         </div>
       </div>
     </>

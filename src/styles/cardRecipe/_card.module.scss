@@ -112,14 +112,26 @@
   }
 
   .img {
+    // position: absolute;
+    // top:-45px;
+    // left:20px;
+    // width:80%;
+    // height: 120%;
+    // border-radius: 50%;
+    // border: 1px solid;
+    // filter: drop-shadow(0 0 10px #555);
+
+    //*********************remove
     position: absolute;
     top:-45px;
     left:20px;
-    width:80%;
-    height: 120%;
     border-radius: 50%;
-    border: 1px solid;
-    filter: drop-shadow(0 0 10px #555);
+    aspect-ratio: 1/1;
+    width: 150px ;
+    object-fit: none;
+    border: 3px solid rgba(255, 255, 255, 0.222);
+    filter: drop-shadow(0 10px 10px #555);
+    
   }
 }
 
@@ -136,6 +148,10 @@
     font-weight: bold;
     font-size: 14px;
     margin-bottom: 10px;
+    width: 160px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .rewiews {

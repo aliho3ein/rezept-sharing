@@ -22,18 +22,25 @@ const TextareaComment: FC<useStateProps> = ({recipeID,flag,setFlag,setText}) => 
       if(e.nativeEvent.submitter.value === 'Abbrechen' ){
         e.target[0].value="";
         setTextarea('');
-        
+        setFlag(!flag);
+      } else {
+        const data:comment = {
+          userID:'64d3939ede491a0d0fc2cd13',//! no final*** userID come from user in usercontext global
+          recipeID,
+          desc:e.target[0].value.trim(),
+        }
+        instance.post(
+            '/comment',
+             data
+        ).then((response) => {
+          setFlag(!flag);
+          e.target[0].value="";
+          setTextarea('');
+          console.log(response)
+        }) .catch((err) => console.log(err));
       }
-      const data:comment = {
-        userID:'64d3939ede491a0d0fc2cd13',//! no final*** userID come from user in usercontext global
-        recipeID,
-        desc:e.target[0].value.trim(),
-      }
-      instance.post(
-          '/comment',
-           data
-      ).then((response) =>  console.log(response)).catch((err) => console.log(err));
-      setFlag(!flag);
+      
+  
   }
 
 
