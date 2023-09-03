@@ -1,7 +1,76 @@
 @import "../variable";
 
 //! Start
+<<<<<<< HEAD
 .start {
+=======
+.startPageContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: 100vh;
+}
+.dropUserProfile {
+  margin-top: 30px;
+}
+
+.recipeCard {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20%;
+
+  .recipesComponent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    max-width: 40%;
+    background: linear-gradient(to right, $secondary-color, $primary-color);
+    border-radius: 10px;
+  }
+
+  .cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 60%;
+  }
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+
+  button {
+    justify-content: center;
+    background-color: $secondary-color;
+    color: $text-color;
+    border: none;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: $accent-color;
+      color: $primary-color;
+    }
+  }
+
+  span {
+    color: $text-color;
+    font-size: 18px;
+    margin: 0 10px;
+  }
+}
+
+/* .recipesComponent{
+>>>>>>> main
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -15,7 +84,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
+<<<<<<< HEAD
 }
+=======
+} */
+>>>>>>> main
 //! search component
 .recipeListContainer {
   display: flex;
@@ -270,6 +343,7 @@
   }
 }
 
+<<<<<<< HEAD
 //!Filter Options
 /* .filterOptions {
   margin-bottom: 20px;
@@ -338,6 +412,8 @@
   }
 }
  */
+=======
+>>>>>>> main
 .filterOptionsContainer {
   padding: 10px;
   border-radius: 5px;
