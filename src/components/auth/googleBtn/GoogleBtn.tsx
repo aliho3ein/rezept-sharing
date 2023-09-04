@@ -25,6 +25,7 @@ const ClientID =
 
 const GoogleBtn: React.FC = () => {
   const { setUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const handleLoginSuccess: GoogleLoginProps["onSuccess"] = (response) => {
