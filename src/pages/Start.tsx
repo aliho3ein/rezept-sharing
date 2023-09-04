@@ -35,7 +35,7 @@ const Start: FC = () => {
       })
       .then((res) => {
         setRecipeList(res.data);
-        /*  console.log("dataaaa", res.data[0]); */
+        /*   console.log("dataaaa", res.data); */
       })
       .catch((err) => console.log(err));
   }, [sort, pageNr, category]);
