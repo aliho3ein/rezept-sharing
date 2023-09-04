@@ -4,6 +4,7 @@ import { alertMassage } from "../../actions/alerts";
 import GoogleBtn from "./googleBtn/GoogleBtn";
 import { Link, useNavigate } from "react-router-dom";
 import instance from "../../api/instance";
+/* import Cookies from "js-cookie"; */
 
 const Signup: FC = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,14 @@ const Signup: FC = () => {
     useState<boolean>(false);
   const [registredUserId, setRegisteredUserId] = useState<string | null>(null);
 
+  /* const [loggedIn, setLoggedIn] = useState<boolean>(false); */
+
   const navigate = useNavigate();
+
+  /*   useEffect(() => { */
+  /*  const authToken = Cookies.get("authToken"); */
+  // wird eig. immer undefined weil beim registrierung ist noch nicht authenticated nur beim anmeldung
+  // um die Sicherheit und Benutzererfahrung in einer Webanwendung zu gewährleisten
 
   const handleSignup = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -65,7 +73,11 @@ const Signup: FC = () => {
       [name]: value,
     }));
   };
-
+  /*   const handleLogout = () => {
+    Cookies.remove("authToken");
+    Cookies.remove("userName");
+    alertMassage("Logout successful", "success");
+  }; */
   return (
     <div className={style.signup_container}>
       <div className={style.card_form}>
@@ -149,7 +161,7 @@ const Signup: FC = () => {
           />
         </div>
         <button className={style.btn} type="button" onClick={handleSignup}>
-          Registrieren
+          <span className={style.text}>Registrieren</span>
         </button>
 
         <p className={style.signup_link}>
@@ -162,7 +174,7 @@ const Signup: FC = () => {
         <div className={style.oder}>Order</div>
 
         <button className={style.google}>
-          <GoogleBtn />
+          <GoogleBtn /* onLogout={handleLogout} */ />
         </button>
       </div>
     </div>

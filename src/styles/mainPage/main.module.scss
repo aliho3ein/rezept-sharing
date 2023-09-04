@@ -1,6 +1,9 @@
 @import "../variable";
 
 //! Start
+<<<<<<< HEAD
+.start {
+=======
 .startPageContainer {
   display: flex;
   flex-direction: column;
@@ -67,6 +70,7 @@
 }
 
 /* .recipesComponent{
+>>>>>>> main
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -80,7 +84,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
+<<<<<<< HEAD
+}
+=======
 } */
+>>>>>>> main
 //! search component
 .recipeListContainer {
   display: flex;
@@ -335,6 +343,77 @@
   }
 }
 
+<<<<<<< HEAD
+//!Filter Options
+/* .filterOptions {
+  margin-bottom: 20px;
+
+  label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: $text-color;
+    font-family: $title-font;
+  }
+
+  .filterList {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+      cursor: pointer;
+      color: $text-color;
+      font-family: $title-font;
+      transition: color 0.3s ease-in-out;
+      font-size: 17px;
+
+      &:hover {
+        color: $accent-color;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+//! sortOptions
+.sortOptions {
+  margin-bottom: 20px;
+
+  label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: $text-color;
+    font-family: $title-font;
+  }
+
+  .sortList {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin-right: 10px;
+      cursor: pointer;
+      color: $text-color;
+      font-family: $title-font;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: $accent-color;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+ */
+=======
+>>>>>>> main
 .filterOptionsContainer {
   padding: 10px;
   border-radius: 5px;

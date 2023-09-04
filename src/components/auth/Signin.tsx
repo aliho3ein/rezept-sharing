@@ -35,19 +35,26 @@ const Signin: FC = () => {
       .post("/user/anmelden", formData)
       .then((res) => {
         if (res.status === 200) {
-          alertMassage(res.data.message + " " + res.data.user.username);
-
+          alertMassage(res.data.message as string);
           const authToken = res.data.token;
+          /* console.log(authToken); */
+
+          Cookies.set("token", authToken, { expires: 7 });
+
           const loggedInUserId = res.data.user._id;
+          console.log(loggedInUserId);
 
           if (loggedInUserId) {
-            Cookies.set("token", authToken, { expires: 7 });
-            Cookies.set("userId", loggedInUserId, { expires: 7 });
             setUser({
               _id: loggedInUserId,
-              ...res.data.user,
             } as userWithId);
-            navigate("/recipes");
+            navigate("/recipes", {
+              state: {
+                id: loggedInUserId,
+                username: res.data.user.username,
+                email: res.data.user.email,
+              },
+            });
           } else {
             navigate("/signin");
           }
@@ -132,7 +139,7 @@ const Signin: FC = () => {
               <Link to="/passwort-vergessen">Password vergessen?</Link>
             </div>
             <button className={style.btn} type="submit">
-              Anmelden
+              <span className={style.text}>Anmelden</span>
             </button>
           </form>
           <p className={style.signup_link}>
@@ -142,7 +149,7 @@ const Signin: FC = () => {
             </Link>
           </p>
           <div className={style.oder}>Oder</div>
-          <GoogleBtn />
+          <GoogleBtn /* onLogout={handleLogout} */ />
         </div>
       </div>
     </>

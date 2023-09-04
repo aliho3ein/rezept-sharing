@@ -66,7 +66,7 @@ const EmailVerification: React.FC<EmailProps> = ({ placeholder }) => {
           />
         </div>
         <button className={style.btn} onClick={handleSubmit}>
-          E-Mail bestätigen
+          <span className={style.text}>E-Mail bestätigen</span>
         </button>
       </div>
     </div>

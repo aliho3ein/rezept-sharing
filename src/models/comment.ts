@@ -1,7 +1,7 @@
 export interface comment {
     _id?: string;
     userID: string;
-    recipeID: string;
+    recipeID?: string;
     title?: string;
     desc?: string;
     date?:Date;

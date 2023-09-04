@@ -16,6 +16,8 @@ const Start: FC = () => {
   const [category, setCategory] = useState<string[]>([]);
   const [pageNr, setPageNr] = useState<number>(1);
 
+<<<<<<< HEAD
+=======
   const nextPage = () => {
     if (recipeList.length > 3) {
       setPageNr(pageNr + 1);
@@ -28,6 +30,7 @@ const Start: FC = () => {
     }
   };
 
+>>>>>>> main
   useEffect(() => {
     instance
       .get<recipeType[]>(`/recipe/page/${pageNr}`, {
@@ -35,7 +38,11 @@ const Start: FC = () => {
       })
       .then((res) => {
         setRecipeList(res.data);
+<<<<<<< HEAD
+        /*    console.log("dataaaa", res.data[0]); */
+=======
         /*  console.log("dataaaa", res.data[0]); */
+>>>>>>> main
       })
       .catch((err) => console.log(err));
   }, [sort, pageNr, category]);
@@ -56,6 +63,28 @@ const Start: FC = () => {
   // }
 
   return (
+<<<<<<< HEAD
+    <>
+      <DropDownUserProfile />
+      <div className={style.start}>
+        <Search recipes={recipes} />
+        <FilterOptions changeCategory={setCategory} />
+        <SortOptions changeSort={setSort} />
+      </div>
+
+      {/* {recipeList.map((item, index) => {
+        return <Card data={item} key={index} />;
+      })} */}
+      <div className={style.cardsContainer}>
+        {recipeList.map((item, index) => {
+          if (category.length === 0 || category.includes(item.category[1])) {
+            return <Card data={item} key={index} />;
+          }
+          return null;
+        })}
+      </div>
+    </>
+=======
     <div className={style.startPageContainer}>
       <div className={style.dropUserProfile}>
         <DropDownUserProfile />
@@ -86,6 +115,7 @@ const Start: FC = () => {
         <button onClick={nextPage}>Next</button>
       </div>
     </div>
+>>>>>>> main
   );
 };
 

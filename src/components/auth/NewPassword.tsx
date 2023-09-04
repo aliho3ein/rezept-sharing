@@ -102,7 +102,9 @@ const NewPassword: FC = () => {
           ></i>
         </div>
         <button className={style.btn} onClick={updatePassword}>
-          {newPassword.password ? "Passwort ändern" : "Passwort zurücksetzen"}
+          <span className={style.text}>
+            {newPassword.password ? "Passwort ändern" : "Passwort zurücksetzen"}
+          </span>
         </button>
       </div>
     </div>

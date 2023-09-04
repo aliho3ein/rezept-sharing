@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+.logoutButton {
+  background-color: #222;
+  width: 100%;
+  color: #febd2f;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 200ms;
+}
+.logoutButton:hover {
+  filter: brightness(1.5);
+}/*# sourceMappingURL=logout.module.css.map */
