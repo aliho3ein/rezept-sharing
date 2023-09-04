@@ -7,6 +7,7 @@ import { completeRecipe } from "../../models/recipe";
 import { comment } from "../../models/comment";
 //import instance from "../../api/instance";
 import axios from "axios";
+import TextareaComment from "./TextareaComment";
 
 const TitleDescription: FC = () => {
   // const getData = () => {
@@ -19,14 +20,17 @@ const TitleDescription: FC = () => {
   const [dataRecipe, setDataRecipe] = useState<completeRecipe>();
   const [dataComment, setDataComment] = useState<[comment]>();
   const [auxComment, setAuxComment] = useState<[comment]>();
+  const [dataCategory, setDataCategory] = useState<[completeRecipe]>();
   const [texto, setTexto] = useState<string>("Alle Kommentare anzeigen");
-
+  const [flag, setFlag] = useState<boolean>(false);
+  
   async function getRecipe() {
     try {
       const response = await axios.get(
-        "http://localhost:3000/recipe/64e5e9f9aad54a0f87ae7650"
+        "http://localhost:3000/recipe/64eef4d8f36d0997fe144773"
       );
       setDataRecipe(response.data);
+      console.log(dataRecipe?._id)
     } catch (error) {
       console.error(error);
     }
@@ -34,7 +38,7 @@ const TitleDescription: FC = () => {
   async function getComments() {
     try {
       const response = await axios.get(
-        "http://localhost:3000/comment/64e5e9f9aad54a0f87ae7650"
+        "http://localhost:3000/comment/64eef4d8f36d0997fe144773"
       );
          setDataComment(response.data);
       
@@ -42,22 +46,38 @@ const TitleDescription: FC = () => {
       console.error(error);
     }
   }
+
+  async function getByCategory() {
+    try {
+      const response = await axios.get(
+        "http://localhost:3000/recipe/category/Vegan"
+      );
+      setDataCategory(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
   useEffect(() => {
     getRecipe();
     getComments();
-  }, []);
+  }, [flag]);
 
   useEffect(() => {
     Comments();
   }, [dataComment]);
 
-  // remove after update  const arrZutaten = [
-  //   { title: "Avocado", number: 2, unit: "kg" },
-  //   { title: "Salz und Pfeffe", number: "", unit: "" },
-  //   { title: "Tomaten", number: 4, unit: "kg" },
-  //   { title: "Salz und Pfeffe", number: "", unit: "" },
-  //   { title: "Tomaten", number: 4, unit: "kg" },
-  // ];
+  useEffect(() => {
+  getByCategory()
+  }, [dataRecipe]);
+
+///*************************
+  console.log(flag);
+  //console.log(dataComment);
+  //getByCategory();
+///******************************
+
+
   const Comments = (): void => {
     let aux: any = dataComment;
     if (dataComment && dataComment.length > 1) {
@@ -67,6 +87,8 @@ const TitleDescription: FC = () => {
   };
 
   const showAllComment = (): void => {
+      
+   
     if (texto === "Alle Kommentare anzeigen") {
       setTexto("Weniger Kommentare anzeigen");
       setAuxComment(dataComment);
@@ -84,7 +106,7 @@ const TitleDescription: FC = () => {
           <h2>{dataRecipe?.title}</h2>
           <img
             className={styles.imgRecipe}
-            src={"/src/assets/1a-guacamole-dip.jpg"} // verification if  image exists
+            src={dataRecipe?.image? dataRecipe.image[0]:"/src/assets/icons-camera.png"} // verification if  image exists {"/src/assets/1a-guacamole-dip.jpg"}
             alt="image incognita"
           />
           <CountRewiews />
@@ -121,7 +143,8 @@ const TitleDescription: FC = () => {
 
       <section className={styles.sectComment}>
         <h3>Kommentare</h3>
-
+        <TextareaComment recipeID = {dataRecipe?._id} flag= {flag} setFlag={setFlag} setText={setTexto} />
+        
         {auxComment ? (
           auxComment.map((comment, index) => (
             <Comment key={index} data={comment} />
@@ -138,10 +161,12 @@ const TitleDescription: FC = () => {
       <div className={styles.similarRecipes}>
         <h3>Änliche Rezepte</h3>
         <div className={styles.cardContainer}>
-          <Card data={dataRecipe} />
-          <Card data={dataRecipe} />
-          <Card data={dataRecipe} />
-          <Card data={dataRecipe} />
+         {
+          dataCategory?.map((category) =>  {
+           return <Card data={category} />
+          })
+         }
+          
         </div>
       </div>
     </>

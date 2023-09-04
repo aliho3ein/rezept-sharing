@@ -9,7 +9,6 @@ import jwt_decode from "jwt-decode";
 import style from "../../../styles/auth/signin.module.scss";
 import { useNavigate } from "react-router-dom";
 import instance from "../../../api/instance";
-
 import { alertMassage } from "../../../actions/alerts";
 import { AuthContext } from "../../../context/authContext";
 import { userWithId } from "../../../models/user";
@@ -32,8 +31,6 @@ const GoogleBtn: React.FC = () => {
   const handleLoginSuccess: GoogleLoginProps["onSuccess"] = (response) => {
     const jwtToken = response.credential;
     const decodedToken = jwt_decode(jwtToken as string) as DecodedToken;
-    Cookies.set("authToken", jwtToken as string, { expires: 7 });
-    Cookies.set("userData", JSON.stringify(decodedToken), { expires: 7 });
 
     const data = {
       username: decodedToken.name,
@@ -45,14 +42,25 @@ const GoogleBtn: React.FC = () => {
       .post("/user/checkgoogle", data)
       .then((res) => {
         const logedGoogleUserId = res.data.user._id;
+        /*         console.log("data", res.data.user); */
+
         alertMassage(res.data.message + " " + res.data.user.username);
 
+        Cookies.set("token", jwtToken as string, { expires: 7 });
+        Cookies.set("userData", JSON.stringify(decodedToken), { expires: 7 });
+
+        const { name, email, picture } = decodedToken;
+
         if (logedGoogleUserId) {
-          Cookies.set("token", jwtToken as string, { expires: 7 });
-          Cookies.set("userData", JSON.stringify(decodedToken), { expires: 7 });
-          Cookies.set("userId", logedGoogleUserId, { expires: 7 });
-          setUser({ _id: logedGoogleUserId, ...res.data.user } as userWithId);
-          navigate("/recipes");
+          setUser({ _id: logedGoogleUserId } as userWithId);
+          navigate("/recipes", {
+            state: {
+              id: logedGoogleUserId,
+              username: name,
+              email: email,
+              picture: picture,
+            },
+          });
         }
       })
       .catch((err) => {

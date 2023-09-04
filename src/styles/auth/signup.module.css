@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
+.signup_container {
+  background: center/cover no-repeat url("../../assets/signup.jpg");
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.card_form {
+  background-color: rgba(244, 242, 238, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 30%;
+  min-width: 500px;
+  text-align: center;
+}
+.card_form .card_title {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+.card_form .card_paragraph {
+  margin-bottom: 25px;
+  font-size: 0.8em;
+  color: #777;
+  margin-bottom: 30px;
+  color: #888;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #222;
+  padding: 7px 0;
+  margin-bottom: 22px;
+}
+.input label {
+  font-size: 1.2em;
+  margin-right: 10px;
+}
+.input input {
+  border-radius: 4px;
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  background-color: transparent;
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-left: 15px;
+}
+.input input:focus {
+  background-color: transparent;
+}
+.input i {
+  cursor: pointer;
+  margin-inline: 10px;
+}
+
+.forgotPassword {
+  text-align: end;
+}
+.forgotPassword a {
+  text-decoration: none;
+  color: #f4f2ee;
+}
+.forgotPassword a:hover {
+  color: #222;
+}
+
+.signup_link {
+  text-align: end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  margin-left: 10px;
+}
+.signup_link a {
+  text-decoration: none;
+  color: #007bff;
+}
+.signup_link a:hover {
+  color: #222;
+}
+
+.oder {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.oder::before,
+.oder::after {
+  content: "";
+  flex: 1 1 0%;
+  border-top: 1px solid #000;
+}
+
+.oder::before {
+  margin-right: 0.375rem;
+}
+
+.oder::after {
+  margin-left: 0.375rem;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  padding: 10px 20px;
+  margin-block: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #222;
+  color: #febd2f;
+  transition: all 200ms;
+}
+.btn:hover {
+  filter: brightness(1.5);
+}
+.btn .text {
+  font-weight: 600;
+}
+
+.googleButton {
+  background-color: #f4f2ee;
+  padding: 0;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0;
+}
+.googleButton .logoutButton {
+  background-color: #f4f2ee;
+  width: 100%;
+  color: #222;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.googleButton .logoutButton:hover {
+  background-color: #222;
+  color: #f4f2ee;
+}
+
+.google {
+  border: none;
+}
+
+@media screen and (max-width: 991px) {
+  .btn {
+    height: 50px;
+  }
+  .btn text {
+    line-height: 50px;
+  }
+}/*# sourceMappingURL=signup.module.css.map */

@@ -106,7 +106,7 @@ const VerificationCode: React.FC = () => {
             ))}
           </div>
           <button className={style.btn} type="submit">
-            Bestätigen
+            <span className={style.text}>Confirm</span>
           </button>
         </form>
       </div>

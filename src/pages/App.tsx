@@ -9,17 +9,12 @@ import VerificationCode from "../components/auth/VerificationCode";
 import Contact from "../components/contactPage/Contact";
 import EmailVerification from "../components/auth/EmailVerification";
 import NewPassword from "../components/auth/NewPassword";
-
-import Start from "./Start";
-
-import { AuthContext } from "../context/authContext";
-
 import CommentPage from "./CommentPage";
 
 const App: FC = () => {
-  const { user, setUser } = useContext(AuthContext);
+  //const { user, setUser } = useContext(AuthContext);
 
-  console.log(user);
+  //console.log(user);
 
   useEffect(() => {
     Aos.init();
@@ -28,7 +23,7 @@ const App: FC = () => {
     <>
       <Routes>
         <Route path="/" element={<StartPage />} />
-        <Route path="/recipes" element={<Start />} />
+         {/* <Route path="/recipes" element={<Start />} />  */}
         <Route path="/user-profile" element={<UserProfile />} />
 
 
@@ -48,7 +43,7 @@ const App: FC = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/user-profile/:id" element={<UserProfile />} />
 
-        <Route path="/comments" element={<CommentPage />} />
+        <Route path="/recipe/:id" element={<CommentPage />} />
 
       </Routes>
     </>

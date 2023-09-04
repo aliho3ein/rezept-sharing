@@ -16,6 +16,7 @@ const Start: FC = () => {
   const [category, setCategory] = useState<string[]>([]);
   const [pageNr, setPageNr] = useState<number>(1);
 
+
   const nextPage = () => {
     if (recipeList.length > 3) {
       setPageNr(pageNr + 1);
@@ -35,7 +36,6 @@ const Start: FC = () => {
       })
       .then((res) => {
         setRecipeList(res.data);
-        /*   console.log("dataaaa", res.data); */
       })
       .catch((err) => console.log(err));
   }, [sort, pageNr, category]);
