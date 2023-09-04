@@ -6,16 +6,15 @@ import FilterOptions from "../components/mainPage/FilterOptions";
 import SortOptions from "../components/mainPage/SortOptions";
 import instance from "../api/instance";
 import Card from "../components/cardRecipe/Card";
-import { recipeType } from "../models/recipe";
+import { completeRecipe } from "../models/recipe";
 import DropDownUserProfile from "../components/dropDownUserProfile/DropDownUserProfile";
 //import { alertMassage } from "../actions/alerts";
 
 const Start: FC = () => {
-  const [recipeList, setRecipeList] = useState<recipeType[]>([]);
+  const [recipeList, setRecipeList] = useState<completeRecipe[]>([]);
   const [sort, setSort] = useState<string>("view");
   const [category, setCategory] = useState<string[]>([]);
   const [pageNr, setPageNr] = useState<number>(1);
-
 
   const nextPage = () => {
     if (recipeList.length > 3) {
@@ -31,11 +30,12 @@ const Start: FC = () => {
 
   useEffect(() => {
     instance
-      .get<recipeType[]>(`/recipe/page/${pageNr}`, {
+      .get<completeRecipe[]>(`/recipe/page/${pageNr}`, {
         params: { sort, category: category.join(",") },
       })
       .then((res) => {
         setRecipeList(res.data);
+        /*   console.log("dataaaa", res.data); */
       })
       .catch((err) => console.log(err));
   }, [sort, pageNr, category]);
