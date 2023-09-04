@@ -5,9 +5,10 @@ import Comment from "./Comment";
 import Card from "../cardRecipe/Card";
 import { completeRecipe } from "../../models/recipe";
 import { comment } from "../../models/comment";
-//import instance from "../../api/instance";
 import axios from "axios";
 import TextareaComment from "./TextareaComment";
+import { useParams } from "react-router-dom";
+//import instance from "../../api/instance";
 
 const TitleDescription: FC = () => {
   // const getData = () => {
@@ -23,11 +24,12 @@ const TitleDescription: FC = () => {
   const [dataCategory, setDataCategory] = useState<[completeRecipe]>();
   const [texto, setTexto] = useState<string>("Alle Kommentare anzeigen");
   const [flag, setFlag] = useState<boolean>(false);
-  
+  const {id} = useParams<string>();
+
   async function getRecipe() {
     try {
       const response = await axios.get(
-        "http://localhost:3000/recipe/64eef4d8f36d0997fe144773"
+        `http://localhost:3000/recipe/${id}`
       );
       setDataRecipe(response.data);
       console.log(dataRecipe?._id)
@@ -38,7 +40,7 @@ const TitleDescription: FC = () => {
   async function getComments() {
     try {
       const response = await axios.get(
-        "http://localhost:3000/comment/64eef4d8f36d0997fe144773"
+        `http://localhost:3000/comment/${id}`
       );
          setDataComment(response.data);
       
@@ -50,7 +52,7 @@ const TitleDescription: FC = () => {
   async function getByCategory() {
     try {
       const response = await axios.get(
-        "http://localhost:3000/recipe/category/Vegan"
+        `http://localhost:3000/recipe/category/${dataRecipe?.category[0]}`//**category[0] or [1]?? question
       );
       setDataCategory(response.data);
       console.log(response.data)
@@ -61,7 +63,7 @@ const TitleDescription: FC = () => {
   useEffect(() => {
     getRecipe();
     getComments();
-  }, [flag]);
+  }, [flag,id]);
 
   useEffect(() => {
     Comments();
@@ -72,7 +74,7 @@ const TitleDescription: FC = () => {
   }, [dataRecipe]);
 
 ///*************************
-  console.log(flag);
+  console.log(dataRecipe?.category[1]);
   //console.log(dataComment);
   //getByCategory();
 ///******************************
@@ -162,8 +164,8 @@ const TitleDescription: FC = () => {
         <h3>Änliche Rezepte</h3>
         <div className={styles.cardContainer}>
          {
-          dataCategory?.map((category) =>  {
-           return <Card data={category} />
+          dataCategory?.map((category,index:number) =>  {
+           return <Card key={index} data={category} />
           })
          }
           
