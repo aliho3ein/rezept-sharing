@@ -8,11 +8,11 @@ import { AuthContext } from "../../context/authContext";
 import instance from "../../api/instance";
 
 const DropDownUserProfile: FC = () => {
-  const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
-  const [userImage, setUserImage] = useState<string | undefined>("");
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [userImage, setUserImage] = useState<string | undefined>("");
+  const { user, setUser } = useContext(AuthContext);
 
+  const navigate = useNavigate();
   const userIdFromCookies = Cookies.get("userId");
 
   const toggleDropdown = () => {
@@ -61,7 +61,14 @@ const DropDownUserProfile: FC = () => {
             </p>
           </div>
           <ul className={style.dropdownMenu}>
-            <li>Profil</li>
+            <li>
+              <Link
+                to={`/user-profile/${user?._id}`}
+                className={style.newRecipes}
+              >
+                Profile
+              </Link>
+            </li>
             <li>
               {" "}
               <Link to="/user-profile" className={style.newRecipes}>

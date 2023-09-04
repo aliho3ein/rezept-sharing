@@ -1,8 +1,6 @@
 @import "../variable";
 
 //! Start
-
-/* .start { */
 .startPageContainer {
   display: flex;
   flex-direction: column;
@@ -68,26 +66,6 @@
     margin: 0 10px;
   }
 }
-
-/* .recipesComponent{
->>>>>>> main
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 10px;
-  background-color: $primary-color;
-  width: 50%;
-  margin: 10px auto;
-}
-.cardsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-
-}
-=======
-} */
 
 //! search component
 .recipeListContainer {
@@ -187,7 +165,7 @@
     }
   }
 }
-.modal {
+.searchRecipeOverlay {
   background-color: rgba(0, 0, 0, 0.9);
   position: fixed;
   top: 0;
@@ -198,102 +176,16 @@
   justify-content: center;
   align-items: center;
   z-index: 999;
-
-  .modalContent {
+  .SearchRecipeCard {
     background-color: $primary-color;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     width: 50%;
-
-    .iconContainer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5em;
-
-      .recipeIcon {
-        font-size: 24px;
-        color: $accent-color;
-        margin-right: 10px;
-      }
-
-      h2 {
-        margin: 0;
-        font-family: $title-font;
-      }
-    }
   }
-  .imagesContainer {
+  .card {
     display: flex;
     justify-content: center;
-    align-items: center;
-
-    margin-bottom: 20px;
-
-    .recipeImage {
-      max-width: 50%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    }
-  }
-  .recipeType {
-    color: $text-color;
-    margin: 10px 0;
-    font-weight: 500;
-    text-align: center;
-  }
-
-  .recipeIngredientsTitle {
-    margin: 20px 0;
-  }
-
-  .recipeIngredients {
-    list-style: none;
-    padding: 0;
-
-    .recipeIngredientItem {
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-
-      .recipeIngredientName {
-        font-weight: bold;
-        margin-right: 5px;
-      }
-
-      .recipeIngredientDetails {
-        flex: 1;
-        border-top: 1px solid $text-color;
-      }
-
-      .recipeIngredientAmount {
-        margin: 0 5px;
-        font-weight: 500;
-      }
-
-      .recipeIngredientUnit {
-        color: $accent-color;
-      }
-    }
-  }
-
-  .iconContainerTime {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-
-    .recipeIcon {
-      font-size: 18px;
-      margin-right: 5px;
-    }
-
-    .cookingTime {
-      color: $accent-color;
-      margin: 10px 0;
-    }
   }
 
   .closeButton {
@@ -315,14 +207,6 @@
 }
 
 //! RandomBtn
-.centerBtn {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0;
-}
-
 .randomBtn {
   background-color: $text-color;
   color: $secondary-color;
@@ -342,7 +226,48 @@
     margin: 0 10px;
   }
 }
+.randomRecipeOverlay {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  .card {
+    display: flex;
+    justify-content: center;
+  }
+  .randomRecipeCard {
+    background-color: $primary-color;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 50%;
+  }
 
+  .closeButton {
+    width: 100%;
+    border: none;
+    padding: 10px 20px;
+    margin-block: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: $text-color;
+    color: $secondary-color;
+    transition: all 200ms;
+
+    &:hover {
+      filter: brightness(1.5);
+    }
+  }
+}
+
+//!!!!!
 .filterOptionsContainer {
   padding: 10px;
   border-radius: 5px;
