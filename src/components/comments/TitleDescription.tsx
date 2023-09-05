@@ -52,7 +52,7 @@ const TitleDescription: FC = () => {
   async function getByCategory() {
     try {
       const response = await axios.get(
-        `http://localhost:3000/recipe/category/${dataRecipe?.category[0]}`//**category[0] or [1]?? question
+        `http://localhost:3000/recipe/category/${dataRecipe?.category[1]}`//**category[0] or [1]?? question
       );
       setDataCategory(response.data);
       console.log(response.data)
