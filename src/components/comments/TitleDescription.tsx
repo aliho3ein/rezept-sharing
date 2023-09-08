@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useContext } from "react";
 import styles from "../../styles/comments/titleDescription.module.scss";
 import { CountRewiews } from "./CountRewiews";
 import Comment from "./Comment";
@@ -8,6 +8,7 @@ import { comment } from "../../models/comment";
 import axios from "axios";
 import TextareaComment from "./TextareaComment";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../context/authContext";
 //import instance from "../../api/instance";
 
 const TitleDescription: FC = () => {
@@ -24,25 +25,22 @@ const TitleDescription: FC = () => {
   const [dataCategory, setDataCategory] = useState<[completeRecipe]>();
   const [texto, setTexto] = useState<string>("Alle Kommentare anzeigen");
   const [flag, setFlag] = useState<boolean>(false);
-  const {id} = useParams<string>();
+  const { id } = useParams<string>();
 
   async function getRecipe() {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/recipe/${id}`
-      );
+      const response = await axios.get(`http://localhost:3000/recipe/${id}`);
       setDataRecipe(response.data);
-      console.log(dataRecipe?._id)
+      console.log(dataRecipe?._id);
     } catch (error) {
       console.error(error);
     }
   }
   async function getComments() {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/comment/${id}`
-      );
-         setDataComment(response.data);
+      const response = await axios.get(`http://localhost:3000/comment/${id}`);
+      setDataComment(response.data);
+      
       
     } catch (error) {
       console.error(error);
@@ -52,10 +50,10 @@ const TitleDescription: FC = () => {
   async function getByCategory() {
     try {
       const response = await axios.get(
-        `http://localhost:3000/recipe/category/${dataRecipe?.category[1]}`//**category[0] or [1]?? question
+        `http://localhost:3000/recipe/category/${dataRecipe?.category[1]}` //**category[0] or [1]?? question
       );
       setDataCategory(response.data);
-      console.log(response.data)
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -63,43 +61,43 @@ const TitleDescription: FC = () => {
   useEffect(() => {
     getRecipe();
     getComments();
-  }, [flag,id]);
+  }, [flag, id]);
 
   useEffect(() => {
     Comments();
   }, [dataComment]);
 
   useEffect(() => {
-  getByCategory()
+    getByCategory();
   }, [dataRecipe]);
 
-///*************************
+  ///*************************
   console.log(dataRecipe?.category[1]);
   //console.log(dataComment);
   //getByCategory();
-///******************************
-
+  ///******************************
 
   const Comments = (): void => {
     let aux: any = dataComment;
     if (dataComment && dataComment.length > 1) {
       aux = dataComment.slice(0, 1);
     }
-      setAuxComment(aux);
+    setAuxComment(aux);
   };
 
   const showAllComment = (): void => {
-      
-   
     if (texto === "Alle Kommentare anzeigen") {
       setTexto("Weniger Kommentare anzeigen");
       setAuxComment(dataComment);
     } else if (texto === "Weniger Kommentare anzeigen") {
       setTexto("Alle Kommentare anzeigen");
-      const aux:any = dataComment?.slice(0,1);
+      const aux: any = dataComment?.slice(0, 1);
       setAuxComment(aux);
     }
   };
+
+  const { user } = useContext(AuthContext);
+  console.log(user);
 
   return (
     <>
@@ -108,7 +106,11 @@ const TitleDescription: FC = () => {
           <h2>{dataRecipe?.title}</h2>
           <img
             className={styles.imgRecipe}
-            src={dataRecipe?.image? dataRecipe.image[0]:"/src/assets/icons-camera.png"} // verification if  image exists {"/src/assets/1a-guacamole-dip.jpg"}
+            src={
+              dataRecipe?.image
+                ? dataRecipe.image[0]
+                : "/src/assets/icons-camera.png"
+            } // verification if  image exists {"/src/assets/1a-guacamole-dip.jpg"}
             alt="image incognita"
           />
           <CountRewiews />
@@ -145,8 +147,15 @@ const TitleDescription: FC = () => {
 
       <section className={styles.sectComment}>
         <h3>Kommentare</h3>
-        <TextareaComment recipeID = {dataRecipe?._id} flag= {flag} setFlag={setFlag} setText={setTexto} />
-        
+        {user && (
+          <TextareaComment
+            recipeID={dataRecipe?._id}
+            flag={flag}
+            setFlag={setFlag}
+            setText={setTexto}
+          />
+        )}
+
         {auxComment ? (
           auxComment.map((comment, index) => (
             <Comment key={index} data={comment} />
@@ -163,12 +172,9 @@ const TitleDescription: FC = () => {
       <div className={styles.similarRecipes}>
         <h3>Änliche Rezepte</h3>
         <div className={styles.cardContainer}>
-         {
-          dataCategory?.map((category,index:number) =>  {
-           return <Card key={index} data={category} />
-          })
-         }
-          
+          {dataCategory?.map((category, index: number) => {
+            return <Card key={index} data={category} />;
+          })}
         </div>
       </div>
     </>
