@@ -1,5 +1,4 @@
 import {FC} from 'react'
-import Rewiews from '../cardRecipe/Rewiews'
 import styles from "../../styles/counterRewiews/counterRewiews.module.scss"
 export const CountRewiews:FC = () => {
   return (

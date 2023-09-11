@@ -1,6 +1,5 @@
 import { FC, useEffect, useState, useContext } from "react";
 import styles from "../../styles/comments/titleDescription.module.scss";
-import { CountRewiews } from "./CountRewiews";
 import Comment from "./Comment";
 import Card from "../cardRecipe/Card";
 import { completeRecipe } from "../../models/recipe";
