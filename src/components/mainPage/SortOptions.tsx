@@ -1,23 +1,18 @@
 import { FC } from "react";
 import style from "../../styles/mainPage/main.module.scss";
 
-/* interface sortType {
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  changeSort: Function;
-} */
 interface sortType {
   changeSort: (sortAction: string) => void;
 }
 
 const SortOptions: FC<sortType> = ({ changeSort }) => {
   const sortOptions = [
-    { label: "Neueste", action: "createdAt" },
+    { label: "Neueste", action: "createAt" },
     { label: "Zeit", action: "time" },
     { label: "Meist Gesehene", action: "view" },
   ];
   const handleSortChange = (sortAction: string) => {
     changeSort(sortAction);
-    console.log("changeSort", changeSort(sortAction));
   };
 
   return (

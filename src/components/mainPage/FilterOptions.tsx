@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import style from "../../styles/mainPage/main.module.scss";
 import { CategoryType } from "../../models/recipe";
 
@@ -25,18 +25,16 @@ const FilterOptions: FC<filterType> = ({ changeCategory }) => {
 
   const handleCheckboxChange = (selectedValue: string) => {
     if (category.includes(selectedValue)) {
-      const updatedCategories = category.filter(
-        (item) => item !== selectedValue
+      setCategory((prevCategories) =>
+        prevCategories.filter((category) => category !== selectedValue)
       );
-      setCategory(updatedCategories);
-
-      changeCategory(updatedCategories);
     } else {
-      const updatedCategoriesSelected = [...category, selectedValue];
-      setCategory(updatedCategoriesSelected);
-      changeCategory(updatedCategoriesSelected);
+      setCategory((prevCategories) => [...prevCategories, selectedValue]);
     }
   };
+  useEffect(() => {
+    changeCategory(category);
+  }, [category, changeCategory]);
 
   return (
     <div className={style.filterOptionsContainer}>
@@ -52,7 +50,7 @@ const FilterOptions: FC<filterType> = ({ changeCategory }) => {
               value={option}
               className={style.filterInput}
               checked={category.includes(option)}
-              onChange={(e) => handleCheckboxChange(e.target.value)}
+              onChange={() => handleCheckboxChange(option)}
             />
             <label htmlFor={option} className={style.filterLabel}>
               {option}
