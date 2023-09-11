@@ -12,10 +12,11 @@ import NewPassword from "../components/auth/NewPassword";
 import CommentPage from "./CommentPage";
 import Start from "./Start";
 
-const App: FC = () => {
-  //const { user, setUser } = useContext(AuthContext);
 
-  //console.log(user);
+const App: FC = () => {
+  // const { user, setUser } = useContext(AuthContext);
+
+  // console.log(user);
 
   useEffect(() => {
     Aos.init();
