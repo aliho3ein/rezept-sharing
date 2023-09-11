@@ -25,7 +25,7 @@ const Card: FC<cardType> = ({ data }) => {
             {/* {[...Array<undefined>(5)].map((item,index:number) => {
               return <Rewiews key={`${index}-${item}`}/>;
             })} */}
-            <Rewiews size={18} initialValue={0}/>
+            <Rewiews size={18} initialValue={0} readonly={true} showTooltip={false} width=''/>
             <p>{data?.like[0]} Rewiews </p> {/*(8 Rewiews)*/}
           </div>
           <hr />

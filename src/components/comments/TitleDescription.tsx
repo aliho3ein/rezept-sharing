@@ -117,7 +117,7 @@ const TitleDescription: FC = () => {
             <p>(8 Rewiews)Rewiews </p>
            
           </div>
-          {true && <div className={styles.bewertungen}>
+          {false && <div className={styles.bewertungen}>
               <Rewiews size={50} initialValue={0} readonly={false} showTooltip={true} width={'450px'} />
               <div className={styles.input}>
               <input className={styles.abbrechen} type="button" value="Abrechen" />
