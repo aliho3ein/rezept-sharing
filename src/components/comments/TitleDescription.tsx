@@ -9,6 +9,7 @@ import axios from "axios";
 import TextareaComment from "./TextareaComment";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
+import Rewiews from "../cardRecipe/Rewiews";
 //import instance from "../../api/instance";
 
 const TitleDescription: FC = () => {
@@ -40,8 +41,6 @@ const TitleDescription: FC = () => {
     try {
       const response = await axios.get(`http://localhost:3000/comment/${id}`);
       setDataComment(response.data);
-      
-      
     } catch (error) {
       console.error(error);
     }
@@ -113,7 +112,20 @@ const TitleDescription: FC = () => {
             } // verification if  image exists {"/src/assets/1a-guacamole-dip.jpg"}
             alt="image incognita"
           />
-          <CountRewiews />
+          {/* <CountRewiews /> */}
+          <div className={styles.mainRewiews}>
+            <Rewiews size={25} initialValue={0} readonly={true} showTooltip={false} width=''/>
+            <p>(8 Rewiews)Rewiews </p>
+           
+          </div>
+          {true && <div className={styles.bewertungen}>
+              <Rewiews size={50} initialValue={0} readonly={false} showTooltip={true} width={'450px'} />
+              <div className={styles.input}>
+              <input className={styles.abbrechen} type="button" value="Abrechen" />
+              <input className={styles.bewertenOff} type="button" value="Bewerten" />
+              </div>
+             
+            </div>}
         </section>
         <section className={styles.sectZutaten}>
           <div>

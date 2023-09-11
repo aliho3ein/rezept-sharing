@@ -90,9 +90,10 @@
 
   width: 200px;
   margin: 10px;
+  
 }
 .card {
- 
+
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -155,13 +156,17 @@
   }
 
   .rewiews {
+    
     display: flex;
     align-items: center;
     justify-content: flex-end;
     font-size: 12px;
-    padding: 5px 0;
+    //padding: 5px 0;
+     
     p {
       padding-left: 5px;
+      font-size: 12px;
+      
     }
   }
 
@@ -173,7 +178,7 @@
   }
 
   .timeWiew {
-    //border : 1px solid;
+    
     display: flex;
     font-size: 12px;
     justify-content: space-between;
@@ -207,3 +212,9 @@ hr {
      margin-bottom: 5px;
    }
  
+
+   
+
+  //  *{
+  //   color: unset;
+  //  }
