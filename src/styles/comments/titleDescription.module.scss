@@ -1,16 +1,15 @@
 @import "../variable";
-.wrapper{
+.wrapper {
   width: 100%;
   height: max-content;
   max-width: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
-.sectImg{
- //border: 1px solid;
- width: 100%;
+.sectImg {
+  //border: 1px solid;
+  width: 100%;
 }
 .imgRecipe {
   min-width: 300px;
@@ -20,7 +19,6 @@
   width: 100%;
   //filter: drop-shadow(0 0 10px #555);
   margin: 20px 0;
-
 }
 
 .sectZutaten {
@@ -28,9 +26,9 @@
   border-top: 1px solid rgba(81, 72, 72, 0.303);
   border-bottom: 1px solid rgba(81, 72, 72, 0.303);
   padding: 30px 0;
-  width:100%;
+  width: 100%;
   h3 {
-    padding-bottom: 20px ;
+    padding-bottom: 20px;
   }
 
   .listItem {
@@ -44,26 +42,21 @@
       text-align: right;
       padding: 10px;
       //border: 1px solid;
-      
     }
-    .paraphName{
+    .paraphName {
       text-align: left;
       max-width: max-content;
     }
-    
   }
- 
 }
 
 .zubereitung {
-    border: 1px solid rgba(81, 72, 72, 0.152);
-    padding: 15px 0 0 10px ;
-    p {
-        max-width: 500px;
-        padding: 20px 10px;
-    }
-   
-    
+  border: 1px solid rgba(81, 72, 72, 0.152);
+  padding: 15px 0 0 10px;
+  p {
+    max-width: 500px;
+    padding: 20px 10px;
+  }
 }
 
 .sectComment {
@@ -73,19 +66,18 @@
   max-width: 500px;
   padding: 20px;
   margin: 50px 0 20px;
-  
+
   .btn {
     width: max-content;
-    background-color:#febd2f;
+    background-color: #febd2f;
     color: white;
     padding: 14px 15px;
     border-radius: 25px;
-    margin: 20px  auto 0;
+    margin: 20px auto 0;
     cursor: pointer;
-
   }
   .btn:hover {
-    background-color:#febc2f98;
+    background-color: #febc2f98;
   }
 }
 .similarRecipes {
@@ -96,10 +88,10 @@
   padding-bottom: 50px;
   margin-top: 30px;
   h3 {
-     padding-bottom: 60px;
+    padding-bottom: 60px;
   }
 
-  .cardContainer{
+  .cardContainer {
     display: flex;
     flex-flow: wrap;
     column-gap: 20px;
@@ -109,26 +101,25 @@
 }
 //#212018
 
-
 @media only screen and (min-width: 768px) {
   .imgRecipe {
     height: 350px;
   }
 
-  .cardContainer{
+  .cardContainer {
     justify-content: unset !important;
   }
   .listItem {
-    p{
-      padding:10px 20px !important;
+    p {
+      padding: 10px 20px !important;
     }
   }
 }
 
 @media only screen and (min-width: 1440px) {
-  .wrapper{
+  .wrapper {
     flex-direction: row;
-    max-width: 1258px; 
+    max-width: 1258px;
     column-gap: 40px;
     align-items: start;
     margin-bottom: 50px;
@@ -136,20 +127,71 @@
 
   .sectZutaten {
     height: 400px;
-    overflow:auto;
+    overflow: auto;
   }
   .zubereitung {
-   
     p {
       max-width: 800px;
       padding: 20px;
-  }
+    }
   }
 
-  .sectComment{
+  .sectComment {
     max-width: 800px;
   }
   .similarRecipes {
     max-width: 800px;
+  }
+}
+
+.mainRewiews {
+  display: flex;
+  align-items: center;
+  p {
+    padding-left: 10px;
+  }
+}
+
+.bewertungen {
+  border-bottom: 1px solid;
+  border-bottom: 1px solid rgba(81, 72, 72, 0.303);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 10px 20px;
+  .input {
+    
+    margin-top: 30px;
+    align-self: self-end;
+    input {
+      padding: 15px 20px;
+      border: 0;
+      color: white;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .bewerten {
+      border-radius: 25px;
+      background-color: $secondary-color;
+      border-color: $secondary-color;
+    }
+    .abbrechen {
+      color: $secondary-color;
+      background-color: $primary-color;
+    }
+
+    .bewertenOff {
+      border-radius: 25px;
+      cursor: not-allowed;
+      background-color: #a7a7a1;
+      border-color: #a7a7a1;
+    }
+    .abbrechen:hover {
+      color: #febc2f98;
+      text-decoration: underline;
+    }
   }
 }

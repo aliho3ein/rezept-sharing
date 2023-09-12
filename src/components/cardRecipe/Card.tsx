@@ -22,10 +22,11 @@ const Card: FC<cardType> = ({ data }) => {
           <p className={styles.titleRecipe}>{data?.title}</p>{" "}
           {/*Special Salad Chicken*/}
           <div className={styles.rewiews}>
-            {[...Array<undefined>(5)].map((item,index:number) => {
+            {/* {[...Array<undefined>(5)].map((item,index:number) => {
               return <Rewiews key={`${index}-${item}`}/>;
-            })}
-            <p>{data?.like[0]}Rewiews </p> {/*(8 Rewiews)*/}
+            })} */}
+            <Rewiews size={18} initialValue={0} readonly={true} showTooltip={false} width=''/>
+            <p>{data?.like[0]} Rewiews </p> {/*(8 Rewiews)*/}
           </div>
           <hr />
           <div className={styles.timeWiew}>
