@@ -21,6 +21,8 @@ const UserProfile: FC = () => {
       .then((response) => setData(response.data))
       .catch((err) => console.log(err));
   }
+  console.log(userInfo);
+  console.log(recipes);
 
   return (
     <section className={style.userProfileContainer}>
