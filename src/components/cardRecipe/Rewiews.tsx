@@ -1,4 +1,4 @@
-import { FC,useState } from "react";
+import { Dispatch, FC,SetStateAction, } from "react";
 import { Rating } from 'react-simple-star-rating'
 
 type rating = {
@@ -7,26 +7,26 @@ type rating = {
   readonly: boolean,
   showTooltip: boolean,
   width: string,
+  setRating:Dispatch<SetStateAction<number> >,
+  
 }
-const Rewiews: FC<rating> = ({size,initialValue,readonly,showTooltip,width}) => {
-  //const styles = { color: "#FEB51D !important", fontSize:"1.5em"} //{ color: "#FEB51D",}
-  const [rating, setRating] = useState(0)
+const Rewiews: FC<rating> = ({size,initialValue,readonly,showTooltip,width,setRating,}) => {
+
+ 
   const handleRating = (rate: number) => {
     setRating(rate)
-
-    // other logic
-  }
+ }
 
   // const onPointerEnter = () => console.log('Enter')
   // const onPointerLeave = () => console.log('Leave')
-  const onPointerMove = (value: number, index: number) => console.log(index,value)
+  // const onPointerMove = (value: number, index: number) => console.log(index,value)
   return (
   <div style={{width:width}}>
     
 
     <Rating
          onClick={handleRating}
-         onPointerMove={onPointerMove}
+        // onPointerMove={onPointerMove}
          //style={{cursor: "pointer"}}
         /* Available Props */
         size={size}
