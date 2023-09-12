@@ -9,8 +9,8 @@ import TextareaComment from "./TextareaComment";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import Rewiews from "../cardRecipe/Rewiews";
-//import instance from "../../api/instance";
-
+import instance from "../../api/instance";
+import { alertMassage } from "../../actions/alerts";
 const TitleDescription: FC = () => {
   // const getData = () => {
   //   instance.get("/recipe/64d394cb3b9a0f12a8cee52a").then((res) => {
@@ -19,6 +19,9 @@ const TitleDescription: FC = () => {
   //   });
   // }
   //getData();
+  const [rewiews, setRewiews] = useState(0);
+  const [showRewiews, setShowRewiews] = useState<boolean>(false);
+  const [rating, setRating] = useState<number>(0);
   const [dataRecipe, setDataRecipe] = useState<completeRecipe>();
   const [dataComment, setDataComment] = useState<[comment]>();
   const [auxComment, setAuxComment] = useState<[comment]>();
@@ -27,11 +30,26 @@ const TitleDescription: FC = () => {
   const [flag, setFlag] = useState<boolean>(false);
   const { id } = useParams<string>();
 
+  const setBewerten = () => {
+    instance
+      .put(`/recipe/rewiews/${id}`, {
+        rating:(dataRecipe?.rating as number) + rating,
+        rewiews: (dataRecipe?.view as number) + 1,
+      })
+      .then((response) => {
+        console.log(response);
+        getRecipe();
+        setRating(0);
+        setShowRewiews(!showRewiews);
+        alertMassage('Vielen Dank für Ihre Bewertung');
+      })
+      .catch((err) => console.log(err));
+  };
+
   async function getRecipe() {
     try {
       const response = await axios.get(`http://localhost:3000/recipe/${id}`);
       setDataRecipe(response.data);
-      console.log(dataRecipe?._id);
     } catch (error) {
       console.error(error);
     }
@@ -51,7 +69,6 @@ const TitleDescription: FC = () => {
         `http://localhost:3000/recipe/category/${dataRecipe?.category[1]}` //**category[0] or [1]?? question
       );
       setDataCategory(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -67,12 +84,12 @@ const TitleDescription: FC = () => {
 
   useEffect(() => {
     getByCategory();
+    calcRewiews();
   }, [dataRecipe]);
 
   ///*************************
-  console.log(dataRecipe?.category[1]);
-  //console.log(dataComment);
-  //getByCategory();
+  console.log(rating);
+
   ///******************************
 
   const Comments = (): void => {
@@ -94,8 +111,23 @@ const TitleDescription: FC = () => {
     }
   };
 
+  const abbrechenButton = (): void => {
+    setRating(0);
+    setShowRewiews(!showRewiews);
+    
+  };
+
+  const calcRewiews = (): void => {
+    if (dataRecipe?.view !== 0) {
+      let rating: number = !dataRecipe?.rating ? 1 : dataRecipe?.rating;
+      let view: number = !dataRecipe?.view ? 1 : dataRecipe?.view;
+      setRewiews(Math.trunc(rating / view));
+    } else {
+      setRewiews(0);
+    }
+  };
+
   const { user } = useContext(AuthContext);
-  console.log(user);
 
   return (
     <>
@@ -112,19 +144,45 @@ const TitleDescription: FC = () => {
             alt="image incognita"
           />
           {/* <CountRewiews /> */}
-          <div className={styles.mainRewiews}>
-            <Rewiews size={25} initialValue={0} readonly={true} showTooltip={false} width=''/>
-            <p>(8 Rewiews)Rewiews </p>
-           
+          <div onClick={abbrechenButton} className={styles.mainRewiews}>
+            <Rewiews
+              setRating={setRating}
+              size={25}
+              initialValue={rewiews}
+              readonly={true}
+              showTooltip={false}
+              width=""
+            />
+            <p>({dataRecipe?.view} Rewiews)</p>
           </div>
-          {false && <div className={styles.bewertungen}>
-              <Rewiews size={50} initialValue={0} readonly={false} showTooltip={true} width={'450px'} />
+
+          {showRewiews && (
+            <div className={styles.bewertungen}>
+              <Rewiews
+                setRating={setRating}
+                size={50}
+                initialValue={rating}
+                readonly={false}
+                showTooltip={true}
+                width={"450px"}
+              />
               <div className={styles.input}>
-              <input className={styles.abbrechen} type="button" value="Abrechen" />
-              <input className={styles.bewertenOff} type="button" value="Bewerten" />
+                <input
+                  onClick={abbrechenButton}
+                  className={styles.abbrechen}
+                  type="button"
+                  value="Abrechen"
+                />
+                <input onClick={setBewerten}
+                  className={
+                    rating === 0 ? styles.bewertenOff : styles.bewerten
+                  }
+                  type="button"
+                  value="Bewerten"
+                />
               </div>
-             
-            </div>}
+            </div>
+          )}
         </section>
         <section className={styles.sectZutaten}>
           <div>

@@ -29,6 +29,7 @@ export interface completeRecipe extends recipeType {
   createAt:Date
   view: number;
   like: number[];
+  rating:number;
 }
 
 //für Jan Folz
