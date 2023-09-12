@@ -8,6 +8,10 @@ import Card from "../components/cardRecipe/Card";
 import { completeRecipe } from "../models/recipe";
 import DropDownUserProfile from "../components/dropDownUserProfile/DropDownUserProfile";
 import RandomBtn from "../components/mainPage/RandomBtn";
+import {
+  BsFillArrowLeftSquareFill,
+  BsFillArrowRightSquareFill,
+} from "react-icons/bs";
 
 const Start: FC = () => {
   const [recipeList, setRecipeList] = useState<completeRecipe[]>([]);
@@ -15,8 +19,9 @@ const Start: FC = () => {
   const [category, setCategory] = useState<string[]>([]);
   const [pageNr, setPageNr] = useState<number>(1);
 
+  const countPerPage = 4;
   const nextPage = () => {
-    if (recipeList.length > 3) {
+    if (pageNr < 3) {
       setPageNr(pageNr + 1);
     }
   };
@@ -30,11 +35,24 @@ const Start: FC = () => {
   useEffect(() => {
     instance
       .get<completeRecipe[]>(`/recipe/page/${pageNr}`, {
-        params: { sort, category: category.join(",") },
+        params: { countPerPage, /*  sort */ category: category.join(",") },
       })
       .then((res) => {
-        setRecipeList(res.data);
-        /*      console.log(res.data) */
+        let sortedRecipes = res.data;
+        console.log(recipeList);
+        console.log("cat", category);
+        console.log("sort", sort);
+        if (sort === "view") {
+          sortedRecipes = sortedRecipes.sort((a, b) => b.view - a.view);
+        } else if (sort === "createAt") {
+          sortedRecipes = sortedRecipes.sort(
+            (a, b) =>
+              new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
+          );
+        } else if (sort === "time") {
+          sortedRecipes = sortedRecipes.sort((a, b) => a.time - b.time);
+        }
+        setRecipeList(sortedRecipes);
       })
       .catch((err) => console.log(err));
   }, [sort, pageNr, category]);
@@ -56,9 +74,7 @@ const Start: FC = () => {
 
   return (
     <div className={style.startPageContainer}>
-      <div className={style.dropUserProfile}>
-        <DropDownUserProfile />
-      </div>
+      <DropDownUserProfile />
 
       <div className={style.recipeCard}>
         <div className={style.recipesComponent}>
@@ -78,9 +94,10 @@ const Start: FC = () => {
         </div>
       </div>
       <div className={style.pagination}>
-        <button onClick={prevPage}>Prev</button>
-        <span>{pageNr}</span>
-        <button onClick={nextPage}>Next</button>
+        <BsFillArrowLeftSquareFill onClick={prevPage} className={style.icon} />
+
+        <span className={style.pageNr}>{pageNr}</span>
+        <BsFillArrowRightSquareFill className={style.icon} onClick={nextPage} />
       </div>
     </div>
   );

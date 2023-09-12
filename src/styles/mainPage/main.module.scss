@@ -3,20 +3,21 @@
 //! Start
 .startPageContainer {
   display: flex;
+
   flex-direction: column;
-  padding: 10px;
+  /*   padding: 10px; */
+  background: center/cover no-repeat url("../../assets/bg-start.jpg");
   height: 100vh;
-}
-.dropUserProfile {
-  margin-top: 30px;
 }
 
 .recipeCard {
   width: 100%;
+  height: 100vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding-top: 20%;
+  padding-left: 10%;
+  margin: 20% auto;
 
   .recipesComponent {
     display: flex;
@@ -37,13 +38,12 @@
     max-width: 60%;
   }
 }
-.pagination {
+/* .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
   width: 100%;
-
   button {
     justify-content: center;
     background-color: $secondary-color;
@@ -60,11 +60,37 @@
     }
   }
 
-  span {
-    color: $text-color;
+  .pageNr {
+    color: #fff;
     font-size: 18px;
     margin: 0 10px;
   }
+} */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.icon {
+  font-size: 40px;
+  background: $primary-color;
+  cursor: pointer;
+  transition: color 0.3s;
+  border-radius: 20px;
+  /* margin: 40px; */
+
+  &:hover {
+    background: $accent-color;
+  }
+}
+
+.pageNr {
+  font-size: 24px;
+  margin: 0 16px;
+  color: $primary-color;
 }
 
 //! search component
