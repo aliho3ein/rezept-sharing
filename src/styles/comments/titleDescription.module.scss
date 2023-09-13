@@ -101,49 +101,6 @@
 }
 //#212018
 
-@media only screen and (min-width: 768px) {
-  .imgRecipe {
-    height: 350px;
-  }
-
-  .cardContainer {
-    justify-content: unset !important;
-  }
-  .listItem {
-    p {
-      padding: 10px 20px !important;
-    }
-  }
-}
-
-@media only screen and (min-width: 1440px) {
-  .wrapper {
-    flex-direction: row;
-    max-width: 1258px;
-    column-gap: 40px;
-    align-items: start;
-    margin-bottom: 50px;
-  }
-
-  .sectZutaten {
-    height: 400px;
-    overflow: auto;
-  }
-  .zubereitung {
-    p {
-      max-width: 800px;
-      padding: 20px;
-    }
-  }
-
-  .sectComment {
-    max-width: 800px;
-  }
-  .similarRecipes {
-    max-width: 800px;
-  }
-}
-
 .mainRewiews {
   display: flex;
   align-items: center;
@@ -200,4 +157,73 @@
       text-decoration: underline;
     }
   }
+  
+  
+ }
+
+ @media only screen and (min-width: 375px) {
+  .bewertungen {
+    svg{
+      width: 35px ;
+      
+    }
+    .rewiews {
+    
+      width: 100%;
+    }
+  }
 }
+
+@media only screen and (min-width: 768px) {
+  .imgRecipe {
+    height: 350px;
+  }
+
+  .cardContainer {
+    justify-content: unset !important;
+  }
+  .listItem {
+    p {
+      padding: 10px 20px !important;
+    }
+  }
+  .bewertungen {
+    
+    svg{
+      width: 45px ;
+     
+    }
+    .rewiews {
+      width: 450px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .wrapper {
+    flex-direction: row;
+    max-width: 1258px;
+    column-gap: 40px;
+    align-items: start;
+    margin-bottom: 50px;
+  }
+
+  .sectZutaten {
+    height: 400px;
+    overflow: auto;
+  }
+  .zubereitung {
+    p {
+      max-width: 800px;
+      padding: 20px;
+    }
+  }
+
+  .sectComment {
+    max-width: 800px;
+  }
+  .similarRecipes {
+    max-width: 800px;
+  }
+}
+

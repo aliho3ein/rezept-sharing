@@ -11,6 +11,7 @@ import { AuthContext } from "../../context/authContext";
 import Rewiews from "../cardRecipe/Rewiews";
 import instance from "../../api/instance";
 import { alertMassage } from "../../actions/alerts";
+import DropDownUserProfile from "../dropDownUserProfile/DropDownUserProfile";
 const TitleDescription: FC = () => {
   // const getData = () => {
   //   instance.get("/recipe/64d394cb3b9a0f12a8cee52a").then((res) => {
@@ -30,18 +31,22 @@ const TitleDescription: FC = () => {
   const [flag, setFlag] = useState<boolean>(false);
   const { id } = useParams<string>();
 
-  const setBewerten = () => {
+  const setBewerten =async () => {
+    const bool= await isAlreadyRaiting();
+    if (bool)
+      return alertMassage("Sie haben dieses Rezept bereits bewertet", "error");
     instance
       .put(`/recipe/rewiews/${id}`, {
-        rating:(dataRecipe?.rating as number) + rating,
+        rating: (dataRecipe?.rating as number) + rating,
         rewiews: (dataRecipe?.view as number) + 1,
+        userId: dataRecipe?.userID,
       })
       .then((response) => {
         console.log(response);
         getRecipe();
         setRating(0);
         setShowRewiews(!showRewiews);
-        alertMassage('Vielen Dank für Ihre Bewertung');
+        alertMassage("Vielen Dank für Ihre Bewertung");
       })
       .catch((err) => console.log(err));
   };
@@ -88,7 +93,7 @@ const TitleDescription: FC = () => {
   }, [dataRecipe]);
 
   ///*************************
-  console.log(rating);
+  console.log(dataRecipe?.userID);
 
   ///******************************
 
@@ -111,10 +116,40 @@ const TitleDescription: FC = () => {
     }
   };
 
+  const verifyRewiews = async () => {
+    if (!user) {
+      alertMassage("Melde dich an und bewerte das Rezept.", "info");
+    } else {
+      const boolRaiting = await isAlreadyRaiting();
+      if (!boolRaiting) {
+        setRating(0);
+        setShowRewiews(!showRewiews);
+      } else {
+        return alertMassage(
+          "Sie haben dieses Rezept bereits bewertet",
+          "error"
+        );
+      }
+    }
+  };
+
   const abbrechenButton = (): void => {
     setRating(0);
     setShowRewiews(!showRewiews);
-    
+  };
+
+  const isAlreadyRaiting = async () => {
+    const data = await instance
+      .get(`/recipe/user/${dataRecipe?.userID}/userating/${dataRecipe?._id}`)
+      .then((response) => {
+        return response.data.isUser;
+      })
+      .catch((error) => {
+        console.log(error);
+        return false;
+      });
+    console.log(data);
+    return data;
   };
 
   const calcRewiews = (): void => {
@@ -144,7 +179,7 @@ const TitleDescription: FC = () => {
             alt="image incognita"
           />
           {/* <CountRewiews /> */}
-          <div onClick={abbrechenButton} className={styles.mainRewiews}>
+          <div onClick={verifyRewiews} className={styles.mainRewiews}>
             <Rewiews
               setRating={setRating}
               size={25}
@@ -173,7 +208,8 @@ const TitleDescription: FC = () => {
                   type="button"
                   value="Abrechen"
                 />
-                <input onClick={setBewerten}
+                <input
+                 disabled= { rating === 0 ?true : false} onClick={setBewerten}
                   className={
                     rating === 0 ? styles.bewertenOff : styles.bewerten
                   }
@@ -236,6 +272,7 @@ const TitleDescription: FC = () => {
         <div onClick={showAllComment} className={styles.btn}>
           {texto}
         </div>
+     
       </section>
 
       <div className={styles.similarRecipes}>
@@ -246,6 +283,9 @@ const TitleDescription: FC = () => {
           })}
         </div>
       </div>
+      <>
+      <DropDownUserProfile/>
+      </>
     </>
   );
 };
