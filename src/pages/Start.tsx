@@ -5,7 +5,7 @@ import FilterOptions from "../components/mainPage/FilterOptions";
 import SortOptions from "../components/mainPage/SortOptions";
 import instance from "../api/instance";
 import Card from "../components/cardRecipe/Card";
-import { completeRecipe } from "../models/recipe";
+import { CategoryType, cardRecipe, completeRecipe } from "../models/recipe";
 import DropDownUserProfile from "../components/dropDownUserProfile/DropDownUserProfile";
 import RandomBtn from "../components/mainPage/RandomBtn";
 import {
@@ -35,24 +35,31 @@ const Start: FC = () => {
   useEffect(() => {
     instance
       .get<completeRecipe[]>(`/recipe/page/${pageNr}`, {
-        params: { countPerPage, /*  sort */ category: category.join(",") },
+        params: { countPerPage, sort, category: category.join(",") },
       })
       .then((res) => {
-        let sortedRecipes = res.data;
-        console.log(recipeList);
-        console.log("cat", category);
-        console.log("sort", sort);
+        let filteredRecipes = res.data;
+
+        if (category.length > 0) {
+          filteredRecipes = filteredRecipes.filter((recipe) =>
+            category.every((selectedCategory) =>
+              recipe.category.includes(selectedCategory as CategoryType)
+            )
+          );
+        }
+
         if (sort === "view") {
-          sortedRecipes = sortedRecipes.sort((a, b) => b.view - a.view);
+          filteredRecipes = filteredRecipes.sort((a, b) => b.view - a.view);
         } else if (sort === "createAt") {
-          sortedRecipes = sortedRecipes.sort(
+          filteredRecipes = filteredRecipes.sort(
             (a, b) =>
               new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
           );
         } else if (sort === "time") {
-          sortedRecipes = sortedRecipes.sort((a, b) => a.time - b.time);
+          filteredRecipes = filteredRecipes.sort((a, b) => a.time - b.time);
         }
-        setRecipeList(sortedRecipes);
+
+        setRecipeList(filteredRecipes);
       })
       .catch((err) => console.log(err));
   }, [sort, pageNr, category]);
@@ -87,7 +94,11 @@ const Start: FC = () => {
         <div className={style.cardsContainer}>
           {recipeList.map((item, index) => {
             if (category.length === 0 || category.includes(item.category[1])) {
-              return <Card data={item} key={index} />;
+              return (
+                <li key={index} className={style.card}>
+                  <Card data={item} />
+                </li>
+              );
             }
             return null;
           })}
