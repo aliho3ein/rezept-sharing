@@ -4,7 +4,6 @@ import Comment from "./Comment";
 import Card from "../cardRecipe/Card";
 import { completeRecipe } from "../../models/recipe";
 import { comment } from "../../models/comment";
-import axios from "axios";
 import TextareaComment from "./TextareaComment";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
@@ -12,14 +11,9 @@ import Rewiews from "../cardRecipe/Rewiews";
 import instance from "../../api/instance";
 import { alertMassage } from "../../actions/alerts";
 import DropDownUserProfile from "../dropDownUserProfile/DropDownUserProfile";
-const TitleDescription: FC = () => {
-  // const getData = () => {
-  //   instance.get("/recipe/64d394cb3b9a0f12a8cee52a").then((res) => {
-  //     console.log(res);
 
-  //   });
-  // }
-  //getData();
+const TitleDescription: FC = () => {
+
   const [rewiews, setRewiews] = useState(0);
   const [showRewiews, setShowRewiews] = useState<boolean>(false);
   const [rating, setRating] = useState<number>(0);
@@ -53,7 +47,7 @@ const TitleDescription: FC = () => {
 
   async function getRecipe() {
     try {
-      const response = await axios.get(`http://localhost:3000/recipe/${id}`);
+      const response = await instance.get(`/recipe/${id}`);
       setDataRecipe(response.data);
     } catch (error) {
       console.error(error);
@@ -61,7 +55,7 @@ const TitleDescription: FC = () => {
   }
   async function getComments() {
     try {
-      const response = await axios.get(`http://localhost:3000/comment/${id}`);
+      const response = await instance.get(`/comment/${id}`);
       setDataComment(response.data);
     } catch (error) {
       console.error(error);
@@ -70,8 +64,8 @@ const TitleDescription: FC = () => {
 
   async function getByCategory() {
     try {
-      const response = await axios.get(
-        `http://localhost:3000/recipe/category/${dataRecipe?.category[1]}` //**category[0] or [1]?? question
+      const response = await instance.get(
+        `/recipe/category/${dataRecipe?.category[1]}` //**category[0] or [1]?? question
       );
       setDataCategory(response.data);
     } catch (error) {
