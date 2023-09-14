@@ -12,7 +12,6 @@ import NewPassword from "../components/auth/NewPassword";
 import CommentPage from "./CommentPage";
 import Start from "./Start";
 
-
 const App: FC = () => {
   // const { user, setUser } = useContext(AuthContext);
 
@@ -27,8 +26,6 @@ const App: FC = () => {
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/recipes" element={<Start />} />
-        <Route path="/user-profile" element={<UserProfile />} />
-
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route
@@ -44,7 +41,6 @@ const App: FC = () => {
         <Route path="/passwort-zuruecksetzen/:id" element={<NewPassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/user-profile/:id" element={<UserProfile />} />
-
         <Route path="/recipe/:id" element={<CommentPage />} />
       </Routes>
     </>

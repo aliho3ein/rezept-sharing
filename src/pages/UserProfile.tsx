@@ -3,12 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import style from "../styles/userProfile/userProfile.module.scss";
 import AddRecipeForm from "../components/userProfile/AddRecipeForm";
 import instance from "../api/instance";
+import { userWithId } from "../models/user";
+import Card from "../components/cardRecipe/Card";
 
 const UserProfile: FC = () => {
   const { id } = useParams();
   const [popup, setPopup] = useState<boolean>(false);
   const [recipes, setRecipes] = useState([]);
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState<userWithId | null>(null);
 
   useEffect(() => {
     handleFetch(`/recipe/user/${id}`, setRecipes);
@@ -26,15 +28,24 @@ const UserProfile: FC = () => {
 
   return (
     <section className={style.userProfileContainer}>
-      <button>
-        <Link to="/">
-          <i className={`fa-solid fa-reply ${style.returnArrow}`}></i>
-          Zurück zum Feed
-        </Link>
-      </button>
-      {/* <p>{userInfo.desc}</p> */}
-      {/* <img src={userInfo.img} /> */}
-      <main>{/* {recipes.map((recipe) => recipe)} */}</main>
+      <Link to="/recipes">
+        <i className={`fa-solid fa-reply ${style.returnArrow}`}></i>
+        Zurück zum Start
+      </Link>
+
+      <img src={userInfo?.image?.[0]} />
+      {userInfo?.info?.length ? (
+        <p>{userInfo.info}</p>
+      ) : (
+        <p>Erzähl etwas über dich.</p>
+      )}
+
+      {recipes.length <= 0 ? (
+        <p>Erstelle ein Rezept!</p>
+      ) : (
+        recipes.map((recipe, index) => <Card key={index} data={recipe} />)
+      )}
+
       <span>Rezept hinzufügen</span>
       <button onClick={() => setPopup(true)}>
         <i className={`fa-solid fa-plus ${style.addRecipe}`}></i>
