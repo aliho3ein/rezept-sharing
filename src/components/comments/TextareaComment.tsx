@@ -1,8 +1,8 @@
-import { FC,Dispatch,SetStateAction,useState } from "react";
+import { FC,Dispatch,SetStateAction,useState,useContext } from "react";
 import styles from "../../styles/comments/textTareaComment.module.scss";
 import instance from "../../api/instance";
 import { comment } from "../../models/comment"
-
+import { AuthContext } from "../../context/authContext";
 //type recipeID = {recipeID:string | any}
 
 type useStateProps = {
@@ -13,7 +13,7 @@ type useStateProps = {
 }
 const TextareaComment: FC<useStateProps> = ({recipeID,flag,setFlag,setText}) => {
   const [textarea,setTextarea] = useState<string>();
-  
+  const { user } = useContext(AuthContext);
   const sendData = (e:any) => {
       e.preventDefault();
       setText('Alle Kommentare anzeigen');
@@ -25,7 +25,7 @@ const TextareaComment: FC<useStateProps> = ({recipeID,flag,setFlag,setText}) => 
         setFlag(!flag);
       } else {
         const data:comment = {
-          userID:'64d3939ede491a0d0fc2cd13',//! no final*** userID come from user in usercontext global
+          userID:user?._id,
           recipeID,
           desc:e.target[0].value.trim(),
         }
