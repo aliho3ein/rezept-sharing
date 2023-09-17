@@ -2,12 +2,13 @@ import { FC } from "react";
 import style from "../../styles/mainPage/main.module.scss";
 
 interface sortType {
+  
   changeSort: (sortAction: string) => void;
 }
 
-const SortOptions: FC<sortType> = ({ changeSort }) => {
+const SortOptions: FC<sortType> = ({ changeSort, }) => {
   const sortOptions = [
-    { label: "Neueste", action: "createAt" },
+    { label: "Neueste", action: "createdAt" },
     { label: "Zeit", action: "time" },
     { label: "Meist Gesehene", action: "view" },
   ];
