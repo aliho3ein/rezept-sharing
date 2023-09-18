@@ -10,7 +10,7 @@ type rating = {
   setRating:Dispatch<SetStateAction<number> >,
   
 }
-const Rewiews: FC<rating> = ({size,initialValue,readonly,showTooltip,width,setRating,}) => {
+const Rewiews: FC<rating> = ({size,initialValue,readonly,showTooltip,setRating,}) => {
 
  
   const handleRating = (rate: number) => {
