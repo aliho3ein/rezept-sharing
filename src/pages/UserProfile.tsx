@@ -42,7 +42,9 @@ const UserProfile: FC = () => {
     instance
       .put(`/user/${id}`, { info: userDescription })
       .then(() => alertMassage("Beschreibung erfolgreich geändert"))
-      .catch(() => alertMassage("Fehler beim Ändern der Beschreibung"));
+      .catch(() =>
+        alertMassage("Fehler beim Ändern der Beschreibung", "error")
+      );
     setIsEditing(false);
     setUserDescription("");
   }
@@ -81,7 +83,7 @@ const UserProfile: FC = () => {
             {userInfo?.info?.length ? (
               <p className={style.userDescription}>{userInfo.info[0]}</p>
             ) : (
-              <p>
+              <p className={style.userDescription}>
                 Beschreibe hier deine bisherige kulinarische Reise, deine
                 Lieblingsgerichte etc.
               </p>
@@ -95,7 +97,9 @@ const UserProfile: FC = () => {
       )}
       <main className={style.userRecipesContainer}>
         {recipes.length <= 0 ? (
-          <p>Erstelle ein Rezept!</p>
+          <p className={style.noRecipesYet}>
+            Bisher hast du noch keine Rezepte..
+          </p>
         ) : (
           recipes.map((recipe, index) => <Card key={index} data={recipe} />)
         )}

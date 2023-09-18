@@ -44,6 +44,7 @@ const AddRecipeForm: FC = () => {
     time: "",
   });
   const [image, setImg] = useState<string[]>([]);
+  const [toolTip, setToolTip] = useState<boolean>(false);
 
   function addIngredientToMaterial(ingredient: Material) {
     setFormData((prevData) => ({
@@ -99,6 +100,10 @@ const AddRecipeForm: FC = () => {
     setImg([]);
   }
 
+  function handleToolTipToggle() {
+    setToolTip(!toolTip);
+  }
+
   return (
     <form onSubmit={handleSubmit} className={style.recipeForm}>
       <h1>Rezept erstellen</h1>
@@ -114,7 +119,37 @@ const AddRecipeForm: FC = () => {
         onChange={handleInputChange}
         className={style.titleInput}
       />
-      <h2>Zutaten</h2>
+      <div className={style.toolTipContainer}>
+        <h2>Zutaten</h2>
+        <i
+          onClick={handleToolTipToggle}
+          className={`fa-solid fa-info ${style.toolTip}`}
+        ></i>
+        {toolTip && (
+          <ul className={style.toolTipList}>
+            <li>
+              <i className={`fa-solid fa-plus ${style.addInstanceBtn}`}></i>
+              <span>Füge weitere Zutaten hinzu</span>
+            </li>
+            <li>
+              <i
+                className={`fa-solid fa-check ${style.confirmIngredientBtn}`}
+              ></i>
+              <span>Bestätige deine Zutat</span>
+            </li>
+            <li>
+              <i className={`fa-solid fa-close ${style.undoIngredientBtn}`}></i>
+              <span>Mach die Bestätigung deiner Zutat rückgängig</span>
+            </li>
+            <li>
+              <i
+                className={`fa-solid fa-trash-can ${style.closeInstanceBtn}`}
+              ></i>
+              <span>Entferne die Zutat</span>
+            </li>
+          </ul>
+        )}
+      </div>
       {[...Array(anotherIngredientInstance)].map((_, index) => {
         return (
           <Ingredient

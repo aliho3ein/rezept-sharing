@@ -115,8 +115,3 @@ const Ingredient: FC<IngredientProps> = ({
 };
 
 export default Ingredient;
-
-// Tasks to do on this component
-// - a button which closes the form -> functionality
-// - on UserProfilePage -> popup for the recipe form on button click
-// - RecipeForm -> send formData to backend -> test if data is sent correctly
