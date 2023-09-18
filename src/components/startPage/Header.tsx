@@ -11,7 +11,7 @@ const Header: FC = () => {
       <div className={style.rightSide}>
         <NavBar />
         <figure>
-          <img src="src/assets/stake.jpg" alt="stake" />
+          <img src="src/assets/stake.png" alt="stake" />
         </figure>
         <h1>
           Rezept <br /> Sharing <br />
