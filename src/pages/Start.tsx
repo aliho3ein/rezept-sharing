@@ -5,7 +5,7 @@ import FilterOptions from "../components/mainPage/FilterOptions";
 import SortOptions from "../components/mainPage/SortOptions";
 import instance from "../api/instance";
 import Card from "../components/cardRecipe/Card";
-import { CategoryType, cardRecipe, completeRecipe } from "../models/recipe";
+import {completeRecipe } from "../models/recipe";
 import DropDownUserProfile from "../components/dropDownUserProfile/DropDownUserProfile";
 import RandomBtn from "../components/mainPage/RandomBtn";
 import {
