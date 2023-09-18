@@ -1,7 +1,7 @@
 import { FC } from "react";
 import style from "./../styles/header.module.scss";
-import instance from "./../api/instance";
-import { completeRecipe, recipeType } from "../models/recipe";
+//import instance from "./../api/instance";
+//import { completeRecipe, recipeType } from "../models/recipe";
 
 const Header: FC = () => {
   // const getData = () => {
