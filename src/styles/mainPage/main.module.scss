@@ -1,77 +1,54 @@
 @import "../variable";
 
 //! Start
+
 .startPageContainer {
   display: flex;
-
   flex-direction: column;
-  /*   padding: 10px; */
-  background: center/cover no-repeat url("../../assets/bg-start.jpg");
-  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: center / cover no-repeat url("../../assets/start-bg.jpg");
+  min-height: 100vh;
 }
 
 .recipeCard {
-  width: 100%;
-  height: 100vh;
+  width: 90%;
+  max-width: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 10%;
-
-  .recipesComponent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-right: 20px;
-    max-width: 40%;
-    background: linear-gradient(to right, $secondary-color, $primary-color);
-    border-radius: 10px;
-  }
-
-  .cardsContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    gap: 20px;
-    width: 60%;
-    border-radius: 20px;
-  }
+  margin-bottom: 20px;
 }
-/* .pagination {
+
+.recipesComponent {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 20px;
   width: 100%;
-  button {
-    justify-content: center;
-    background-color: $secondary-color;
-    color: $text-color;
-    border: none;
-    padding: 5px 10px;
-    margin: 0 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+  max-width: 400px;
+  background: linear-gradient(to right, $secondary-color, $primary-color);
+  border-radius: 10px;
+}
 
-    &:hover {
-      background-color: $accent-color;
-      color: $primary-color;
-    }
-  }
-
-  .pageNr {
-    color: #fff;
-    font-size: 18px;
-    margin: 0 10px;
-  }
-} */
-
+.cardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+  padding-left: 0 20px;
+}
+.card:hover {
+  transform: scale(1.02);
+}
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-top: 100px;
 }
 
 .icon {
@@ -80,7 +57,6 @@
   cursor: pointer;
   transition: color 0.3s;
   border-radius: 20px;
-  /* margin: 40px; */
 
   &:hover {
     background: $accent-color;
@@ -90,7 +66,7 @@
 .pageNr {
   font-size: 24px;
   margin: 0 16px;
-  color: $primary-color;
+  color: $text-color;
 }
 
 //! search component

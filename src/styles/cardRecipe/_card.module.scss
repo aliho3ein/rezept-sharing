@@ -81,11 +81,12 @@
 /////// here
  
 .cardContainer {
-  //border: 1px solid ;
+  
   display: flex;
   align-items: center;
   background-color: $primary-color;
   width: max-content;
+  border-radius: 20px;
   //height: 300px;
 
   width: 200px;
@@ -93,7 +94,7 @@
   
 }
 .card {
-
+  //border: 1px solid  red;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -125,7 +126,7 @@
     //*********************remove
     position: absolute;
     top:-45px;
-    left:20px;
+    left:25px;
     border-radius: 50%;
     aspect-ratio: 1/1;
     width: 150px ;

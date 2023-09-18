@@ -29,6 +29,7 @@ const Search: React.FC<SearchProps> = ({ recipes }) => {
   const handleRecipeClick = (recipe: completeRecipe) => {
     setSelectedRecipe(recipe);
   };
+ 
   return (
     <div className={style.recipeListContainer}>
       <div className={style.searchBox}>

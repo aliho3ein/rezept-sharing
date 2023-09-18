@@ -17,7 +17,7 @@ interface FormData {
 }
 
 const categories: string[] = [
-  "Sonstige",
+  "Sonstiges",
   "Asiatisch",
   "Italienisch",
   "Oriental",

@@ -1,6 +1,6 @@
 import { Dispatch, FC,SetStateAction, } from "react";
 import { Rating } from 'react-simple-star-rating'
-
+import styles from "../../styles/comments/titleDescription.module.scss"
 type rating = {
   size: number,
   initialValue: number,
@@ -21,7 +21,7 @@ const Rewiews: FC<rating> = ({size,initialValue,readonly,showTooltip,width,setRa
   // const onPointerLeave = () => console.log('Leave')
   // const onPointerMove = (value: number, index: number) => console.log(index,value)
   return (
-  <div style={{width:width}}>
+  <div className={styles.rewiews} >
     
 
     <Rating
