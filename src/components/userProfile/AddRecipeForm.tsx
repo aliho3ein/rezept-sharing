@@ -20,7 +20,7 @@ type RecipeFormProps = {
 };
 
 const categories: string[] = [
-  "Sonstige",
+  "Sonstiges",
   "Asiatisch",
   "Italienisch",
   "Oriental",

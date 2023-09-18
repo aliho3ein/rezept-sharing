@@ -33,7 +33,7 @@ const TitleDescription: FC = () => {
       .put(`/recipe/rewiews/${id}`, {
         rating: (dataRecipe?.rating as number) + rating,
         rewiews: (dataRecipe?.view as number) + 1,
-        userId: dataRecipe?.userID,
+        userId: user?._id,
       })
       .then((response) => {
         console.log(response);
@@ -133,8 +133,9 @@ const TitleDescription: FC = () => {
   };
 
   const isAlreadyRaiting = async () => {
+    console.log(user?._id)
     const data = await instance
-      .get(`/recipe/user/${dataRecipe?.userID}/userating/${dataRecipe?._id}`)
+      .get(`/recipe/user/${user?._id}/userating/${dataRecipe?._id}`)
       .then((response) => {
         return response.data.isUser;
       })

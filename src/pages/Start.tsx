@@ -15,13 +15,40 @@ import {
 
 const Start: FC = () => {
   const [recipeList, setRecipeList] = useState<completeRecipe[]>([]);
-  const [sort, setSort] = useState<string>("view");
+  const [sort, setSort] = useState<string>('view');
   const [category, setCategory] = useState<string[]>([]);
   const [pageNr, setPageNr] = useState<number>(1);
+  const [pagination, setPagination] = useState<paginationType>();
+  type paginationType = {
+    totalDocs: number;
+    limit: number;
+    totalPages: number;
+  };
+  const recipePagination = async (): Promise<void> => {
+    const { data } = await instance.get("/recipe/pages/pagination", {
+      params: { pageNr, category: category,sort },
+    });
+    const { totalDocs, limit, totalPages } = data;
+    const pagination: paginationType = {
+      totalDocs,
+      limit,
+      totalPages,
+    };
+    setPagination(pagination);
+    setRecipeList(data.docs);
+    console.log(data)
+  };
 
-  const countPerPage = 4;
+  useEffect(() => {
+    recipePagination();
+  }, [pageNr, category,sort]);
+
+  useEffect(() => {
+    verifyPageNr();
+  }, [pagination]);
+
   const nextPage = () => {
-    if (pageNr < 3) {
+    if (pageNr < (pagination?.totalPages as number)) {
       setPageNr(pageNr + 1);
     }
   };
@@ -32,37 +59,43 @@ const Start: FC = () => {
     }
   };
 
-  useEffect(() => {
-    instance
-      .get<completeRecipe[]>(`/recipe/page/${pageNr}`, {
-        params: { countPerPage, sort, category: category.join(",") },
-      })
-      .then((res) => {
-        let filteredRecipes = res.data;
+  const verifyPageNr = () => {
+    if (pageNr > (pagination?.totalPages as number)) {
+      setPageNr(pagination?.totalPages as number);
+    }
+  };
+console.log(sort)
+  // useEffect(() => {
+  //   instance
+  //     .get<completeRecipe[]>(`/recipe/page/${pageNr}`, {
+  //       params: { countPerPage, sort, category: category.join(",") },
+  //     })
+  //     .then((res) => {
+  //       let filteredRecipes = res.data;
 
-        if (category.length > 0) {
-          filteredRecipes = filteredRecipes.filter((recipe) =>
-            category.every((selectedCategory) =>
-              recipe.category.includes(selectedCategory as CategoryType)
-            )
-          );
-        }
+  //       if (category.length > 0) {
+  //         filteredRecipes = filteredRecipes.filter((recipe) =>
+  //           category.every((selectedCategory) =>
+  //             recipe.category.includes(selectedCategory as CategoryType)
+  //           )
+  //         );
+  //       }
 
-        if (sort === "view") {
-          filteredRecipes = filteredRecipes.sort((a, b) => b.view - a.view);
-        } else if (sort === "createAt") {
-          filteredRecipes = filteredRecipes.sort(
-            (a, b) =>
-              new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
-          );
-        } else if (sort === "time") {
-          filteredRecipes = filteredRecipes.sort((a, b) => a.time - b.time);
-        }
+  //       if (sort === "view") {
+  //         filteredRecipes = filteredRecipes.sort((a, b) => b.view - a.view);
+  //       } else if (sort === "createAt") {
+  //         filteredRecipes = filteredRecipes.sort(
+  //           (a, b) =>
+  //             new Date(b.createAt).getTime() - new Date(a.createAt).getTime()
+  //         );
+  //       } else if (sort === "time") {
+  //         filteredRecipes = filteredRecipes.sort((a, b) => a.time - b.time);
+  //       }
 
-        setRecipeList(filteredRecipes);
-      })
-      .catch((err) => console.log(err));
-  }, [sort, pageNr, category]);
+  //       setRecipeList(filteredRecipes);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, [sort, pageNr, category]);
 
   // const { isError, isLoading, data } = useQuery("fetchRecipes", async () => {
   //   return instance
@@ -88,7 +121,7 @@ const Start: FC = () => {
           <Search recipes={recipeList} />
           <RandomBtn recipes={recipeList} />
           <FilterOptions changeCategory={setCategory} />
-          <SortOptions changeSort={setSort} />
+          <SortOptions changeSort={setSort}/>
         </div>
 
         <div className={style.cardsContainer}>
