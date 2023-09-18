@@ -1,9 +1,10 @@
-import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import Ingredient, { Material } from "./Ingredient";
 import style from "../../styles/userProfile/recipeForm.module.scss";
 import instance from "../../api/instance";
 import { uploadRecipeImg } from "../../actions/imageStorage";
 import { alertMassage } from "../../actions/alerts";
+import { Link, useParams } from "react-router-dom";
 
 // import { useNavigate } from "react-router-dom";
 
@@ -14,10 +15,6 @@ interface FormData {
   category: string[];
   time: string;
 }
-
-type RecipeFormProps = {
-  closePopup: Dispatch<SetStateAction<boolean>>;
-};
 
 const categories: string[] = [
   "Sonstiges",
@@ -34,8 +31,9 @@ const categories: string[] = [
   "Snacks",
 ];
 
-const AddRecipeForm: FC<RecipeFormProps> = ({ closePopup }) => {
+const AddRecipeForm: FC = () => {
   // const navigate = useNavigate();
+  const { id } = useParams();
   const [anotherIngredientInstance, setAnotherIngredientInstance] =
     useState<number>(1);
   const [formData, setFormData] = useState<FormData>({
@@ -81,18 +79,14 @@ const AddRecipeForm: FC<RecipeFormProps> = ({ closePopup }) => {
     }
   }
 
-  const userId = "64b19a04a6306177a70fa74c";
-
-  // if (!userId) {
-  //   navigate("/signin");
-  // }
+  const userId = id;
 
   function handleSubmit(event: any) {
     event.preventDefault();
     instance
       .post(`/recipe/create/${userId}`, { ...formData, image })
-      .then((response) => alertMassage("Rezept gespeichert"))
-      .catch((err) => alertMassage("Fehler beim Speichern"));
+      .then(() => alertMassage("Rezept gespeichert"))
+      .catch(() => alertMassage("Fehler beim Speichern", "error"));
   }
 
   const getUrl = (e: ChangeEvent) => {
@@ -107,11 +101,10 @@ const AddRecipeForm: FC<RecipeFormProps> = ({ closePopup }) => {
 
   return (
     <form onSubmit={handleSubmit} className={style.recipeForm}>
-      <i
-        className={`fa-solid fa-close ${style.goBackBtn}`}
-        onClick={() => closePopup(false)}
-      ></i>
       <h1>Rezept erstellen</h1>
+      <Link to={`/user-profile/${userId}`} className={style.backToProfile}>
+        <i className="fa-solid fa-arrow-left"></i>
+      </Link>
       <h2>Titel</h2>
       <input
         type="text"
@@ -191,6 +184,7 @@ const AddRecipeForm: FC<RecipeFormProps> = ({ closePopup }) => {
           onChange={getUrl}
           className={style.fileInput}
         />
+
         {image.map((img, index) => {
           return <img src={img} key={index} className={style.fileInputImg} />;
         })}

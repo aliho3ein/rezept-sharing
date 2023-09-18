@@ -1,0 +1,211 @@
+@import "../variable";
+
+* {
+  outline: none;
+  text-decoration: none;
+  letter-spacing: 10px;
+}
+
+body {
+  height: 100vh;
+}
+
+.userProfileContainer {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 25% 1fr 25%;
+  grid-template-rows: 30% auto auto;
+}
+
+.backToFeed i {
+  border-radius: 50%;
+  font-size: 25px;
+  padding: 8px;
+  color: $text-color;
+
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+.backToFeed {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  align-self: center;
+  justify-self: center;
+  margin-bottom: 8.5rem;
+  margin-right: 10rem;
+}
+
+.userProfileImage {
+  border-radius: 50%;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  justify-self: end;
+  align-self: center;
+  height: 85px;
+  width: 85px;
+  margin-bottom: 25px;
+  position: absolute;
+  top: 10px;
+  right: 95px;
+}
+
+.userRecipesContainer {
+  grid-column: 1 / 4;
+  grid-row: 2 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userDescription {
+  border: 2px solid $secondary-color;
+  color: $text-color;
+  font-weight: 500;
+  border-radius: 5px;
+  width: 600px;
+  height: 125px;
+  padding: 12px;
+  word-break: break-all;
+}
+
+.descriptionEditBtn {
+  color: $text-color;
+  background-color: $secondary-color;
+  padding: 8px;
+  margin: 0.75rem;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.descriptionEditArea {
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  color: $text-color;
+  font-weight: 500;
+  border-radius: 5px;
+  width: 600px;
+  height: 150px;
+  padding: 12px;
+  resize: none;
+
+  &:focus {
+    border-color: $secondary-color;
+  }
+}
+
+.descriptionSaveBtn {
+  color: $text-color;
+  background-color: $secondary-color;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 0.75rem;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.descriptionCancelBtn {
+  color: $text-color;
+  background-color: $accent-color;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.createRecipe i {
+  border-radius: 50%;
+  background-color: $secondary-color;
+  font-size: 25px;
+  padding: 8px;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.createRecipe {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+  align-self: center;
+  justify-self: center;
+}
+
+.currentDescriptionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+  height: 250px;
+  position: relative;
+}
+
+.editModeDescriptionContainer {
+  align-self: center;
+  justify-self: center;
+  width: 600px;
+}
+
+@media only screen and (max-width: 576px) {
+  .userProfileContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% repeat(3, auto);
+    height: 100dvh;
+  }
+
+  .backToFeed {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    margin: 0;
+    margin-left: 0.7rem;
+    justify-self: flex-start;
+  }
+
+  .currentDescriptionContainer {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+
+  .userDescription {
+    width: 400px;
+  }
+
+  .userProfileImage {
+    position: absolute;
+    top: 5px;
+    right: 65px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .userRecipesContainer {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+  }
+
+  .createRecipe {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+  }
+}

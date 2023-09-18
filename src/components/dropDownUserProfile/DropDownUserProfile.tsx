@@ -71,8 +71,11 @@ const DropDownUserProfile: FC = () => {
             </li>
             <li>
               {" "}
-              <Link to="/recipes" className={style.newRecipes}>
-                Neue Rezepte
+              <Link
+                to={`/create-recipe/${user?._id}`}
+                className={style.newRecipes}
+              >
+                Rezept erstellen
               </Link>
             </li>
             <li>Wünschliste</li>

@@ -11,6 +11,7 @@ import EmailVerification from "../components/auth/EmailVerification";
 import NewPassword from "../components/auth/NewPassword";
 import CommentPage from "./CommentPage";
 import Start from "./Start";
+import AddRecipeForm from "../components/userProfile/AddRecipeForm";
 
 const App: FC = () => {
   // const { user, setUser } = useContext(AuthContext);
@@ -41,6 +42,7 @@ const App: FC = () => {
         <Route path="/passwort-zuruecksetzen/:id" element={<NewPassword />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/user-profile/:id" element={<UserProfile />} />
+        <Route path="/create-recipe/:id" element={<AddRecipeForm />} />
         <Route path="/recipe/:id" element={<CommentPage />} />
       </Routes>
     </>
