@@ -5,6 +5,7 @@ import instance from "../api/instance";
 import { userWithId } from "../models/user";
 import Card from "../components/cardRecipe/Card";
 import { alertMassage } from "../actions/alerts";
+import DropDownUserProfile from "../components/dropDownUserProfile/DropDownUserProfile";
 
 const UserProfile: FC = () => {
   const { id } = useParams();
@@ -92,7 +93,8 @@ const UserProfile: FC = () => {
               Bearbeiten
             </button>
           </div>
-          <img src={userInfo?.image?.[0]} className={style.userProfileImage} />
+          {/*  <img src={userInfo?.image?.[0]} className={style.userProfileImage} /> */}
+          <DropDownUserProfile />
         </div>
       )}
       <main className={style.userRecipesContainer}>

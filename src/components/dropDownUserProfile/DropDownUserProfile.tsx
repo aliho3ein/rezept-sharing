@@ -56,9 +56,9 @@ const DropDownUserProfile: FC = () => {
           <div className={style.userInfo}>
             <p className={style.username}>{user?.username}</p>
             <p className={style.email}>{user?.email}</p>
-            <p style={{ fontSize: "12px", color: "#888", marginTop: "5px" }}>
+            {/*   <p style={{ fontSize: "12px", color: "#888", marginTop: "5px" }}>
               {user?._id}
-            </p>
+            </p> */}
           </div>
           <ul className={style.dropdownMenu}>
             <li>
