@@ -1,0 +1,103 @@
+@import "../variable";
+
+.editPopupProfileContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary-color;
+  width: 600px;
+  border-radius: 8px;
+  gap: 15px;
+  padding: 26px 18px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  z-index: 1000;
+}
+
+.popupInputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.editPopupHeaderContainer {
+  width: 600px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: 15px;
+}
+
+.leavePopup {
+  font-size: 24px;
+  margin-left: 50px;
+
+  &:hover {
+    color: $secondary-color;
+    cursor: pointer;
+  }
+}
+
+.popupHeading {
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin-left: 8rem;
+}
+
+.editPopupInput {
+  width: 500px;
+  height: 40px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    border-color: $secondary-color;
+  }
+}
+
+.editPopupDescriptionArea {
+  width: 500px;
+  height: 100px;
+  background-color: white;
+  resize: none;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.saveBtn {
+  background-color: $secondary-color;
+  padding: 8px;
+  font-size: 16px;
+  color: $text-color;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
+
+.transparentBackground {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.userProfileImage {
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+}
