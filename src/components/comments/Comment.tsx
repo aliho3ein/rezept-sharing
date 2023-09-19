@@ -9,7 +9,7 @@ const Comment:FC<commetType>  = ({data}) => {
   return (
     
     <div className={styles.main}>
-        <img src={"/src/assets/buddy-60fix.jpg"} alt="user img" />
+        <img src={"/buddy-60fix.jpg"} alt="user img" />
         <div>
              <p>{data?.userID?.username}</p>
              <p>{data?.desc}</p>

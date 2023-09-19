@@ -7,11 +7,12 @@ const CrewCard: FC<{ detail: crewType }> = ({ detail }) => {
     <>
       <div
         className={style.crewCard}
-        data-aos="fade-down"
+        //data-aos="fade-down"
         style={{
-          ["--img" as string]: `url("src/assets/${detail.name.toLocaleLowerCase()}.png")`,
+          ["--img" as string]: `url("/${detail.name.toLocaleLowerCase()}.png")`,
         }}
       >
+        
         <span className={style.userPosition}>{detail.position}</span>
         <h3>{detail.name}</h3>
         <div className={style.socialContainer}>

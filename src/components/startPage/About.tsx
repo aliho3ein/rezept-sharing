@@ -6,7 +6,7 @@ const About: FC = () => {
     <section id="about" className={style.aboutContainer}>
       <div>
         <figure>
-          <img src="src/assets/01.png" className={style.onionImg} alt="onion" />
+          <img src={"./01.png"} className={style.onionImg} alt="onion" />
         </figure>
         <h2>Über Tasty Pixel</h2>
         <p>

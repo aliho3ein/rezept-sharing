@@ -5,14 +5,16 @@ import CrewCard from "./CrewCard";
 import { crewType } from "../../models/user";
 
 const Crew: FC = () => {
+
   return (
     <section className={style.crewContainer}>
       <h2>
-        <img src="src/assets/052.png" alt="carrot" className={style.carrot} />
+        <img src={"./052.png"} alt="carrot" className={style.carrot} />
         unser Team
       </h2>
       <div>
         {crews.map((user: crewType, index: number) => {
+        
           return <CrewCard key={index} detail={user} />;
         })}
       </div>
