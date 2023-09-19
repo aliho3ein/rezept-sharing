@@ -1,7 +1,7 @@
 @import "../variable";
 .userProfileContainer {
   position: fixed;
-  top: 50px;
+  top: 27px;
   right: 20px;
   display: flex;
 
@@ -29,7 +29,7 @@
   position: absolute;
   top: 60px;
   right: 0px;
-  background-color: $primary-color;
+  background-color: white;
   border-top: none;
   border-radius: 0 0 5px 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
