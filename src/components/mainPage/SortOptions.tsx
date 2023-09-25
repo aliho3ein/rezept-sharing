@@ -2,11 +2,10 @@ import { FC } from "react";
 import style from "../../styles/mainPage/main.module.scss";
 
 interface sortType {
-  
   changeSort: (sortAction: string) => void;
 }
 
-const SortOptions: FC<sortType> = ({ changeSort, }) => {
+const SortOptions: FC<sortType> = ({ changeSort }) => {
   const sortOptions = [
     { label: "Neueste", action: "createdAt" },
     { label: "Zeit", action: "time" },
@@ -18,7 +17,7 @@ const SortOptions: FC<sortType> = ({ changeSort, }) => {
 
   return (
     <div className={style.sortOptionsContainer}>
-      <label className={style.labelSortTile}>Sort Options:</label>
+      <label className={style.labelSortTile}>Sortieren nach:</label>
       <ul className={style.sortList}>
         {sortOptions.map((sortOption, index) => (
           <li key={index}>

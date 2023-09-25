@@ -153,13 +153,13 @@ const Signup: FC = () => {
         </button>
 
         <p className={style.signup_link}>
-          Hast du keine Konto?
+          Du hast bereits ein Konto?
           <Link to="/signin" className={style.signup_link}>
             Anmelden
           </Link>
         </p>
 
-        <div className={style.oder}>Order</div>
+        <div className={style.oder}>Oder</div>
 
         <button className={style.google}>
           <GoogleBtn />

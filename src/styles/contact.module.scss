@@ -8,10 +8,12 @@
   justify-content: center;
   backdrop-filter: blur(10px);
 
-  h1 {
+  h2 {
     text-align: center;
-    margin: 1rem 0;
+    margin: 1rem;
+    margin-bottom: 7.5rem;
     color: $text-color;
+    font-size: 30px;
   }
 }
 
@@ -75,12 +77,24 @@
     width: 100%;
     padding: 0.75rem;
     margin-bottom: 1rem;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 4px;
     outline: none;
-  }
-  .contactTextarea {
-    resize: vertical;
+    background-color: white;
+    font-family: "Roboto", "sans-serif";
+    color: $text-color;
+
+    &::placeholder {
+      font-family: "Roboto", "sans-serif";
+    }
+
+    &:hover {
+      border: 2px solid $secondary-color;
+    }
+
+    &:focus {
+      border: 2px solid $secondary-color;
+    }
   }
 }
 

@@ -105,7 +105,7 @@ const Signin: FC = () => {
               <input
                 id="email"
                 type="email"
-                placeholder="email"
+                placeholder="Email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -117,7 +117,7 @@ const Signin: FC = () => {
               </label>
               <input
                 id="password"
-                placeholder="password"
+                placeholder="Passwort"
                 type={showPassword ? "text" : "password"}
                 name="password"
                 value={formData.password}
@@ -129,14 +129,14 @@ const Signin: FC = () => {
               ></i>
             </div>
             <div className={style.forgotPassword}>
-              <Link to="/passwort-vergessen">Password vergessen?</Link>
+              <Link to="/passwort-vergessen">Passwort vergessen?</Link>
             </div>
             <button className={style.btn} type="submit">
               Anmelden
             </button>
           </form>
           <p className={style.signup_link}>
-            Hast du keine Konto?
+            Du hast noch kein Konto?
             <Link to="/signup" className={style.signup_link}>
               Registrieren
             </Link>

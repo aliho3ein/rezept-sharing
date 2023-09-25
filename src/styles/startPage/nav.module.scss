@@ -20,27 +20,20 @@
 
       a {
         all: unset;
-      }
-
-      &:last-child {
-        margin-left: auto;
-        padding: 3px 8px;
-        border-radius: 5px;
-        background-color: $secondary-color;
-
-        &:hover {
-          color: #fff;
-        }
-      }
-
-      &:hover {
-        color: $secondary-color;
-      }
-      a {
         text-decoration: none;
         color: $text-color;
         &:hover {
-          color: $primary-color;
+          color: $secondary-color;
+        }
+      }
+      &:last-child {
+        margin-left: auto;
+        padding: 8px;
+        border-radius: 5px;
+        background-color: $secondary-color;
+
+        a:hover {
+          color: white;
         }
       }
     }

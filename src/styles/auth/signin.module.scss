@@ -26,10 +26,9 @@ $link-color: #007bff;
   }
   .card_paragraph {
     font-size: 0.8em;
-    color: #777;
     margin-bottom: 25px;
     font-size: 0.8em;
-    color: #888;
+    color: #444;
   }
 }
 
@@ -43,6 +42,9 @@ $link-color: #007bff;
   label {
     font-size: 1.2em;
     margin-right: 15px;
+    &:hover {
+      color: $secondary-color;
+    }
   }
 
   input {
@@ -62,6 +64,9 @@ $link-color: #007bff;
   i {
     cursor: pointer;
     margin: 0 10px;
+    &:hover {
+      color: $secondary-color;
+    }
   }
 }
 
@@ -148,12 +153,13 @@ $link-color: #007bff;
   cursor: pointer;
   border-radius: 4px;
   font-size: 16px;
-  background-color: $text-color;
-  color: $secondary-color;
+  font-weight: bold;
+  background-color: $secondary-color;
+  color: $text-color;
   transition: all 200ms;
 
   &:hover {
-    filter: brightness(1.5);
+    filter: brightness(1.2);
   }
 }
 

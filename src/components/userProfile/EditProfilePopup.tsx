@@ -47,18 +47,19 @@ const EditProfilePopup: FC<EditProfilePopupProps> = ({
           />
           <input
             type="text"
-            value="Jan"
+            placeholder="Vorname"
             readOnly
             className={style.editPopupInput}
           />
           <input
             type="text"
-            value="Folz"
+            placeholder="Nachname"
             readOnly
             className={style.editPopupInput}
           />
           <input
             type="text"
+            readOnly
             placeholder="Benutzername"
             className={style.editPopupInput}
           />
