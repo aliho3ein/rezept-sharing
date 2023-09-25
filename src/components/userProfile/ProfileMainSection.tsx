@@ -37,6 +37,17 @@ const ProfileMainSection: FC = () => {
             alt="User Profile Image"
             className={style.profileImage}
           />
+          <input
+            type="file"
+            id="profile-picture"
+            accept="image/*"
+            className={style.profilePictureFileInput}
+          />
+          <label htmlFor="profile-picture">
+            <i
+              className={`fa-solid fa-pen ${style.profilePictureFileInputIcon}`}
+            ></i>
+          </label>
           <span className={style.follows}>0 Gefolgt</span>
           <span className={style.follower}>0 Follower</span>
         </div>
