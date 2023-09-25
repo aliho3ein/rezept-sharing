@@ -192,6 +192,9 @@ body {
   grid-row: 4 / 5;
   margin: 2rem 13rem;
   width: 900px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .profilePictureFileInput {
