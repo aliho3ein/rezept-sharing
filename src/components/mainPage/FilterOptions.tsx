@@ -25,8 +25,9 @@ const FilterOptions: FC<filterType> = ({ changeCategory }) => {
 
   const handleCheckboxChange = (selectedValue: string) => {
     if (category.includes(selectedValue)) {
-      setCategory((prevCategories) =>
-        prevCategories.filter((category) => category !== selectedValue) //esto quita la category del category array si ya se encuentra ahi  
+      setCategory(
+        (prevCategories) =>
+          prevCategories.filter((category) => category !== selectedValue) //esto quita la category del category array si ya se encuentra ahi
       );
     } else {
       setCategory((prevCategories) => [...prevCategories, selectedValue]);
@@ -36,11 +37,10 @@ const FilterOptions: FC<filterType> = ({ changeCategory }) => {
     changeCategory(category);
   }, [category, changeCategory]);
 
-  
   return (
     <div className={style.filterOptionsContainer}>
       <label className={style.labelFilterTitle}>
-        Filter Options: {category.join(", ")}
+        Filtern nach: {category.join(", ")}
       </label>
       <ul className={style.filterList}>
         {filterOptions.map((option, index) => (
@@ -51,7 +51,7 @@ const FilterOptions: FC<filterType> = ({ changeCategory }) => {
               value={option}
               className={style.filterInput}
               checked={category.includes(option)} // estoa hace que cambie de color los botonnes
-              onChange={() => handleCheckboxChange(option)} // aqui se guarda en array category las categorias que vas clickkeando 
+              onChange={() => handleCheckboxChange(option)} // aqui se guarda en array category las categorias que vas clickkeando
             />
             <label htmlFor={option} className={style.filterLabel}>
               {option}

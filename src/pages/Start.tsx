@@ -5,17 +5,13 @@ import FilterOptions from "../components/mainPage/FilterOptions";
 import SortOptions from "../components/mainPage/SortOptions";
 import instance from "../api/instance";
 import Card from "../components/cardRecipe/Card";
-import {completeRecipe } from "../models/recipe";
+import { completeRecipe } from "../models/recipe";
 import DropDownUserProfile from "../components/dropDownUserProfile/DropDownUserProfile";
 import RandomBtn from "../components/mainPage/RandomBtn";
-import {
-  BsFillArrowLeftSquareFill,
-  BsFillArrowRightSquareFill,
-} from "react-icons/bs";
 
 const Start: FC = () => {
   const [recipeList, setRecipeList] = useState<completeRecipe[]>([]);
-  const [sort, setSort] = useState<string>('view');
+  const [sort, setSort] = useState<string>("view");
   const [category, setCategory] = useState<string[]>([]);
   const [pageNr, setPageNr] = useState<number>(1);
   const [pagination, setPagination] = useState<paginationType>();
@@ -26,7 +22,7 @@ const Start: FC = () => {
   };
   const recipePagination = async (): Promise<void> => {
     const { data } = await instance.get("/recipe/pages/pagination", {
-      params: { pageNr, category: category,sort },
+      params: { pageNr, category: category, sort },
     });
     const { totalDocs, limit, totalPages } = data;
     const pagination: paginationType = {
@@ -36,12 +32,12 @@ const Start: FC = () => {
     };
     setPagination(pagination);
     setRecipeList(data.docs);
-    console.log(data)
+    console.log(data);
   };
 
   useEffect(() => {
     recipePagination();
-  }, [pageNr, category,sort]);
+  }, [pageNr, category, sort]);
 
   useEffect(() => {
     verifyPageNr();
@@ -64,7 +60,7 @@ const Start: FC = () => {
       setPageNr(pagination?.totalPages as number);
     }
   };
-console.log(sort)
+  console.log(sort);
   // useEffect(() => {
   //   instance
   //     .get<completeRecipe[]>(`/recipe/page/${pageNr}`, {
@@ -121,7 +117,7 @@ console.log(sort)
           <Search recipes={recipeList} />
           <RandomBtn recipes={recipeList} />
           <FilterOptions changeCategory={setCategory} />
-          <SortOptions changeSort={setSort}/>
+          <SortOptions changeSort={setSort} />
         </div>
 
         <div className={style.cardsContainer}>
@@ -138,10 +134,15 @@ console.log(sort)
         </div>
       </div>
       <div className={style.pagination}>
-        <BsFillArrowLeftSquareFill onClick={prevPage} className={style.icon} />
-
+        <i
+          className={`fa-solid fa-arrow-left ${style.icon}`}
+          onClick={prevPage}
+        ></i>
         <span className={style.pageNr}>{pageNr}</span>
-        <BsFillArrowRightSquareFill className={style.icon} onClick={nextPage} />
+        <i
+          className={`fa-solid fa-arrow-right ${style.icon}`}
+          onClick={nextPage}
+        ></i>
       </div>
     </div>
   );

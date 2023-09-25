@@ -40,13 +40,10 @@ const Contact: FC = () => {
   };
   return (
     <div id="contact" className={style.contactPage}>
-      <h1>Kontaktieren Sie Uns für weitere Informationen.</h1>
-
+      <h2 className={style.contactHeading}>
+        Kontaktiere uns für weitere Informationen.
+      </h2>
       <div className={style.contactContainer}>
-        <div className={style.contactTitle}>
-          <p>Kontakt aufnehmen</p>
-          <h1>Kontakt</h1>
-        </div>
         <div className={style.contactContent}>
           <div className={style.contactInfo}>
             <p className={style.contactInfoItem}>
@@ -90,14 +87,14 @@ const Contact: FC = () => {
             <textarea
               rows={10}
               name="textMessage"
-              placeholder="Ihre Nachricht"
+              placeholder="Deine Nachricht"
               className={style.contactInput}
               value={contactData.textMessage}
               onChange={handleChange}
             ></textarea>
             <button type="submit" className={style.contactButton}>
-              <span>SEND</span>
-              <span>Sende Ihre Nachricht </span>
+              <span>SENDEN</span>
+              <span>Sende uns deine Nachricht</span>
             </button>
           </form>
         </div>

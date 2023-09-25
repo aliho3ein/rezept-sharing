@@ -7,14 +7,10 @@ const NavBar: FC = () => {
     <nav className={style.navbar}>
       <ul>
         <li>
-          <Link to="/">How to use?</Link>
-        </li>
-
-        <li>
           <a href="#about">Über uns</a>
         </li>
         <li>
-          <a href="#contact">Kontakt uns</a>
+          <a href="#contact">Kontakt</a>
         </li>
         <li>
           <Link to="/signin">Anmelden</Link>

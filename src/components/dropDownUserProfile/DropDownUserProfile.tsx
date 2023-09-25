@@ -66,7 +66,7 @@ const DropDownUserProfile: FC = () => {
                 to={`/user-profile/${user?._id}`}
                 className={style.newRecipes}
               >
-                Profile
+                Profil
               </Link>
             </li>
             <li>
@@ -78,7 +78,7 @@ const DropDownUserProfile: FC = () => {
                 Rezept erstellen
               </Link>
             </li>
-            <li>Wünschliste</li>
+            <li>Favoriten</li>
             <li>
               <LogoutButton onLogout={handleLogout} />
             </li>

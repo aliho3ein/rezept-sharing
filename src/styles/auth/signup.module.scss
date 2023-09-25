@@ -27,9 +27,8 @@
   .card_paragraph {
     margin-bottom: 25px;
     font-size: 0.8em;
-    color: #777;
     margin-bottom: 30px;
-    color: #888;
+    color: #444;
   }
 }
 
@@ -43,6 +42,9 @@
   label {
     font-size: 1.2em;
     margin-right: 10px;
+    &:hover {
+      color: $secondary-color;
+    }
   }
 
   input {
@@ -64,6 +66,9 @@
   i {
     cursor: pointer;
     margin-inline: 10px;
+    &:hover {
+      color: $secondary-color;
+    }
   }
 }
 
@@ -131,12 +136,13 @@
   cursor: pointer;
   border-radius: 4px;
   font-size: 16px;
-  background-color: $text-color;
-  color: $secondary-color;
+  font-weight: bold;
+  background-color: $secondary-color;
+  color: $text-color;
   transition: all 200ms;
 
   &:hover {
-    filter: brightness(1.5);
+    filter: brightness(1.2);
   }
 }
 

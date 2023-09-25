@@ -5,7 +5,6 @@ import CrewCard from "./CrewCard";
 import { crewType } from "../../models/user";
 
 const Crew: FC = () => {
-
   return (
     <section className={style.crewContainer}>
       <h2>
@@ -14,7 +13,6 @@ const Crew: FC = () => {
       </h2>
       <div>
         {crews.map((user: crewType, index: number) => {
-        
           return <CrewCard key={index} detail={user} />;
         })}
       </div>
@@ -45,7 +43,7 @@ const crews: crewType[] = [
       { icon: "fa-twitter-square", title: "Twitter", link: "" },
       { icon: "fa-linkedin", title: "linkedin", link: "" },
     ],
-    position: "Full-stack developer",
+    position: "Fullstack Developer",
   },
   {
     name: "Charbel",
@@ -54,7 +52,7 @@ const crews: crewType[] = [
       { icon: "fa-instagram-square", title: "Instagram", link: "" },
       { icon: "fa-linkedin", title: "linkedin", link: "" },
     ],
-    position: "Full-stack developer",
+    position: "Fullstack Developer",
   },
   {
     name: "Jan",
@@ -63,24 +61,24 @@ const crews: crewType[] = [
       { icon: "fa-instagram-square", title: "Instagram", link: "" },
       { icon: "fa-blogger", title: "Blog", link: "" },
     ],
-    position: "Full-stack developer",
+    position: "Fullstack Developer",
   },
   {
-    name: "Mohammad",
+    name: "Mohammed",
     social: [
       { icon: "fa-github-square", title: "Github", link: "" },
       { icon: "fa-instagram-square", title: "Instagram", link: "" },
       { icon: "fa-blogger", title: "Blog", link: "" },
     ],
-    position: "UI/UX designer",
+    position: "UI/UX Designer",
   },
   {
-    name: "Mahdi",
+    name: "Avraz",
     social: [
       { icon: "fa-github-square", title: "Github", link: "" },
       { icon: "fa-instagram-square", title: "Instagram", link: "" },
       { icon: "fa-blogger", title: "Blog", link: "" },
     ],
-    position: "Front-End developer",
+    position: "Frontend Developer",
   },
 ];

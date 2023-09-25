@@ -4,10 +4,10 @@ import ProfileMainSection from "../components/userProfile/ProfileMainSection";
 
 const UserProfile: FC = () => {
   return (
-    <div>
+    <>
       <ProfileHeader />
       <ProfileMainSection />
-    </div>
+    </>
   );
 };
 

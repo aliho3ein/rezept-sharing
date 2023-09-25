@@ -69,6 +69,14 @@
   background-color: white;
   resize: none;
   border: 2px solid rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    border-color: $secondary-color;
+  }
+
+  &:focus {
+    border-color: $secondary-color;
+  }
 }
 
 .saveBtn {
